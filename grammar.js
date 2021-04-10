@@ -56,6 +56,7 @@ module.exports = grammar({
 
     externals: $ => [
         $._concat,
+        $._bracket_concat,
     ],
 
     rules: {
@@ -80,6 +81,17 @@ module.exports = grammar({
         variable_name: $ => /[a-zA-Z0-9_]+/,
 
         variable_expansion: $ => seq(repeat1('$'), $.variable_name),
+
+        bracket_expansion: $ => prec.right(-1, seq(
+            '{',
+            optional(','),
+            optional($._bracket_expression),
+            prec.left(1, repeat1(seq(
+                seq(',', optional($._bracket_expression)),
+                optional($._bracket_expression),
+            ))),
+            '}',
+        )),
 
         double_quote_string: $ => seq(
             '"',
@@ -129,12 +141,39 @@ module.exports = grammar({
             $.single_quote_string,
             $.double_quote_string,
             $.variable_expansion,
+            $.word,
+            $.variable_name,
+            $.bracket_expansion,
         ),
 
-        word: $ => prec.left(repeat1(choice(
+        bracket_concatenation: $ => prec(-1, seq(
+            choice($._base_bracket_expression, $.escape_sequence),
+            repeat1(prec(1, seq(
+                $._bracket_concat,
+                choice($._base_bracket_expression, $.escape_sequence),
+            ))),
+        )),
+
+        _bracket_expression: $ => choice(
+            alias($.bracket_concatenation, $.concatenation),
+            $._base_bracket_expression,
+        ),
+
+        _base_bracket_expression: $ => choice(
+            $.single_quote_string,
+            $.double_quote_string,
+            $.variable_expansion,
+            alias($.bracket_word, $.word),
             $.escape_sequence,
-            noneOf(SPECIAL_CHARACTERS),
-        ))),
+            $.variable_name,
+        ),
+
+        // In order to use it as a "word":
+        // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),
+        word: $ => prec.left(noneOf(SPECIAL_CHARACTERS)),
+        bracket_word: $ => token(prec.left(-1, 
+            noneOf([',', '\\', '{', '}', '(', ')'])
+        )),
     },
 });
 

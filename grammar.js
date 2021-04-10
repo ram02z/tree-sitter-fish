@@ -66,9 +66,9 @@ module.exports = grammar({
 
         comment: $ => seq('#', /.*/),
 
-        //variable_name: $ => /[a-zA-Z0-9_]+/,
+        variable_name: $ => /[a-zA-Z0-9_]+/,
 
-        variable_expansion: $ => seq('$', /[\w_\$]+/),
+        variable_expansion: $ => seq(repeat1('$'), $.variable_name),
 
         double_quote_string: $ => seq(
             '"',

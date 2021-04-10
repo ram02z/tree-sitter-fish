@@ -1,3 +1,14 @@
+// TODO(1): Add $VAR[index]
+// TODO(2): '*' is still a special character inside bracket expansion.
+// TODO(3): Implement `begin`
+// TODO(4): Implement `function`
+// TODO(5): Implement `if`
+// TODO(6): Implement `switch`
+// TODO(7): Implement `while`
+// TODO(8): Implement `for`
+// TODO(9): Go through SPECIAL_CARACTERS for `word` and `bracket_word`
+//          and ensure they are correct.
+
 const SPECIAL_CHARACTERS = [
     '$',
     '*',

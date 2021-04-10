@@ -378,30 +378,26 @@
           {
             "type": "REPEAT1",
             "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_concat"
-                  },
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "_base_expression"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "escape_sequence"
-                      }
-                    ]
-                  }
-                ]
-              }
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_concat"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_base_expression"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "escape_sequence"
+                    }
+                  ]
+                }
+              ]
             }
           }
         ]

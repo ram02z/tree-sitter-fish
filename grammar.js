@@ -126,10 +126,10 @@ module.exports = grammar({
 
         concatenation: $ => prec(-1, seq(
             choice($._base_expression, $.escape_sequence),
-            repeat1(prec(1, seq(
+            repeat1(seq(
                 $._concat,
                 choice($._base_expression, $.escape_sequence)
-            ))),
+            )),
         )),
 
         _expression: $ => choice(

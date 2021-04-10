@@ -1,0 +1,27 @@
+{
+  "name": "tree-sitter-fish",
+  "version": "0.0.0",
+  "description": "Fish tree-sitter grammar",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "npm run generate && ./node_modules/.bin/tree-sitter test",
+    "parse": "./node_modules/.bin/tree-sitter parse",
+    "generate": "./node_modules/.bin/tree-sitter generate",
+    "wasm": "./node_modules/.bin/tree-sitter build-wasm",
+    "start": "./node_modules/.bin/tree-sitter web-ui"
+  },
+  "keywords": [
+    "tree-sitter",
+    "fish",
+    "shell",
+    "parser"
+  ],
+  "author": "Krnik",
+  "license": "ISC",
+  "dependencies": {
+    "nan": "^2.14.2"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.19.4"
+  }
+}

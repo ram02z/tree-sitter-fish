@@ -1,0 +1,32 @@
+========================================
+Comment - single line comment
+========================================
+
+# This is a comment
+
+---
+
+(program (comment))
+
+========================================
+Comment - multi line comment
+========================================
+
+# This is a comment
+# That spans multiple lines
+
+---
+
+(program (comment) (comment))
+
+========================================
+Comment - multi line with escape sequence
+========================================
+
+# This is a comment
+# With multiple\ lines and \xFFescape sequence
+
+---
+
+(program (comment) (comment))
+

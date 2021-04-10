@@ -40,7 +40,7 @@ Bracket Expansion - missing comma
             (MISSING ","))))
 
 ========================================
-Command - single value
+Bracket Expansion - single value
 ========================================
 
 {name,}

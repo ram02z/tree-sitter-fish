@@ -170,7 +170,7 @@ module.exports = grammar({
 
         // In order to use it as a "word":
         // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),
-        word: $ => prec.left(noneOf(SPECIAL_CHARACTERS)),
+        word: $ => noneOf(SPECIAL_CHARACTERS),
         bracket_word: $ => token(prec.left(-1, 
             noneOf([',', '\\', '{', '}', '(', ')'])
         )),

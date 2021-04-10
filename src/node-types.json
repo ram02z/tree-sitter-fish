@@ -225,11 +225,6 @@
     }
   },
   {
-    "type": "word",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\n",
     "named": false
   },
@@ -271,6 +266,10 @@
   },
   {
     "type": "variable_name",
+    "named": true
+  },
+  {
+    "type": "word",
     "named": true
   },
   {

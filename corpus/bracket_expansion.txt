@@ -154,3 +154,14 @@ $PATH{a,b}c
             (bracket_expansion (variable_name) (variable_name))
             (variable_name))))
 
+========================================
+Bracket Expansion - proper distinction between vars and words
+========================================
+
+{a+b,b}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion (word) (variable_name)))

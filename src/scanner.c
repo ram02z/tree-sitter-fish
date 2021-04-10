@@ -2,7 +2,8 @@
 #include <wctype.h>
 
 enum TokenType {
-    CONCAT
+    CONCAT,
+    BRACKET_CONCAT
 };
 
 void *tree_sitter_fish_external_scanner_create() { return NULL; }
@@ -24,11 +25,25 @@ bool tree_sitter_fish_external_scanner_scan(
             lexer->lookahead == ';' ||
             lexer->lookahead == '&' ||
             lexer->lookahead == '|' ||
-            lexer->lookahead == '`' ||
             lexer->lookahead == '#' ||
             iswspace(lexer->lookahead)
         )) {
             lexer->result_symbol = CONCAT;
+            return true;
+        }
+    }
+
+    if (valid_symbols[BRACKET_CONCAT]) {
+        if (!(
+            lexer->lookahead == 0 ||
+            lexer->lookahead == ')' ||
+            lexer->lookahead == '(' ||
+            lexer->lookahead == '}' ||
+            lexer->lookahead == '{' ||
+            lexer->lookahead == ',' ||
+            iswspace(lexer->lookahead)
+        )) {
+            lexer->result_symbol = BRACKET_CONCAT;
             return true;
         }
     }

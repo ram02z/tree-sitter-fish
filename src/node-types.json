@@ -1,5 +1,44 @@
 [
   {
+    "type": "bracket_expansion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "double_quote_string",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "single_quote_string",
+          "named": true
+        },
+        {
+          "type": "variable_expansion",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        },
+        {
+          "type": "word",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "command",
     "named": true,
     "fields": {
@@ -7,6 +46,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "bracket_expansion",
+            "named": true
+          },
           {
             "type": "concatenation",
             "named": true
@@ -21,6 +64,14 @@
           },
           {
             "type": "variable_expansion",
+            "named": true
+          },
+          {
+            "type": "variable_name",
+            "named": true
+          },
+          {
+            "type": "word",
             "named": true
           }
         ]
@@ -30,6 +81,10 @@
         "required": true,
         "types": [
           {
+            "type": "bracket_expansion",
+            "named": true
+          },
+          {
             "type": "concatenation",
             "named": true
           },
@@ -43,6 +98,14 @@
           },
           {
             "type": "variable_expansion",
+            "named": true
+          },
+          {
+            "type": "variable_name",
+            "named": true
+          },
+          {
+            "type": "word",
             "named": true
           }
         ]
@@ -63,6 +126,10 @@
       "required": true,
       "types": [
         {
+          "type": "bracket_expansion",
+          "named": true
+        },
+        {
           "type": "double_quote_string",
           "named": true
         },
@@ -76,6 +143,14 @@
         },
         {
           "type": "variable_expansion",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        },
+        {
+          "type": "word",
           "named": true
         }
       ]
@@ -150,6 +225,11 @@
     }
   },
   {
+    "type": "word",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -178,6 +258,10 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": ";",
     "named": false
   },
@@ -188,5 +272,13 @@
   {
     "type": "variable_name",
     "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
   }
 ]

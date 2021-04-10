@@ -1,0 +1,69 @@
+========================================
+Command - single variable_name command
+========================================
+
+echo
+
+---
+
+(program
+    (command
+        name: (variable_name)))
+
+========================================
+Command - single word command
+========================================
+
++echo
+
+---
+
+(program
+    (command
+        name: (word)))
+
+========================================
+Command - with options and arguments
+========================================
+
+echo --help
+echo -e -- "THIS IS A STRING $PATH"
+
+---
+
+(program
+    (command
+        name: (variable_name)
+        arguments: (word))
+    (command
+        name: (variable_name)
+        arguments: (word)
+        arguments: (word)
+        arguments: (double_quote_string (variable_expansion (variable_name)))))
+
+========================================
+Command - multiline
+========================================
+
+echo 'a new\
+line'
+echo "a new
+line"
+echo token\
+multiline
+
+---
+
+(program
+    (command
+        name: (variable_name)
+        arguments: (single_quote_string (escape_sequence)))
+    (command
+        name: (variable_name)
+        arguments: (double_quote_string))
+    (command
+        name: (variable_name)
+        arguments: (concatenation
+            (variable_name)
+            (escape_sequence)
+            (variable_name))))

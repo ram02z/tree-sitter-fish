@@ -1,0 +1,156 @@
+========================================
+Bracket Expansion - empty
+========================================
+
+{,}
+{,,,}
+{,,,,,}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion))
+    (command
+        name: (bracket_expansion))
+    (command
+        name: (bracket_expansion)))
+
+========================================
+Bracket Expansion - missing comma
+========================================
+
+{a}
+{$a}
+{}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion
+            (variable_name)
+            (MISSING ",")))
+    (command
+        name: (bracket_expansion
+            (variable_expansion (variable_name))
+            (MISSING ",")))
+    (command
+        name: (bracket_expansion
+            (MISSING ","))))
+
+========================================
+Command - single value
+========================================
+
+{name,}
+{,name}
+{,name,}
+{,,,name,}
+{,,,name,,,,,}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion (variable_name)))
+    (command
+        name: (bracket_expansion (variable_name)))
+    (command
+        name: (bracket_expansion (variable_name)))
+    (command
+        name: (bracket_expansion (variable_name)))
+    (command
+        name: (bracket_expansion (variable_name))))
+
+========================================
+Bracket Expansion - with escapes
+========================================
+
+{\ ,\'}
+{t\ est,}
+{,,'lit\'eral',}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion
+            (escape_sequence)
+            (escape_sequence)))
+    (command
+        name: (bracket_expansion
+            (concatenation
+                (variable_name)
+                (escape_sequence)
+                (variable_name))))
+    (command
+        name: (bracket_expansion
+                (single_quote_string (escape_sequence)))))
+
+========================================
+Bracket Expansion - with variable_expansion
+========================================
+
+{,$PATH}
+{,$PATH[1]}
+{\$PATH,$env}
+{$$ref,$arr}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion
+            (variable_expansion (variable_name))))
+    (command
+        name: (bracket_expansion
+            (concatenation (escape_sequence) (variable_name))
+            (variable_expansion (variable_name))))
+    (command
+        name: (bracket_expansion
+            (variable_expansion (variable_name))
+            (variable_expansion (variable_name)))))
+
+========================================
+Bracket Expansion - with otherwise special characters
+========================================
+
+{<,>,*,~,#}
+{[,]}
+{^,&}
+{|,;}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion
+            (word) (word) (word) (word) (word)))
+    (command
+        name: (bracket_expansion (word) (word)))
+    (command
+        name: (bracket_expansion (word) (word)))
+    (command
+        name: (bracket_expansion (word) (word))))
+
+========================================
+Bracket Expansion - with around string concat
+========================================
+
+{a,b}c
+$PATH{a,b}c
+
+---
+
+(program
+    (command
+        name: (concatenation
+            (bracket_expansion (variable_name) (variable_name))
+            (variable_name)))
+    (command
+        name: (concatenation
+            (variable_expansion (variable_name))
+            (bracket_expansion (variable_name) (variable_name))
+            (variable_name))))
+

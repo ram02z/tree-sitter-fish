@@ -109,16 +109,23 @@
         }
       ]
     },
+    "variable_name": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9_]+"
+    },
     "variable_expansion": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "$"
+          "type": "REPEAT1",
+          "content": {
+            "type": "STRING",
+            "value": "$"
+          }
         },
         {
-          "type": "PATTERN",
-          "value": "[\\w_\\$]+"
+          "type": "SYMBOL",
+          "name": "variable_name"
         }
       ]
     },

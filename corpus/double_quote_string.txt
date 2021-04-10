@@ -70,9 +70,9 @@ Double quote string - variable expansion
 
 (program
     (command
-        name: (double_quote_string (variable_expansion)))
+        name: (double_quote_string (variable_expansion (variable_name))))
     (command
-        name: (double_quote_string (variable_expansion))))
+        name: (double_quote_string (variable_expansion (variable_name)))))
 
 =====
 Double quote string - escaped variable expansion
@@ -98,5 +98,5 @@ Double quote string - escaped variable expansion
     (command
         name: (double_quote_string
             (escape_sequence)
-            (variable_expansion))))
+            (variable_expansion (variable_name)))))
 

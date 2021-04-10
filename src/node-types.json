@@ -137,7 +137,17 @@
   {
     "type": "variable_expansion",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "\n",
@@ -173,6 +183,10 @@
   },
   {
     "type": "escape_sequence",
+    "named": true
+  },
+  {
+    "type": "variable_name",
     "named": true
   }
 ]

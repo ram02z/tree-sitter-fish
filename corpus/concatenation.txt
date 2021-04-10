@@ -150,9 +150,9 @@ Concatenation - double quote strings with escape sequence and variable expansion
 (program
     (command
         name: (concatenation
-            (double_quote_string (variable_expansion))
+            (double_quote_string (variable_expansion (variable_name)))
             (escape_sequence)
-            (double_quote_string (variable_expansion)))))
+            (double_quote_string (variable_expansion (variable_name))))))
 
 ========================================
 Concatenation - mixed quote strings with escape sequence and variable expansion
@@ -168,7 +168,7 @@ Concatenation - mixed quote strings with escape sequence and variable expansion
         name: (concatenation
             (single_quote_string)
             (escape_sequence)
-            (double_quote_string (variable_expansion)))))
+            (double_quote_string (variable_expansion (variable_name))))))
 
 
 ========================================
@@ -182,12 +182,12 @@ $PATH\ "ological"
 (program
     (command
         name: (concatenation
-            (variable_expansion)
+            (variable_expansion (variable_name))
             (escape_sequence)
             (single_quote_string)))
     (command
         name: (concatenation
-            (variable_expansion)
+            (variable_expansion (variable_name))
             (escape_sequence)
             (double_quote_string))))
 

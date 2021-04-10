@@ -67,3 +67,21 @@ multiline
             (variable_name)
             (escape_sequence)
             (variable_name))))
+
+
+========================================
+Command - multi words as arguments
+========================================
+
+echo -- +test +q -nest start
+
+---
+
+(program
+    (command
+        name: (variable_name)
+        arguments: (word)
+        arguments: (word)
+        arguments: (word)
+        arguments: (word)
+        arguments: (variable_name)))

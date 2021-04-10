@@ -164,4 +164,4 @@ Bracket Expansion - proper distinction between vars and words
 
 (program
     (command
-        name: (bracket_expansion (word) (variable_name)))
+        name: (bracket_expansion (word) (variable_name))))

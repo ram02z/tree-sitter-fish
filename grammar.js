@@ -80,11 +80,11 @@ module.exports = grammar({
 
         variable_name: $ => /[a-zA-Z0-9_]+/,
 
-        variable_expansion: $ => seq(
+        variable_expansion: $ => prec.right(seq(
             repeat1('$'),
             $.variable_name,
             optional(repeat1($.list_element_access)),
-        ),
+        )),
 
         index: $ => choice(/(-|\+)?\d+/, $.variable_expansion),
 
@@ -158,6 +158,7 @@ module.exports = grammar({
             $.single_quote_string,
             $.double_quote_string,
             $.variable_expansion,
+            $.list_element_access,
             $.word,
             $.variable_name,
             $.bracket_expansion,
@@ -183,14 +184,13 @@ module.exports = grammar({
             alias($.bracket_word, $.word),
             $.escape_sequence,
             $.variable_name,
+            $.list_element_access,
         ),
 
         // In order to use it as a "word":
         // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),
         word: $ => noneOf(SPECIAL_CHARACTERS),
-        bracket_word: $ => token(prec.left(-1, 
-            noneOf([',', '\\', '{', '}', '(', ')'])
-        )),
+        bracket_word: $ => noneOf(['$', '\'', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
     },
 });
 

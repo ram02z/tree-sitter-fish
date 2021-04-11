@@ -122,7 +122,6 @@ Bracket Expansion - with otherwise special characters
 ========================================
 
 {<,>,*,~,#}
-{[,]}
 {^,&}
 {|,;}
 
@@ -132,8 +131,6 @@ Bracket Expansion - with otherwise special characters
     (command
         name: (bracket_expansion
             (word) (word) (word) (word) (word)))
-    (command
-        name: (bracket_expansion (word) (word)))
     (command
         name: (bracket_expansion (word) (word)))
     (command

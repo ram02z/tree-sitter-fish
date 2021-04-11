@@ -7,7 +7,6 @@
 // TODO(7):     Implement `while`.
 // TODO(8):     Implement `for`.
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
-// TODO(10):    Fix "Bracket Expansion - proper distinction between vars and words" test.
 
 const SPECIAL_CHARACTERS = [
     '$',

@@ -86,18 +86,23 @@ module.exports = grammar({
             optional(repeat1($.list_element_access)),
         )),
 
-        index: $ => choice(/(-|\+)?\d+/, $.variable_expansion),
+        index: $ => choice(
+            prec(2, /(-|\+)?\d+/),
+            prec(2, /'(-|\+)?\d+'/),
+            prec(1, $.variable_expansion),
+            $.double_quote_string,
+        ),
 
         range: $ => seq($.index, '..', $.index),
 
-        list_element_access: $ => prec.left(-1, seq(
+        list_element_access: $ => seq(
             '[',
             optional(repeat1(choice(
                 $.index,
                 $.range,
             ))),
             ']',
-        )),
+        ),
 
         bracket_expansion: $ => prec.right(-1, seq(
             '{',

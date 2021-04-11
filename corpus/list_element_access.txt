@@ -6,6 +6,9 @@ $ENV[]
 $ENV[1 -2 +3]
 $ENV[1-2+3]
 VAR[1]
+$ENV['1''+2''-3']
+$ENV["1""+2""-3"]
+$ENV["$ONE"]
 
 ---
 
@@ -30,8 +33,28 @@ VAR[1]
                 (index))))
     (command
         name: (concatenation
-                (variable_name)
-                (list_element_access (index)))))
+            (variable_name)
+            (list_element_access (index))))
+    (command
+        name: (concatenation
+            (variable_expansion (variable_name))
+            (list_element_access
+                (index)
+                (index)
+                (index))))
+    (command
+        name: (concatenation
+            (variable_expansion (variable_name))
+            (list_element_access
+                (index (double_quote_string))
+                (index (double_quote_string))
+                (index (double_quote_string)))))
+    (command
+        name: (concatenation
+            (variable_expansion (variable_name))
+            (list_element_access
+                (index (double_quote_string
+                    (variable_expansion (variable_name))))))))
 
 ========================================
 List Access - range
@@ -40,6 +63,7 @@ List Access - range
 $ENV[1..2]
 $ENV[-1..-2 -1..+2]
 $ENV[-1..-2-1..+2 3..4]
+$ENV['-1'.."-2"-1..+2 3..$ONE]
 
 ---
 
@@ -60,7 +84,16 @@ $ENV[-1..-2-1..+2 3..4]
             (list_element_access
                 (range (index) (index))
                 (range (index) (index))
-                (range (index) (index))))))
+                (range (index) (index)))))
+    (command
+        name: (concatenation
+            (variable_expansion (variable_name))
+            (list_element_access
+                (range (index) (index (double_quote_string)))
+                (range (index) (index))
+                (range
+                    (index)
+                    (index (variable_expansion (variable_name)))))))
 
 ========================================
 List Access - variable expansion

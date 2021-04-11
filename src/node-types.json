@@ -200,6 +200,10 @@
       "required": false,
       "types": [
         {
+          "type": "double_quote_string",
+          "named": true
+        },
+        {
           "type": "variable_expansion",
           "named": true
         }

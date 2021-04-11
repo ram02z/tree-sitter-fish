@@ -1,0 +1,16 @@
+========================================
+Pipe - simple
+========================================
+
+printf "one" | echo
+
+---
+
+(program
+    (command
+        name: (variable_name)
+        arguments: (double_quote_string))
+    (pipe)
+    (command
+        name: (variable_name)))
+

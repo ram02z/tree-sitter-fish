@@ -1,5 +1,44 @@
 [
   {
+    "type": "begin",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "background",
+          "named": true
+        },
+        {
+          "type": "begin",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirection",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "bracket_expansion",
     "named": true,
     "fields": {},
@@ -173,6 +212,11 @@
     }
   },
   {
+    "type": "conditional_execution",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "double_quote_string",
     "named": true,
     "fields": {},
@@ -238,11 +282,31 @@
       "required": false,
       "types": [
         {
+          "type": "background",
+          "named": true
+        },
+        {
+          "type": "begin",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirection",
           "named": true
         }
       ]
@@ -258,6 +322,57 @@
       "types": [
         {
           "type": "index",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "redirection",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "begin",
+          "named": true
+        },
+        {
+          "type": "bracket_expansion",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "double_quote_string",
+          "named": true
+        },
+        {
+          "type": "list_element_access",
+          "named": true
+        },
+        {
+          "type": "single_quote_string",
+          "named": true
+        },
+        {
+          "type": "variable_expansion",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        },
+        {
+          "type": "word",
           "named": true
         }
       ]
@@ -322,6 +437,10 @@
     "named": false
   },
   {
+    "type": "&&",
+    "named": false
+  },
+  {
     "type": "'",
     "named": false
   },
@@ -346,7 +465,31 @@
     "named": false
   },
   {
+    "type": "and",
+    "named": false
+  },
+  {
+    "type": "background",
+    "named": true
+  },
+  {
+    "type": "begin",
+    "named": false
+  },
+  {
+    "type": "end",
+    "named": false
+  },
+  {
     "type": "escape_sequence",
+    "named": true
+  },
+  {
+    "type": "or",
+    "named": false
+  },
+  {
+    "type": "pipe",
     "named": true
   },
   {
@@ -359,6 +502,10 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "||",
     "named": false
   },
   {

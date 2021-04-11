@@ -46,14 +46,6 @@ function noneOf(characterArray) {
 module.exports = grammar({
     name: 'fish',
 
-    inline: $ => [
-        $._statements,
-        $._statement,
-        $._expression,
-        $._base_expression,
-        $._terminator,
-    ],
-
     externals: $ => [
         $._concat,
         $._bracket_concat,
@@ -63,16 +55,52 @@ module.exports = grammar({
         program: $ => optional($._statements),
 
         _statements: $ => prec(1, seq(
-            repeat(seq($._statement, $._terminator)),
-            $._statement,
+            repeat(seq($._top_statement, $._terminator)),
+            $._top_statement,
             optional($._terminator),
         )),
 
-        _job_control_background: $ => '&',
-        _terminator: $ => choice(';', '\n', '\r', '\r\n', $._job_control_background),
+        _top_statement: $ => choice($._statement, $.comment, $.redirection),
+
+        conditional_execution: $ => choice(
+            choice(
+                '||',
+                seq(';', 'or'),
+            ),
+            choice(
+                '&&',
+                seq(';', 'and'),
+            ),
+        ),
+
+        redirection: $ => choice(
+            seq(
+                $._statement,
+                /[012]?(>{1,2}|<{1})\&[-012]/,
+            ),
+            seq(
+                $._statement,
+                /[012]?((>|<)|>{2}|((>|<){1}\?))/,
+                $._expression,
+            ),
+        ),
+
+        pipe: $ => '|',
+
+        background: $ => '&',
+
+        _terminator: $ => prec.left(-1, repeat1(choice(
+            ';',
+            '\n',
+            '\r',
+            '\r\n',
+            $.background,
+            $.conditional_execution,
+            $.pipe,
+            $.comment
+        ))),
 
         _statement: $ => choice(
-            $.comment,
             $.command,
         ),
 

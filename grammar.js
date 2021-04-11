@@ -86,9 +86,9 @@ module.exports = grammar({
         )),
 
         index: $ => choice(
-            prec(2, /(-|\+)?\d+/),
-            prec(2, /'(-|\+)?\d+'/),
-            prec(1, $.variable_expansion),
+            /(-|\+)?\d+/,
+            /'(-|\+)?\d+'/,
+            $.variable_expansion,
             $.double_quote_string,
         ),
 

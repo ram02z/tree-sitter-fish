@@ -152,28 +152,16 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "PATTERN",
-            "value": "(-|\\+)?\\d+"
-          }
+          "type": "PATTERN",
+          "value": "(-|\\+)?\\d+"
         },
         {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "PATTERN",
-            "value": "'(-|\\+)?\\d+'"
-          }
+          "type": "PATTERN",
+          "value": "'(-|\\+)?\\d+'"
         },
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "variable_expansion"
-          }
+          "type": "SYMBOL",
+          "name": "variable_expansion"
         },
         {
           "type": "SYMBOL",

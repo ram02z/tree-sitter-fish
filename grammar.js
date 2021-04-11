@@ -1,3 +1,4 @@
+// TODO(1):     Implement job control and redirections.
 // TODO(2):     Implement glob: '*' is still a special character inside bracket expansion.
 // TODO(3):     Implement `begin`.
 // TODO(4):     Implement `function`.

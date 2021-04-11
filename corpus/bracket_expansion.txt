@@ -167,3 +167,16 @@ Bracket Expansion - proper distinction between vars and words
 (program
     (command
         name: (bracket_expansion (word) (variable_name))))
+
+
+========================================
+Bracket Expansion - requires comma between expressions
+========================================
+
+{,b b}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion (variable_name) (ERROR (variable_name)))))

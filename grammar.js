@@ -80,7 +80,24 @@ module.exports = grammar({
 
         variable_name: $ => /[a-zA-Z0-9_]+/,
 
-        variable_expansion: $ => seq(repeat1('$'), $.variable_name),
+        variable_expansion: $ => seq(
+            repeat1('$'),
+            $.variable_name,
+            optional(repeat1($.list_element_access)),
+        ),
+
+        index: $ => choice(/(-|\+)?\d+/, $.variable_expansion),
+
+        range: $ => seq($.index, '..', $.index),
+
+        list_element_access: $ => prec.left(-1, seq(
+            '[',
+            optional(repeat1(choice(
+                $.index,
+                $.range,
+            ))),
+            ']',
+        )),
 
         bracket_expansion: $ => prec.right(-1, seq(
             '{',

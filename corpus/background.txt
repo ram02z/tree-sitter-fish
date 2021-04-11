@@ -1,0 +1,14 @@
+========================================
+Background - simple
+========================================
+
+printf "one" &;;;
+
+---
+
+(program
+    (command
+        name: (variable_name)
+        arguments: (double_quote_string))
+    (background))
+

@@ -1,0 +1,97 @@
+========================================
+Redirection - write
+========================================
+
+echo ''     >       test
+echo ''     0>      test
+echo ''     >>      test
+echo ''     1>>     test
+echo ''     >?      test
+echo ''     2>?     test
+echo ''     >&0
+echo ''     >>&1
+echo ''     >&-
+echo ''     1>>&-
+
+---
+
+(program
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string)))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string)))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string)))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))))
+
+========================================
+Redirection - read
+========================================
+
+echo ''     < 	    test
+echo ''     0< 	    test
+echo ''     1< 	    test
+echo ''     2< 	    test
+
+---
+
+(program
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name))
+    (redirection
+        (command
+            name: (variable_name)
+            arguments: (single_quote_string))
+        (variable_name)))

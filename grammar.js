@@ -136,10 +136,9 @@ module.exports = grammar({
             '{',
             optional(','),
             optional($._bracket_expression),
-            prec.left(1, repeat1(seq(
+            prec.left(1, repeat1(
                 seq(',', optional($._bracket_expression)),
-                optional($._bracket_expression),
-            ))),
+            )),
             '}',
         )),
 
@@ -223,7 +222,7 @@ module.exports = grammar({
         // In order to use it as a "word":
         // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),
         word: $ => noneOf(SPECIAL_CHARACTERS),
-        bracket_word: $ => noneOf(['$', '\'', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
+        bracket_word: $ => noneOf(['\\s', '$', '\'', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
     },
 });
 

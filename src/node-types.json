@@ -20,6 +20,10 @@
           "named": true
         },
         {
+          "type": "list_element_access",
+          "named": true
+        },
+        {
           "type": "single_quote_string",
           "named": true
         },
@@ -59,6 +63,10 @@
             "named": true
           },
           {
+            "type": "list_element_access",
+            "named": true
+          },
+          {
             "type": "single_quote_string",
             "named": true
           },
@@ -90,6 +98,10 @@
           },
           {
             "type": "double_quote_string",
+            "named": true
+          },
+          {
+            "type": "list_element_access",
             "named": true
           },
           {
@@ -138,6 +150,10 @@
           "named": true
         },
         {
+          "type": "list_element_access",
+          "named": true
+        },
+        {
           "type": "single_quote_string",
           "named": true
         },
@@ -176,6 +192,40 @@
     }
   },
   {
+    "type": "index",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "variable_expansion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "list_element_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "index",
+          "named": true
+        },
+        {
+          "type": "range",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "program",
     "named": true,
     "fields": {},
@@ -189,6 +239,21 @@
         },
         {
           "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "index",
           "named": true
         }
       ]
@@ -214,9 +279,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "list_element_access",
+          "named": true
+        },
         {
           "type": "variable_name",
           "named": true
@@ -257,7 +326,19 @@
     "named": false
   },
   {
+    "type": "..",
+    "named": false
+  },
+  {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
     "named": false
   },
   {

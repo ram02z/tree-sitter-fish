@@ -93,7 +93,7 @@ $ENV['-1'.."-2"-1..+2 3..$ONE]
                 (range (index) (index))
                 (range
                     (index)
-                    (index (variable_expansion (variable_name)))))))
+                    (index (variable_expansion (variable_name))))))))
 
 ========================================
 List Access - variable expansion

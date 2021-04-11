@@ -54,11 +54,13 @@ module.exports = grammar({
     rules: {
         program: $ => optional($._statements),
 
-        _statements: $ => prec(1, seq(
-            repeat(seq($._top_statement, $._terminator)),
-            $._top_statement,
-            optional($._terminator),
-        )),
+        _statements: $ => seq(
+            repeat1(seq(
+                optional(repeat1($._terminator)),
+                $._top_statement,
+            )),
+            optional(repeat1($._terminator)),
+        ),
 
         _top_statement: $ => choice($._statement, $.comment, $.redirection),
 
@@ -97,7 +99,6 @@ module.exports = grammar({
             $.background,
             $.conditional_execution,
             $.pipe,
-            $.comment
         ))),
 
         _statement: $ => choice(

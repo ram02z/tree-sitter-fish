@@ -30,3 +30,23 @@ Comment - multi line with escape sequence
 
 (program (comment) (comment))
 
+
+========================================
+Comment - ending command
+========================================
+
+true # a comment
+# in between
+;; true # a comment
+
+---
+
+(program
+    (command
+        name: (variable_name))
+    (comment)
+    (comment)
+    (command
+        name: (variable_name))
+    (comment))
+

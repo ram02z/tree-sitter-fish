@@ -8,18 +8,18 @@ false ;;or echo 1
 ---
 
 (program
-    (command
-        name: (variable_name))
-    (conditional_execution)
-    (command
-        name: (variable_name)
-        arguments: (variable_name))
-    (command
-        name: (variable_name))
-    (conditional_execution)
-    (command
-        name: (variable_name)
-        arguments: (variable_name)))
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (command
+            name: (variable_name)
+            arguments: (variable_name)))
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (command
+            name: (variable_name)
+            arguments: (variable_name))))
 
 ========================================
 Conditional Execution - and
@@ -31,16 +31,40 @@ true; and and --help
 ---
 
 (program
-    (command
-        name: (variable_name))
-    (conditional_execution)
-    (command
-        name: (variable_name)
-        arguments: (variable_name))
-    (command
-        name: (variable_name))
-    (conditional_execution)
-    (command
-        name: (variable_name)
-        arguments: (word)))
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (command
+            name: (variable_name)
+            arguments: (variable_name)))
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (command
+            name: (variable_name)
+            arguments: (word))))
+
+
+========================================
+Conditional Execution - with redirect
+========================================
+
+false || printf > file
+true ;; and printf > file
+
+---
+
+(program
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (redirection
+            (command name: (variable_name))
+            (variable_name)))
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (redirection
+            (command name: (variable_name))
+            (variable_name))))
 

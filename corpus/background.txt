@@ -2,13 +2,42 @@
 Background - simple
 ========================================
 
-printf "one" &;;;
+printf "one" &
 
 ---
 
 (program
-    (command
-        name: (variable_name)
-        arguments: (double_quote_string))
-    (background))
+    (background
+        (command
+            name: (variable_name)
+            arguments: (double_quote_string))))
 
+========================================
+Background - multiple
+========================================
+
+printf "one" & echo &
+
+---
+
+(program
+    (background
+        (command
+            name: (variable_name)
+            arguments: (double_quote_string)))
+    (background
+        (command name: (variable_name))))
+
+========================================
+Background - with redirect
+========================================
+
+printf > file &
+
+---
+
+(program
+    (background
+        (redirection
+            (command name: (variable_name))
+            (variable_name))))

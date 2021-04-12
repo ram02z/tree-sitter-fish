@@ -1,30 +1,18 @@
 [
   {
-    "type": "begin",
+    "type": "background",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
           "type": "background",
           "named": true
         },
         {
-          "type": "begin",
-          "named": true
-        },
-        {
           "type": "command",
-          "named": true
-        },
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "conditional_execution",
           "named": true
         },
         {
@@ -214,7 +202,37 @@
   {
     "type": "conditional_execution",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "background",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirection",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "double_quote_string",
@@ -274,6 +292,33 @@
     }
   },
   {
+    "type": "pipe",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "background",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirection",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "program",
     "named": true,
     "fields": {},
@@ -283,10 +328,6 @@
       "types": [
         {
           "type": "background",
-          "named": true
-        },
-        {
-          "type": "begin",
           "named": true
         },
         {
@@ -336,7 +377,7 @@
       "required": true,
       "types": [
         {
-          "type": "begin",
+          "type": "background",
           "named": true
         },
         {
@@ -357,6 +398,14 @@
         },
         {
           "type": "list_element_access",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirection",
           "named": true
         },
         {
@@ -437,6 +486,10 @@
     "named": false
   },
   {
+    "type": "&",
+    "named": false
+  },
+  {
     "type": "&&",
     "named": false
   },
@@ -469,28 +522,12 @@
     "named": false
   },
   {
-    "type": "background",
-    "named": true
-  },
-  {
-    "type": "begin",
-    "named": false
-  },
-  {
-    "type": "end",
-    "named": false
-  },
-  {
     "type": "escape_sequence",
     "named": true
   },
   {
     "type": "or",
     "named": false
-  },
-  {
-    "type": "pipe",
-    "named": true
   },
   {
     "type": "variable_name",
@@ -502,6 +539,10 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
     "named": false
   },
   {

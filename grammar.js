@@ -65,7 +65,6 @@ module.exports = grammar({
         _top_statement: $ => prec(-1, choice(
             $._statement,
             $.comment,
-            $.conditional_execution,
         )),
 
         conditional_execution: $ => prec.right(1, seq(
@@ -111,11 +110,18 @@ module.exports = grammar({
         ))),
 
         _statement: $ => choice(
+            $.conditional_execution,
             $.pipe,
             $.command,
             $.redirection,
             $.background,
         ),
+
+        // begin: $ => seq(
+        //     'begin',
+        //     optional($._statements),
+        //     'end',
+        // ),
 
         comment: $ => seq('#', /.*/),
 

@@ -73,10 +73,6 @@
           {
             "type": "SYMBOL",
             "name": "comment"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "conditional_execution"
           }
         ]
       }
@@ -257,6 +253,10 @@
     "_statement": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "SYMBOL",
+          "name": "conditional_execution"
+        },
         {
           "type": "SYMBOL",
           "name": "pipe"

@@ -16,6 +16,10 @@
           "named": true
         },
         {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -308,6 +312,10 @@
           "named": true
         },
         {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -390,6 +398,10 @@
         },
         {
           "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "conditional_execution",
           "named": true
         },
         {

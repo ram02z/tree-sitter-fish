@@ -7,10 +7,53 @@ printf "one" | echo
 ---
 
 (program
-    (command
-        name: (variable_name)
-        arguments: (double_quote_string))
-    (pipe)
-    (command
-        name: (variable_name)))
+    (pipe
+        (command
+            name: (variable_name)
+            arguments: (double_quote_string))
+        (command
+            name: (variable_name))))
 
+========================================
+Pipe - with redirection
+========================================
+
+false | printf > file
+echo 1 >&0 | echo
+
+---
+
+(program
+    (pipe
+        (command name: (variable_name))
+        (redirection
+            (command name: (variable_name))
+            (variable_name)))
+    (pipe
+        (redirection
+            (command
+                name: (variable_name)
+                arguments: (variable_name)))
+        (command name: (variable_name))))
+
+
+========================================
+Pipe - with conditional execution
+========================================
+
+false || printf | file
+echo | echo || echo
+
+---
+
+(program
+    (conditional_execution
+        (command name: (variable_name))
+        (pipe
+            (command name: (variable_name))
+            (command name: (variable_name))))
+    (conditional_execution
+        (pipe
+            (command name: (variable_name))
+            (command name: (variable_name)))
+        (command name: (variable_name))))

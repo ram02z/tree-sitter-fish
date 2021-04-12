@@ -62,20 +62,28 @@ module.exports = grammar({
             optional(repeat1($._terminator)),
         ),
 
-        _top_statement: $ => choice($._statement, $.comment, $.redirection),
+        _top_statement: $ => prec(-1, choice(
+            $._statement,
+            $.comment,
+            $.conditional_execution,
+        )),
 
-        conditional_execution: $ => choice(
+        conditional_execution: $ => prec.right(1, seq(
+            $._top_statement,
             choice(
-                '||',
-                seq(';', 'or'),
+                choice(
+                    '||',
+                    seq(repeat1(';'), 'or'),
+                ),
+                choice(
+                    '&&',
+                    seq(repeat1(';'), 'and'),
+                ),
             ),
-            choice(
-                '&&',
-                seq(';', 'and'),
-            ),
-        ),
+            $._top_statement,
+        )),
 
-        redirection: $ => choice(
+        redirection: $ => prec(1, choice(
             seq(
                 $._statement,
                 /[012]?(>{1,2}|<{1})\&[-012]/,
@@ -85,24 +93,28 @@ module.exports = grammar({
                 /[012]?((>|<)|>{2}|((>|<){1}\?))/,
                 $._expression,
             ),
-        ),
+        )),
 
-        pipe: $ => '|',
+        pipe: $ => prec.left(seq(
+            $._statement,
+            '|',
+            $._statement,
+        )),
 
-        background: $ => '&',
+        background: $ => seq($._statement, '&'),
 
         _terminator: $ => prec.left(-1, repeat1(choice(
             ';',
             '\n',
             '\r',
             '\r\n',
-            $.background,
-            $.conditional_execution,
-            $.pipe,
         ))),
 
         _statement: $ => choice(
+            $.pipe,
             $.command,
+            $.redirection,
+            $.background,
         ),
 
         comment: $ => seq('#', /.*/),

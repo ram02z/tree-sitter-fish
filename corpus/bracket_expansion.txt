@@ -179,4 +179,4 @@ Bracket Expansion - requires comma between expressions
 
 (program
     (command
-        name: (bracket_expansion (variable_name) (ERROR (variable_name)))))
+        name: (bracket_expansion (variable_name) (ERROR (UNEXPECTED 'b')))))

@@ -220,10 +220,6 @@
           "named": true
         },
         {
-          "type": "comment",
-          "named": true
-        },
-        {
           "type": "conditional_execution",
           "named": true
         },

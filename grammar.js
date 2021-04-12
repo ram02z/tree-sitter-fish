@@ -52,37 +52,32 @@ module.exports = grammar({
     ],
 
     rules: {
-        program: $ => optional($._statements),
-
-        _statements: $ => seq(
-            repeat1(seq(
-                optional(repeat1($._terminator)),
-                $._top_statement,
-            )),
-            optional(repeat1($._terminator)),
-        ),
-
-        _top_statement: $ => prec(-1, choice(
-            $._statement,
-            $.comment,
+        program: $ => optional(prec.right(-1,
+            repeat1($._top_statement),
         )),
 
-        conditional_execution: $ => prec.right(1, seq(
-            $._top_statement,
+        _top_statement: $ => choice(
+            $._statement,
+            $.comment,
+            $._terminator,
+        ),
+
+        conditional_execution: $ => prec.left(1, seq(
+            $._statement,
             choice(
                 choice(
                     '||',
-                    seq(repeat1(';'), 'or'),
+                    seq(prec.right(repeat1(';')), 'or'),
                 ),
                 choice(
                     '&&',
-                    seq(repeat1(';'), 'and'),
+                    seq(prec.right(repeat1(';')), 'and'),
                 ),
             ),
-            $._top_statement,
+            $._statement,
         )),
 
-        redirection: $ => prec(1, choice(
+        redirection: $ => prec(10, choice(
             seq(
                 $._statement,
                 /[012]?(>{1,2}|<{1})\&[-012]/,
@@ -94,7 +89,7 @@ module.exports = grammar({
             ),
         )),
 
-        pipe: $ => prec.left(seq(
+        pipe: $ => prec.left(2, seq(
             $._statement,
             '|',
             $._statement,
@@ -102,12 +97,12 @@ module.exports = grammar({
 
         background: $ => seq($._statement, '&'),
 
-        _terminator: $ => prec.left(-1, repeat1(choice(
+        _terminator: $ => choice(
             ';',
             '\n',
             '\r',
             '\r\n',
-        ))),
+        ),
 
         _statement: $ => choice(
             $.conditional_execution,

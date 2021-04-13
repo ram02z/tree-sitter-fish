@@ -1,0 +1,113 @@
+========================================
+Begin - simple
+========================================
+
+begin ;; end;
+
+begin
+    true
+end
+
+;; begin; # this is a begin statement
+    # comment inside the block
+end
+
+---
+
+(program
+    (begin)
+    (begin
+        (command
+            name: (variable_name)))
+    (begin (comment) (comment)))
+
+========================================
+Begin - nested
+========================================
+
+begin; begin; end; end
+
+begin
+    begin; true; end
+end
+
+begin; begin; end; end
+begin;;; begin;;  end; end
+
+---
+
+(program
+    (begin (begin))
+    (begin (begin (command name: (variable_name))))
+    (begin (begin))
+    (begin (begin)))
+
+========================================
+Begin - with conditional execution
+========================================
+
+begin; end || true
+true && begin; end || true
+
+---
+
+(program
+    (conditional_execution
+        (begin)
+        (command
+            name: (variable_name)))
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (conditional_execution
+            (begin)
+            (command
+                name: (variable_name)))))
+
+========================================
+Begin - with redirection
+========================================
+
+begin; end >&-
+
+---
+
+(program
+    (redirection (begin)))
+
+========================================
+Begin - with pipe
+========================================
+
+begin; end | echo
+
+---
+
+(program
+    (pipe
+        (begin)
+        (command
+            name: (variable_name))))
+
+========================================
+Begin - invalid
+========================================
+
+begin & end
+begin && end
+begin | end
+begin > end
+begin < end
+begin 0>&0 end
+
+---
+
+(program
+    (begin (ERROR))
+    (begin (ERROR))
+    (begin (ERROR))
+    (begin (ERROR))
+    (begin (ERROR))
+    (begin 
+        (redirection
+            (command name: (variable_name)))))

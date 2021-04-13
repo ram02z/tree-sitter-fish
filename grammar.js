@@ -1,6 +1,4 @@
-// TODO(1):     Implement job control and redirections.
 // TODO(2):     Implement glob: '*' is still a special character inside bracket expansion.
-// TODO(3):     Implement `begin`.
 // TODO(4):     Implement `function`.
 // TODO(5):     Implement `if`.
 // TODO(6):     Implement `switch`.
@@ -51,10 +49,14 @@ module.exports = grammar({
         $._bracket_concat,
     ],
 
+    inline: $ => [
+        $._terminator,
+        $._top_statement,
+        $._statement,
+    ],
+
     rules: {
-        program: $ => optional(prec.right(-1,
-            repeat1($._top_statement),
-        )),
+        program: $ => optional(repeat($._top_statement)),
 
         _top_statement: $ => choice(
             $._statement,
@@ -62,22 +64,22 @@ module.exports = grammar({
             $._terminator,
         ),
 
-        conditional_execution: $ => prec.left(1, seq(
+        conditional_execution: $ => prec.right(-1, seq(
             $._statement,
             choice(
                 choice(
                     '||',
-                    seq(prec.right(repeat1(';')), 'or'),
+                    /;+\s*or/,
                 ),
                 choice(
                     '&&',
-                    seq(prec.right(repeat1(';')), 'and'),
+                    /;+\s*and/,
                 ),
             ),
             $._statement,
         )),
 
-        redirection: $ => prec(10, choice(
+        redirection: $ => prec.left(5, choice(
             seq(
                 $._statement,
                 /[012]?(>{1,2}|<{1})\&[-012]/,
@@ -89,7 +91,7 @@ module.exports = grammar({
             ),
         )),
 
-        pipe: $ => prec.left(2, seq(
+        pipe: $ => prec.left(4, seq(
             $._statement,
             '|',
             $._statement,
@@ -110,13 +112,14 @@ module.exports = grammar({
             $.command,
             $.redirection,
             $.background,
+            $.begin,
         ),
 
-        // begin: $ => seq(
-        //     'begin',
-        //     optional($._statements),
-        //     'end',
-        // ),
+        begin: $ => prec(6, seq(
+            'begin',
+            optional(repeat1($._top_statement)),
+            'end',
+        )),
 
         comment: $ => seq('#', /.*/),
 

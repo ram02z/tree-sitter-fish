@@ -12,7 +12,50 @@
           "named": true
         },
         {
+          "type": "begin",
+          "named": true
+        },
+        {
           "type": "command",
+          "named": true
+        },
+        {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirection",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "begin",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "background",
+          "named": true
+        },
+        {
+          "type": "begin",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -216,6 +259,10 @@
           "named": true
         },
         {
+          "type": "begin",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
@@ -304,6 +351,10 @@
           "named": true
         },
         {
+          "type": "begin",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
@@ -332,6 +383,10 @@
       "types": [
         {
           "type": "background",
+          "named": true
+        },
+        {
+          "type": "begin",
           "named": true
         },
         {
@@ -382,6 +437,10 @@
       "types": [
         {
           "type": "background",
+          "named": true
+        },
+        {
+          "type": "begin",
           "named": true
         },
         {
@@ -526,16 +585,16 @@
     "named": false
   },
   {
-    "type": "and",
+    "type": "begin",
+    "named": false
+  },
+  {
+    "type": "end",
     "named": false
   },
   {
     "type": "escape_sequence",
     "named": true
-  },
-  {
-    "type": "or",
-    "named": false
   },
   {
     "type": "variable_name",

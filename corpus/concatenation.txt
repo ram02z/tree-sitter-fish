@@ -61,6 +61,7 @@ Concatenation - single quote string with escape sequence
 ========================================
 
 'echo'\
+location
 
 ---
 
@@ -68,7 +69,8 @@ Concatenation - single quote string with escape sequence
     (command
         name: (concatenation
             (single_quote_string)
-            (escape_sequence))))
+            (escape_sequence)
+            (variable_name))))
 
 ========================================
 Concatenation - multiple single quote strings with escape sequence
@@ -93,7 +95,7 @@ Concatenation - multiple single quote strings with escape sequence
 Concatenation - double quote string with escape sequence
 ========================================
 
-"echo"\
+"echo"\\
 
 ---
 
@@ -177,6 +179,7 @@ Concatenation - variable expansion concat
 
 $PATH\ 'ological'
 $PATH\ "ological"
+
 ---
 
 (program

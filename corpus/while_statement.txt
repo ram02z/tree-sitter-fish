@@ -1,0 +1,64 @@
+========================================
+While Statement - simple
+========================================
+
+while true;;; end
+
+while true; printf; end
+
+while false
+    printf
+end
+
+---
+
+(program
+    (while_statement
+        condition: (command name: (variable_name)))
+    (while_statement
+        condition: (command name: (variable_name))
+        (command
+            name: (variable_name)))
+    (while_statement
+        condition: (command name: (variable_name))
+        (command
+            name: (variable_name))))
+
+========================================
+While Statement - with conditional execution
+========================================
+
+while false || true;
+end
+
+---
+
+(program
+    (while_statement
+        condition:
+            (conditional_execution
+                (command name: (variable_name))
+                (command name: (variable_name)))))
+
+========================================
+While Statement - flow control
+========================================
+
+while true; break; end
+
+while true;
+    continue;
+end
+
+---
+
+(program
+    (while_statement
+        condition: (command
+            name: (variable_name))
+        (break))
+    (while_statement
+        condition: (command
+            name: (variable_name))
+        (continue)))
+

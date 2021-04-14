@@ -1,0 +1,81 @@
+========================================
+If Statement - simple
+========================================
+
+if true
+end
+
+if true; end
+
+---
+
+(program
+    (if_statement
+        condition: (command name: (variable_name)))
+    (if_statement
+        condition: (command name: (variable_name))))
+
+========================================
+If Statement - else
+========================================
+
+if true
+else
+end
+
+if true; else; end
+
+if true;
+else
+    begin; end
+end
+
+---
+
+(program
+    (if_statement
+        condition: (command name: (variable_name))
+        (else_clause))
+    (if_statement
+        condition: (command name: (variable_name))
+        (else_clause))
+    (if_statement
+        condition: (command name: (variable_name))
+        (else_clause (begin_statement))))
+
+========================================
+If Statement - else if
+========================================
+
+if true
+else if true
+end
+
+if false; else if true; end
+
+if false
+else if false
+else if true
+else
+end
+
+if false; else if false; else; end
+
+---
+
+(program
+    (if_statement
+        condition: (command name: (variable_name))
+        (else_if_clause (command name: (variable_name))))
+    (if_statement
+        condition: (command name: (variable_name))
+        (else_if_clause (command name: (variable_name))))
+    (if_statement
+        condition: (command name: (variable_name))
+        (else_if_clause (command name: (variable_name)))
+        (else_if_clause (command name: (variable_name)))
+        (else_clause))
+    (if_statement
+        condition: (command name: (variable_name))
+        (else_if_clause (command name: (variable_name)))
+        (else_clause)))

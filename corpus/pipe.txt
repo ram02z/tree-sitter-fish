@@ -10,7 +10,7 @@ printf "one" | echo
     (pipe
         (command
             name: (variable_name)
-            arguments: (double_quote_string))
+            argument: (double_quote_string))
         (command
             name: (variable_name))))
 
@@ -33,7 +33,7 @@ echo 1 >&0 | echo
         (redirection
             (command
                 name: (variable_name)
-                arguments: (variable_name)))
+                argument: (variable_name)))
         (command name: (variable_name))))
 
 

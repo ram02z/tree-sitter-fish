@@ -1,5 +1,5 @@
 ========================================
-Begin - simple
+Begin Statement - simple
 ========================================
 
 begin ;; end;
@@ -15,14 +15,14 @@ end
 ---
 
 (program
-    (begin)
-    (begin
+    (begin_statement)
+    (begin_statement
         (command
             name: (variable_name)))
-    (begin (comment) (comment)))
+    (begin_statement (comment) (comment)))
 
 ========================================
-Begin - nested
+Begin Statement - nested
 ========================================
 
 begin; begin; end; end
@@ -37,13 +37,13 @@ begin;;; begin;;  end; end
 ---
 
 (program
-    (begin (begin))
-    (begin (begin (command name: (variable_name))))
-    (begin (begin))
-    (begin (begin)))
+    (begin_statement (begin_statement))
+    (begin_statement (begin_statement (command name: (variable_name))))
+    (begin_statement (begin_statement))
+    (begin_statement (begin_statement)))
 
 ========================================
-Begin - with conditional execution
+Begin Statement - with conditional execution
 ========================================
 
 begin; end || true
@@ -53,19 +53,19 @@ true && begin; end || true
 
 (program
     (conditional_execution
-        (begin)
+        (begin_statement)
         (command
             name: (variable_name)))
     (conditional_execution
         (command
             name: (variable_name))
         (conditional_execution
-            (begin)
+            (begin_statement)
             (command
                 name: (variable_name)))))
 
 ========================================
-Begin - with redirection
+Begin Statement - with redirection
 ========================================
 
 begin; end >&-
@@ -73,10 +73,10 @@ begin; end >&-
 ---
 
 (program
-    (redirection (begin)))
+    (redirection (begin_statement)))
 
 ========================================
-Begin - with pipe
+Begin Statement - with pipe
 ========================================
 
 begin; end | echo
@@ -85,12 +85,12 @@ begin; end | echo
 
 (program
     (pipe
-        (begin)
+        (begin_statement)
         (command
             name: (variable_name))))
 
 ========================================
-Begin - invalid
+Begin Statement - invalid
 ========================================
 
 begin & end
@@ -103,11 +103,11 @@ begin 0>&0 end
 ---
 
 (program
-    (begin (ERROR))
-    (begin (ERROR))
-    (begin (ERROR))
-    (begin (ERROR))
-    (begin (ERROR))
-    (begin 
+    (begin_statement (ERROR))
+    (begin_statement (ERROR))
+    (begin_statement (ERROR))
+    (begin_statement (ERROR))
+    (begin_statement (ERROR))
+    (begin_statement 
         (redirection
             (command name: (variable_name)))))

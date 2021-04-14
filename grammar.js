@@ -1,11 +1,9 @@
 // TODO(2):     Implement glob: '*' is still a special character inside bracket expansion.
 // TODO(4):     Implement `function`.
-// TODO(5):     Implement `if`.
-// TODO(6):     Implement `switch`.
-// TODO(7):     Implement `while`.
-// TODO(8):     Implement `for`.
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
 // TODO(10):    "test[test]" should be a word
+// TODO(11):    "begin & end" should be invalid
+// TODO(12):    Background commands cannot be used as conditionals "while echo &; end"
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -55,26 +53,31 @@ module.exports = grammar({
         $._statement,
     ],
 
+    extras: $ => [
+        $.comment,
+        /\s/,
+    ],
+
     rules: {
-        program: $ => optional(repeat($._top_statement)),
+        program: $ => prec.right(-1, optional(
+            prec.left(1, repeat1(seq(
+                optional($._statement),
+                $._terminator,
+            ))),
+        )),
 
         _top_statement: $ => choice(
             $._statement,
-            $.comment,
             $._terminator,
         ),
 
         conditional_execution: $ => prec.right(-1, seq(
             $._statement,
             choice(
-                choice(
-                    '||',
-                    /;+\s*or/,
-                ),
-                choice(
-                    '&&',
-                    /;+\s*and/,
-                ),
+                '||',
+                /;+\s*or/,
+                '&&',
+                /;+\s*and/,
             ),
             $._statement,
         )),
@@ -97,10 +100,10 @@ module.exports = grammar({
             $._statement,
         )),
 
-        background: $ => seq($._statement, '&'),
 
         _terminator: $ => choice(
             ';',
+            '&',
             '\n',
             '\r',
             '\r\n',
@@ -111,11 +114,74 @@ module.exports = grammar({
             $.pipe,
             $.command,
             $.redirection,
-            $.background,
-            $.begin,
+            $.begin_statement,
+            $.if_statement,
+            $.while_statement,
+            $.for_statement,
+            $.switch_statement,
         ),
 
-        begin: $ => prec(6, seq(
+        _terminated_statement: $ => prec(1, seq(
+            $._statement,
+            $._terminator,
+        )),
+
+        switch_statement: $ => seq(
+            'switch',
+            field('value', $._expression),
+            $._terminator,
+            optional(repeat1($.case_clause)),
+            'end',
+        ),
+
+        case_clause: $ => seq(
+            'case',
+            repeat1($._expression),
+            $._terminator,
+            optional(repeat1($._terminated_statement)),
+        ),
+
+        break: $ => 'break',
+        continue: $ => 'continue',
+
+        for_statement: $ => seq(
+            'for',
+            field('variable', $.variable_name),
+            'in',
+            field('value', repeat1($._expression)),
+            $._terminator,
+            optional(repeat1(choice($.break, $.continue, $._top_statement))),
+            'end',
+        ),
+
+        while_statement: $ => prec.right(-3, seq(
+            'while',
+            field('condition', $._terminated_statement),
+            optional(repeat1(choice($.break, $.continue, $._top_statement))),
+            'end',
+        )),
+
+        if_statement: $ => prec.right(-3, seq(
+            'if',
+            field('condition', $._terminated_statement),
+            optional(repeat1($._top_statement)),
+            repeat($.else_if_clause),
+            optional($.else_clause),
+            'end'
+        )),
+
+        else_if_clause: $ => seq(
+            /else[ ]+if/,
+            optional(repeat1($._terminated_statement)),
+        ),
+
+        else_clause: $ => seq(
+            'else',
+            $._terminator,
+            optional(repeat1($._top_statement)),
+        ),
+
+        begin_statement: $ => prec(6, seq(
             'begin',
             optional(repeat1($._top_statement)),
             'end',
@@ -187,7 +253,7 @@ module.exports = grammar({
 
         command: $ => prec.right(seq(
             field('name', $._expression),
-            field('arguments', optional(repeat1($._expression))),
+            field('argument', optional(repeat1($._expression))),
         )),
 
         concatenation: $ => prec(-1, seq(

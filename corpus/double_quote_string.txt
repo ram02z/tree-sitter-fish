@@ -1,6 +1,6 @@
-=====
+========================================
 Double quote string - simple value
-=====
+========================================
 
 "value"
 
@@ -10,9 +10,9 @@ Double quote string - simple value
     (command
         name: (double_quote_string)))
 
-=====
+========================================
 Double quote string - multi words
-=====
+========================================
 
 "value of a string is anything inbetween the quotes"
 
@@ -22,9 +22,9 @@ Double quote string - multi words
     (command
         name: (double_quote_string)))
 
-=====
+========================================
 Double quote string - escape sequences
-=====
+========================================
 
 "value of a string is anything inbetween the quotes\
 a string can span two lines"
@@ -35,9 +35,9 @@ a string can span two lines"
     (command
         name: (double_quote_string (escape_sequence))))
 
-=====
+========================================
 Double quote string - escaped quotes
-=====
+========================================
 
 "string can have escaped double quotes in it: \""
 
@@ -47,9 +47,9 @@ Double quote string - escaped quotes
     (command
         name: (double_quote_string (escape_sequence))))
 
-=====
+========================================
 Double quote string - single quotes with no meaning
-=====
+========================================
 
 "value 'single_quote' is literal"
 
@@ -59,9 +59,9 @@ Double quote string - single quotes with no meaning
     (command
         name: (double_quote_string)))
 
-=====
+========================================
 Double quote string - variable expansion
-=====
+========================================
 
 "$PATH"
 "$$DOUBLE_EXPANSION"
@@ -74,9 +74,9 @@ Double quote string - variable expansion
     (command
         name: (double_quote_string (variable_expansion (variable_name)))))
 
-=====
+========================================
 Double quote string - escaped variable expansion
-=====
+========================================
 
 "\$PATH"
 
@@ -86,9 +86,9 @@ Double quote string - escaped variable expansion
     (command
         name: (double_quote_string (escape_sequence))))
 
-=====
+========================================
 Double quote string - escaped variable expansion
-=====
+========================================
 
 "The following is treated literally \$PATH, but this not: $PATH"
 

@@ -19,49 +19,49 @@ echo ''     1>>&-
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string)))
+            argument: (single_quote_string)))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string)))
+            argument: (single_quote_string)))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string)))
+            argument: (single_quote_string)))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))))
+            argument: (single_quote_string))))
 
 ========================================
 Redirection - read
@@ -78,20 +78,20 @@ echo ''     2< 	    test
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name))
     (redirection
         (command
             name: (variable_name)
-            arguments: (single_quote_string))
+            argument: (single_quote_string))
         (variable_name)))

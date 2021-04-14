@@ -130,7 +130,7 @@ Bracket Expansion - with otherwise special characters
 (program
     (command
         name: (bracket_expansion
-            (word) (word) (word) (word) (word)))
+            (word) (word) (word) (word) (comment) (MISSING "}")))
     (command
         name: (bracket_expansion (word) (word)))
     (command

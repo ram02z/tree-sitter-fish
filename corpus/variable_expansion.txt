@@ -25,7 +25,9 @@ $$CMD_REF
 ========================================
 Variable Expansion - with escape sequence
 ========================================
+
 \$$CMD_REF
+
 ---
 
 (program

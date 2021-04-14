@@ -34,12 +34,12 @@ echo -e -- "THIS IS A STRING $PATH"
 (program
     (command
         name: (variable_name)
-        arguments: (word))
+        argument: (word))
     (command
         name: (variable_name)
-        arguments: (word)
-        arguments: (word)
-        arguments: (double_quote_string (variable_expansion (variable_name)))))
+        argument: (word)
+        argument: (word)
+        argument: (double_quote_string (variable_expansion (variable_name)))))
 
 ========================================
 Command - multiline
@@ -57,13 +57,13 @@ multiline
 (program
     (command
         name: (variable_name)
-        arguments: (single_quote_string (escape_sequence)))
+        argument: (single_quote_string (escape_sequence)))
     (command
         name: (variable_name)
-        arguments: (double_quote_string))
+        argument: (double_quote_string))
     (command
         name: (variable_name)
-        arguments: (concatenation
+        argument: (concatenation
             (variable_name)
             (escape_sequence)
             (variable_name))))
@@ -80,8 +80,8 @@ echo -- +test +q -nest start
 (program
     (command
         name: (variable_name)
-        arguments: (word)
-        arguments: (word)
-        arguments: (word)
-        arguments: (word)
-        arguments: (variable_name)))
+        argument: (word)
+        argument: (word)
+        argument: (word)
+        argument: (word)
+        argument: (variable_name)))

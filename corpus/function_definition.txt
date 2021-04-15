@@ -1,0 +1,66 @@
+========================================
+Function Definition - simple
+========================================
+
+function test; end
+
+function name
+end
+
+---
+
+(program
+    (function_definition
+        name: (variable_name))
+    (function_definition
+        name: (variable_name)))
+
+========================================
+Function Definition - nested
+========================================
+
+function test; function nested; end; end
+
+---
+
+(program
+    (function_definition
+        name: (variable_name)
+        (function_definition
+            name: (variable_name))))
+
+========================================
+Function Definition - with options
+========================================
+
+function test --argument-names one two three
+end
+
+---
+
+(program
+    (function_definition
+        name: (variable_name)
+        option: (word)
+        option: (variable_name)
+        option: (variable_name)
+        option: (variable_name)))
+
+========================================
+Function Definition - extras
+========================================
+
+function a -d "Multi
+line description"
+    cmd
+end
+
+---
+
+(program
+    (function_definition
+        name: (variable_name)
+        option: (word)
+        option: (double_quote_string)
+        (command
+            name: (variable_name))))

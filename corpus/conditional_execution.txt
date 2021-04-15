@@ -44,7 +44,6 @@ true; and and --help
             name: (variable_name)
             argument: (word))))
 
-
 ========================================
 Conditional Execution - with redirect
 ========================================
@@ -68,3 +67,19 @@ true ;; and printf > file
             (command name: (variable_name))
             (variable_name))))
 
+========================================
+Conditional Execution - and or
+========================================
+
+true;;
+
+and echo
+
+---
+
+(program
+    (conditional_execution
+        (command
+            name: (variable_name))
+        (command
+            name: (variable_name))))

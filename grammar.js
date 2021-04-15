@@ -193,7 +193,7 @@ module.exports = grammar({
         )),
 
         else_if_clause: $ => seq(
-            /else[ ]+if/,
+            seq('else', 'if'),
             optional(repeat1($._terminated_statement)),
         ),
 

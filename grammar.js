@@ -3,6 +3,7 @@
 // TODO(10):    "test[test]" should be a word
 // TODO(11):    "begin & end" should be invalid
 // TODO(12):    Background commands cannot be used as conditionals "while echo &; end"
+// TODO(13):    "and", "or" should not be part of the regexp so they can be highlighted
 
 const SPECIAL_CHARACTERS = [
     '$',

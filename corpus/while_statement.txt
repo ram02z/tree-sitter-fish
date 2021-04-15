@@ -62,3 +62,20 @@ end
             name: (variable_name))
         (continue)))
 
+========================================
+While Statement - break
+========================================
+
+while true
+    begin
+        break
+    end
+end
+
+---
+
+(program
+    (while_statement
+        condition: (command name: (variable_name))
+        (begin_statement
+            (break))))

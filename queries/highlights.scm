@@ -7,6 +7,8 @@
   "||"
   "|"
   "&"
+  (direction)
+  (stream_redirect)
 ] @operator
 
 [

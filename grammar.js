@@ -4,6 +4,7 @@
 // TODO(11):    "begin & end" should be invalid
 // TODO(12):    Background commands cannot be used as conditionals "while echo &; end"
 // TODO(13):    "and", "or" should not be part of the regexp so they can be highlighted
+// TODO(14):    "begin >&0 end" should be invalid
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -82,24 +83,25 @@ module.exports = grammar({
             $._statement,
         )),
 
-        redirection: $ => prec.left(5, choice(
-            seq(
-                $._statement,
-                /[012]?(>{1,2}|<{1})\&[-012]/,
-            ),
-            seq(
-                $._statement,
-                /[012]?((>|<)|>{2}|((>|<){1}\?))/,
-                $._expression,
-            ),
+        // Prec: higher than pipe
+        redirected_statement: $ => prec(1, seq(
+            $._statement,
+            choice($.file_redirect, $.stream_redirect),
         )),
 
-        pipe: $ => prec.left(4, seq(
+        stream_redirect: $ => token(/[012]?(>>|>|<)&[012-]/),
+        direction: $ => token(/[012]?(>>?\??|<)/),
+
+        file_redirect: $ => seq(
+            field('operator', $.direction),
+            field('destination', $._expression),
+        ),
+
+        pipe: $ => prec.left(seq(
             $._statement,
             '|',
             $._statement,
         )),
-
 
         _terminator: $ => choice(
             ';',
@@ -113,7 +115,7 @@ module.exports = grammar({
             $.conditional_execution,
             $.pipe,
             $.command,
-            $.redirection,
+            $.redirected_statement,
             $.begin_statement,
             $.if_statement,
             $.while_statement,

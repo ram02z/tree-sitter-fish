@@ -73,7 +73,9 @@ begin; end >&-
 ---
 
 (program
-    (redirection (begin_statement)))
+    (redirected_statement
+        (begin_statement)
+        (stream_redirect)))
 
 ========================================
 Begin Statement - with pipe

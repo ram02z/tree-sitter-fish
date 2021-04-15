@@ -26,14 +26,17 @@ echo 1 >&0 | echo
 (program
     (pipe
         (command name: (variable_name))
-        (redirection
+        (redirected_statement
             (command name: (variable_name))
-            (variable_name)))
+            (file_redirect
+                operator: (direction)
+                destination: (variable_name))))
     (pipe
-        (redirection
+        (redirected_statement
             (command
                 name: (variable_name)
-                argument: (variable_name)))
+                argument: (variable_name))
+            (stream_redirect))
         (command name: (variable_name))))
 
 

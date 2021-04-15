@@ -57,15 +57,19 @@ true ;; and printf > file
     (conditional_execution
         (command
             name: (variable_name))
-        (redirection
+        (redirected_statement
             (command name: (variable_name))
-            (variable_name)))
+            (file_redirect
+                operator: (direction)
+                destination: (variable_name))))
     (conditional_execution
         (command
             name: (variable_name))
-        (redirection
+        (redirected_statement
             (command name: (variable_name))
-            (variable_name))))
+            (file_redirect
+                operator: (direction)
+                destination: (variable_name)))))
 
 ========================================
 Conditional Execution - and or

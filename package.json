@@ -4,11 +4,12 @@
   "description": "Fish tree-sitter grammar",
   "main": "bindings/node",
   "scripts": {
-    "test": "npm run generate && ./node_modules/.bin/tree-sitter test",
-    "parse": "./node_modules/.bin/tree-sitter parse",
-    "generate": "./node_modules/.bin/tree-sitter generate",
-    "wasm": "./node_modules/.bin/tree-sitter build-wasm",
-    "start": "./node_modules/.bin/tree-sitter web-ui"
+    "build": "tree-sitter generate",
+    "build:wasm": "npm run build && tree-sitter build-wasm",
+    "parse": "npm run build && tree-sitter parse",
+    "start": "npm run build && tree-sitter web-ui",
+    "test": "npm run build && tree-sitter test",
+    "test:watch": "nodemon --ext js,txt --watch grammar.js --watch corpus  --exec npm run test"
   },
   "keywords": [
     "tree-sitter",
@@ -22,6 +23,7 @@
     "nan": "^2.14.2"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.19.4"
+    "tree-sitter-cli": "^0.19.4",
+    "nodemon": "^2.0.7"
   }
 }

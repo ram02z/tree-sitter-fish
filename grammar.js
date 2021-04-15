@@ -120,6 +120,8 @@ module.exports = grammar({
             $.for_statement,
             $.switch_statement,
             $.function_definition,
+            $.break,
+            $.continue,
         ),
 
         _terminated_statement: $ => prec(1, seq(
@@ -173,14 +175,14 @@ module.exports = grammar({
             'in',
             field('value', repeat1($._expression)),
             $._terminator,
-            optional(repeat1(choice($.break, $.continue, $._top_statement))),
+            optional(repeat1($._top_statement)),
             'end',
         ),
 
         while_statement: $ => prec.right(-3, seq(
             'while',
             field('condition', $._terminated_statement),
-            optional(repeat1(choice($.break, $.continue, $._top_statement))),
+            optional(repeat1($._top_statement)),
             'end',
         )),
 

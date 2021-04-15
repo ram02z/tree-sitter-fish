@@ -12,11 +12,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -110,6 +118,10 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
@@ -119,6 +131,10 @@
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -319,11 +335,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -389,11 +413,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -440,11 +472,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -676,11 +716,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -747,11 +795,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
             "type": "command",
             "named": true
           },
           {
             "type": "conditional_execution",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -794,11 +850,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -891,11 +955,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -942,11 +1014,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1012,6 +1092,10 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
@@ -1021,6 +1105,10 @@
         },
         {
           "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1199,11 +1287,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
             "type": "command",
             "named": true
           },
           {
             "type": "conditional_execution",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {

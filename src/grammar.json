@@ -92,48 +92,70 @@
         ]
       }
     },
-    "redirection": {
-      "type": "PREC_LEFT",
-      "value": 5,
+    "redirected_statement": {
+      "type": "PREC",
+      "value": 1,
       "content": {
-        "type": "CHOICE",
+        "type": "SEQ",
         "members": [
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_statement"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[012]?(>{1,2}|<{1})\\&[-012]"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "_statement"
           },
           {
-            "type": "SEQ",
+            "type": "CHOICE",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_statement"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[012]?((>|<)|>{2}|((>|<){1}\\?))"
+                "name": "file_redirect"
               },
               {
                 "type": "SYMBOL",
-                "name": "_expression"
+                "name": "stream_redirect"
               }
             ]
           }
         ]
       }
     },
+    "stream_redirect": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[012]?(>>|>|<)&[012-]"
+      }
+    },
+    "direction": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[012]?(>>?\\??|<)"
+      }
+    },
+    "file_redirect": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "operator",
+          "content": {
+            "type": "SYMBOL",
+            "name": "direction"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "destination",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        }
+      ]
+    },
     "pipe": {
       "type": "PREC_LEFT",
-      "value": 4,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -194,7 +216,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "redirection"
+          "name": "redirected_statement"
         },
         {
           "type": "SYMBOL",

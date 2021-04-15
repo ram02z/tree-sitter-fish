@@ -179,6 +179,7 @@ Concatenation - variable expansion concat
 
 $PATH\ 'ological'
 $PATH\ "ological"
+$PATH\ ological
 
 ---
 
@@ -192,6 +193,11 @@ $PATH\ "ological"
         name: (concatenation
             (variable_expansion (variable_name))
             (escape_sequence)
-            (double_quote_string))))
+            (double_quote_string)))
+    (command
+        name: (concatenation
+            (variable_expansion (variable_name))
+            (escape_sequence)
+            (variable_name))))
 
 

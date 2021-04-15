@@ -595,47 +595,120 @@
         "required": true,
         "types": [
           {
-            "type": "function_name",
+            "type": "bracket_expansion",
+            "named": true
+          },
+          {
+            "type": "concatenation",
+            "named": true
+          },
+          {
+            "type": "double_quote_string",
+            "named": true
+          },
+          {
+            "type": "list_element_access",
+            "named": true
+          },
+          {
+            "type": "single_quote_string",
+            "named": true
+          },
+          {
+            "type": "variable_expansion",
+            "named": true
+          },
+          {
+            "type": "variable_name",
+            "named": true
+          },
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      },
+      "option": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "bracket_expansion",
+            "named": true
+          },
+          {
+            "type": "concatenation",
+            "named": true
+          },
+          {
+            "type": "double_quote_string",
+            "named": true
+          },
+          {
+            "type": "list_element_access",
+            "named": true
+          },
+          {
+            "type": "single_quote_string",
+            "named": true
+          },
+          {
+            "type": "variable_expansion",
+            "named": true
+          },
+          {
+            "type": "variable_name",
+            "named": true
+          },
+          {
+            "type": "word",
             "named": true
           }
         ]
       }
-    }
-  },
-  {
-    "type": "function_name",
-    "named": true,
-    "fields": {},
+    },
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "bracket_expansion",
+          "type": "begin_statement",
           "named": true
         },
         {
-          "type": "concatenation",
+          "type": "command",
           "named": true
         },
         {
-          "type": "double_quote_string",
+          "type": "conditional_execution",
           "named": true
         },
         {
-          "type": "list_element_access",
+          "type": "for_statement",
           "named": true
         },
         {
-          "type": "single_quote_string",
+          "type": "function_definition",
           "named": true
         },
         {
-          "type": "variable_name",
+          "type": "if_statement",
           "named": true
         },
         {
-          "type": "word",
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirection",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]

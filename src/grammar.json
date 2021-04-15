@@ -251,8 +251,46 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "function_name"
+            "name": "_function_name"
           }
+        },
+        {
+          "type": "FIELD",
+          "name": "option",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_terminated_statement"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -260,7 +298,7 @@
         }
       ]
     },
-    "function_name": {
+    "_function_name": {
       "type": "CHOICE",
       "members": [
         {
@@ -277,6 +315,10 @@
             {
               "type": "SYMBOL",
               "name": "double_quote_string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "variable_expansion"
             },
             {
               "type": "SYMBOL",

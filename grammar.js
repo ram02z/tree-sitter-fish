@@ -1,5 +1,4 @@
 // TODO(2):     Implement glob: '*' is still a special character inside bracket expansion.
-// TODO(4):     Implement `function`.
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
 // TODO(10):    "test[test]" should be a word
 // TODO(11):    "begin & end" should be invalid
@@ -119,12 +118,35 @@ module.exports = grammar({
             $.while_statement,
             $.for_statement,
             $.switch_statement,
+            $.function_definition,
         ),
 
         _terminated_statement: $ => prec(1, seq(
             $._statement,
             $._terminator,
         )),
+
+        function_definition: $ => seq(
+            'function',
+            field('name', $._function_name),
+            field('option', optional(repeat1($._expression))),
+            $._terminator,
+            optional(repeat1($._terminated_statement)),
+            'end',
+        ),
+
+        _function_name: $ => choice(
+            $.concatenation,
+            choice(
+                $.single_quote_string,
+                $.double_quote_string,
+                $.variable_expansion,
+                $.list_element_access,
+                $.word,
+                $.variable_name,
+                $.bracket_expansion,
+            ),
+        ),
 
         switch_statement: $ => seq(
             'switch',

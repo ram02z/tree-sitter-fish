@@ -1,6 +1,10 @@
-(comment) @comment
+[
+  (double_quote_string)
+  (single_quote_string)
+  (concatenation)
+] @string
 
-(function_definition name: (word)) @function
+(comment) @comment
 
 [
   "&&"
@@ -11,11 +15,29 @@
   (stream_redirect)
 ] @operator
 
+(index) @number
+
+(variable_expansion) @constant
+
 [
-    (double_quote_string)
-    (single_quote_string)
-    (concatenation)
-] @string
+ "["
+ "]"
+ "{"
+ "}"
+ "("
+ ")"
+] @punctuation.bracket
+
+"," @punctuation.delimiter
+
+(function_definition name: (variable_name) @function)
+(function_definition (_)* option: (word) @parameter
+                     (#match? @parameter "^--?"))
+
+(command name: (variable_name) @function)
+(command (_)* argument: (word) @parameter
+         (#match? @parameter "^--?"))
+
 
 [
  "switch"
@@ -28,9 +50,7 @@
  "end"
  "while"
  "for"
- ; (conditional_execution "and") - this is invalid now
- (while_statement (break))
- (while_statement (continue))
- (for_statement (break))
- (for_statement (continue))
+ ;"and" "or" - this is invalid now
+ (break)
+ (continue)
 ] @keyword

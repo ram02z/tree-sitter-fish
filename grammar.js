@@ -5,6 +5,8 @@
 // TODO(12):    Background commands cannot be used as conditionals "while echo &; end"
 // TODO(13):    "and", "or" should not be part of the regexp so they can be highlighted
 // TODO(14):    "begin >&0 end" should be invalid
+// TODO(15):    implement "not" keyword
+// TODO(16):    "function/while/begin --help" should be a command
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -130,6 +132,16 @@ module.exports = grammar({
             $._statement,
             $._terminator,
         )),
+
+        command_substitution: $ => seq(
+            '(',
+            seq(
+                repeat($._terminated_statement),
+                $._statement,
+                optional(repeat1($._terminator))
+            ),
+            ')',
+        ),
 
         function_definition: $ => seq(
             'function',
@@ -294,6 +306,7 @@ module.exports = grammar({
         _expression: $ => choice(
             $._base_expression,
             $.concatenation,
+            $.command_substitution,
         ),
 
         _base_expression: $ => choice(

@@ -1,0 +1,56 @@
+========================================
+Command Substitudion - simple
+========================================
+
+echo (printf text)
+echo (begin; print 1; end;;;)
+
+---
+
+(program
+    (command
+        name: (variable_name)
+        argument: (command_substitution
+            (command
+                name: (variable_name)
+                argument: (variable_name))))
+    (command
+        name: (variable_name)
+        argument: (command_substitution
+            (begin_statement
+                (command
+                    name: (variable_name)
+                   argument: (variable_name))))))
+
+========================================
+Command Substitudion - multiline
+========================================
+
+echo (
+    printf text
+)
+echo (
+    printf text
+    printf ' ing'
+)
+
+---
+
+(program
+    (command
+        name: (variable_name)
+        argument: (command_substitution
+            (command
+                name: (variable_name)
+                argument: (variable_name))))
+    (command
+        name: (variable_name)
+        argument: (command_substitution
+            (command
+                name: (variable_name)
+                argument: (variable_name))
+            (command
+                name: (variable_name)
+                argument: (single_quote_string)))))
+
+

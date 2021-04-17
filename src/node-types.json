@@ -83,6 +83,10 @@
           "named": true
         },
         {
+          "type": "home_dir_expansion",
+          "named": true
+        },
+        {
           "type": "list_element_access",
           "named": true
         },
@@ -150,11 +154,23 @@
           "named": true
         },
         {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
           "type": "for_statement",
           "named": true
         },
         {
           "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "glob",
+          "named": true
+        },
+        {
+          "type": "home_dir_expansion",
           "named": true
         },
         {
@@ -229,6 +245,18 @@
             "named": true
           },
           {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
+            "named": true
+          },
+          {
             "type": "list_element_access",
             "named": true
           },
@@ -268,6 +296,18 @@
           },
           {
             "type": "double_quote_string",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
             "named": true
           },
           {
@@ -380,6 +420,14 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "glob",
+          "named": true
+        },
+        {
+          "type": "home_dir_expansion",
           "named": true
         },
         {
@@ -638,6 +686,18 @@
             "named": true
           },
           {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
+            "named": true
+          },
+          {
             "type": "list_element_access",
             "named": true
           },
@@ -693,6 +753,18 @@
           },
           {
             "type": "double_quote_string",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
             "named": true
           },
           {
@@ -847,6 +919,18 @@
           },
           {
             "type": "double_quote_string",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
             "named": true
           },
           {
@@ -1089,6 +1173,10 @@
       "multiple": false,
       "required": false,
       "types": [
+        {
+          "type": "command_substitution",
+          "named": true
+        },
         {
           "type": "double_quote_string",
           "named": true
@@ -1434,6 +1522,18 @@
             "named": true
           },
           {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
+            "named": true
+          },
+          {
             "type": "list_element_access",
             "named": true
           },
@@ -1735,6 +1835,14 @@
   {
     "type": "function",
     "named": false
+  },
+  {
+    "type": "glob",
+    "named": true
+  },
+  {
+    "type": "home_dir_expansion",
+    "named": true
   },
   {
     "type": "if",

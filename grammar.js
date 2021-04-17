@@ -7,6 +7,7 @@
 // TODO(14):    "begin >&0 end" should be invalid
 // TODO(15):    implement "not" keyword
 // TODO(16):    "function/while/begin --help" should be a command
+// TODO(17):    How to handle "{}" "{string}"
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -247,6 +248,7 @@ module.exports = grammar({
             /'(-|\+)?\d+'/,
             $.variable_expansion,
             $.double_quote_string,
+            $.command_substitution,
         ),
 
         range: $ => seq($.index, '..', $.index),
@@ -260,13 +262,18 @@ module.exports = grammar({
             ']',
         ),
 
-        bracket_expansion: $ => prec.right(-1, seq(
+        bracket_expansion: $ => prec.right(seq(
             '{',
-            optional(','),
-            optional($._bracket_expression),
-            prec.left(1, repeat1(
-                seq(',', optional($._bracket_expression)),
-            )),
+            choice(
+                $.variable_expansion,
+                seq(
+                    optional(','),
+                    optional($._bracket_expression),
+                    repeat1(
+                        prec.right(seq(',', optional($._bracket_expression))),
+                    ),
+                ),
+            ),
             '}',
         )),
 
@@ -289,7 +296,7 @@ module.exports = grammar({
             '\'',
         )),
 
-        escape_sequence: $ => token.immediate(seq('\\', choice(
+        escape_sequence: $ => token(seq('\\', choice(
             /[^xu]/,
             /u[0-9a-fA-F]{4}/,
             /u{[0-9a-fA-F]+}/,
@@ -302,10 +309,10 @@ module.exports = grammar({
         )),
 
         concatenation: $ => prec(-1, seq(
-            choice($._base_expression, $.escape_sequence),
+            $._base_expression,
             repeat1(seq(
                 $._concat,
-                choice($._base_expression, $.escape_sequence)
+                $._base_expression,
             )),
         )),
 
@@ -323,13 +330,16 @@ module.exports = grammar({
             $.word,
             $.variable_name,
             $.bracket_expansion,
+            $.escape_sequence,
+            $.glob,
+            $.home_dir_expansion,
         ),
 
         bracket_concatenation: $ => prec(-1, seq(
-            choice($._base_bracket_expression, $.escape_sequence),
+            $._base_bracket_expression,
             repeat1(prec(1, seq(
                 $._bracket_concat,
-                choice($._base_bracket_expression, $.escape_sequence),
+                $._base_bracket_expression,
             ))),
         )),
 
@@ -346,7 +356,12 @@ module.exports = grammar({
             $.escape_sequence,
             $.variable_name,
             $.list_element_access,
+            $.home_dir_expansion,
         ),
+
+        home_dir_expansion: $ => '~',
+
+        glob: $ => token.immediate(repeat1('*')),
 
         // In order to use it as a "word":
         // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),

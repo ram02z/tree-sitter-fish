@@ -135,11 +135,11 @@ module.exports = grammar({
 
         command_substitution: $ => seq(
             '(',
-            seq(
-                repeat($._terminated_statement),
-                $._statement,
-                optional(repeat1($._terminator))
-            ),
+            repeat(seq(
+                optional($._statement),
+                $._terminator,
+            )),
+            optional($._statement),
             ')',
         ),
 

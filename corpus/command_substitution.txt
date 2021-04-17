@@ -4,6 +4,8 @@ Command Substitudion - simple
 
 echo (printf text)
 echo (begin; print 1; end;;;)
+echo (;;;)
+echo ()
 
 ---
 
@@ -20,7 +22,13 @@ echo (begin; print 1; end;;;)
             (begin_statement
                 (command
                     name: (variable_name)
-                   argument: (variable_name))))))
+                   argument: (variable_name)))))
+    (command
+        name: (variable_name)
+        argument: (command_substitution))
+    (command
+        name: (variable_name)
+        argument: (command_substitution)))
 
 ========================================
 Command Substitudion - multiline

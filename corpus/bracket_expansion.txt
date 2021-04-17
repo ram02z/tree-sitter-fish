@@ -21,7 +21,6 @@ Bracket Expansion - missing comma
 ========================================
 
 {a}
-{$a}
 {}
 
 ---
@@ -30,10 +29,6 @@ Bracket Expansion - missing comma
     (command
         name: (bracket_expansion
             (variable_name)
-            (MISSING ",")))
-    (command
-        name: (bracket_expansion
-            (variable_expansion (variable_name))
             (MISSING ",")))
     (command
         name: (bracket_expansion

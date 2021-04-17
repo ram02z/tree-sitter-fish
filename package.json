@@ -29,7 +29,7 @@
   "repository": "https://github.com/krnik/tree-sitter-fish",
   "tree-sitter": [
         {
-            "scope": "program.fish",
+            "scope": "source.fish",
             "file-types": ["fish"]
         }
   ]

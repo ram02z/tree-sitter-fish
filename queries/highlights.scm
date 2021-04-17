@@ -50,6 +50,8 @@
  "end"
  "while"
  "for"
+ "not"
+ "!"
  ;"and" "or" - this is invalid now
  (break)
  (continue)

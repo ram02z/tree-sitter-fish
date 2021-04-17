@@ -40,6 +40,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -159,6 +163,10 @@
         },
         {
           "type": "list_element_access",
+          "named": true
+        },
+        {
+          "type": "negated_statement",
           "named": true
         },
         {
@@ -327,6 +335,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -434,6 +446,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -512,6 +528,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -568,6 +588,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "negated_statement",
           "named": true
         },
         {
@@ -741,6 +765,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -881,6 +909,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -960,6 +992,10 @@
             "named": true
           },
           {
+            "type": "negated_statement",
+            "named": true
+          },
+          {
             "type": "pipe",
             "named": true
           },
@@ -1023,6 +1059,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -1080,6 +1120,69 @@
     }
   },
   {
+    "type": "negated_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "begin_statement",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirected_statement",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pipe",
     "named": true,
     "fields": {},
@@ -1117,6 +1220,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "negated_statement",
           "named": true
         },
         {
@@ -1176,6 +1283,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "negated_statement",
           "named": true
         },
         {
@@ -1254,6 +1365,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "negated_statement",
           "named": true
         },
         {
@@ -1432,6 +1547,10 @@
             "named": true
           },
           {
+            "type": "negated_statement",
+            "named": true
+          },
+          {
             "type": "pipe",
             "named": true
           },
@@ -1487,6 +1606,10 @@
           "named": true
         },
         {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
           "type": "pipe",
           "named": true
         },
@@ -1515,6 +1638,10 @@
   },
   {
     "type": "\r\n",
+    "named": false
+  },
+  {
+    "type": "!",
     "named": false
   },
   {
@@ -1615,6 +1742,10 @@
   },
   {
     "type": "in",
+    "named": false
+  },
+  {
+    "type": "not",
     "named": false
   },
   {

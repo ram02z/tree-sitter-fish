@@ -126,11 +126,17 @@ module.exports = grammar({
             $.function_definition,
             $.break,
             $.continue,
+            $.negated_statement,
         ),
 
         _terminated_statement: $ => prec(1, seq(
             $._statement,
             $._terminator,
+        )),
+
+        negated_statement: $ => prec.left(-1, seq(
+            choice('!', 'not'),
+            $._statement,
         )),
 
         command_substitution: $ => seq(

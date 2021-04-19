@@ -83,7 +83,7 @@
           "named": true
         },
         {
-          "type": "home_dir_expansion",
+          "type": "glob",
           "named": true
         },
         {

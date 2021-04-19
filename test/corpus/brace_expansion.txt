@@ -1,5 +1,5 @@
 ========================================
-Bracket Expansion - empty
+Brace Expansion - empty
 ========================================
 
 {,}
@@ -10,14 +10,14 @@ Bracket Expansion - empty
 
 (program
     (command
-        name: (bracket_expansion))
+        name: (brace_expansion))
     (command
-        name: (bracket_expansion))
+        name: (brace_expansion))
     (command
-        name: (bracket_expansion)))
+        name: (brace_expansion)))
 
 ========================================
-Bracket Expansion - missing comma
+Brace Expansion - missing comma
 ========================================
 
 {a}
@@ -27,15 +27,15 @@ Bracket Expansion - missing comma
 
 (program
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (variable_name)
             (MISSING ",")))
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (MISSING ","))))
 
 ========================================
-Bracket Expansion - single value
+Brace Expansion - single value
 ========================================
 
 {name,}
@@ -48,18 +48,18 @@ Bracket Expansion - single value
 
 (program
     (command
-        name: (bracket_expansion (variable_name)))
+        name: (brace_expansion (variable_name)))
     (command
-        name: (bracket_expansion (variable_name)))
+        name: (brace_expansion (variable_name)))
     (command
-        name: (bracket_expansion (variable_name)))
+        name: (brace_expansion (variable_name)))
     (command
-        name: (bracket_expansion (variable_name)))
+        name: (brace_expansion (variable_name)))
     (command
-        name: (bracket_expansion (variable_name))))
+        name: (brace_expansion (variable_name))))
 
 ========================================
-Bracket Expansion - with escapes
+Brace Expansion - with escapes
 ========================================
 
 {\ ,\'}
@@ -70,21 +70,21 @@ Bracket Expansion - with escapes
 
 (program
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (escape_sequence)
             (escape_sequence)))
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (concatenation
                 (variable_name)
                 (escape_sequence)
                 (variable_name))))
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
                 (single_quote_string (escape_sequence)))))
 
 ========================================
-Bracket Expansion - with variable_expansion
+Brace Expansion - with variable_expansion
 ========================================
 
 {,$PATH}
@@ -96,24 +96,24 @@ Bracket Expansion - with variable_expansion
 
 (program
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (variable_expansion (variable_name))))
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (concatenation
                 (variable_expansion (variable_name))
                 (list_element_access (index)))))
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (concatenation (escape_sequence) (variable_name))
             (variable_expansion (variable_name))))
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (variable_expansion (variable_name))
             (variable_expansion (variable_name)))))
 
 ========================================
-Bracket Expansion - with otherwise special characters
+Brace Expansion - with otherwise special characters
 ========================================
 
 {<,>,~,#}
@@ -124,15 +124,15 @@ Bracket Expansion - with otherwise special characters
 
 (program
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (word) (word) (word) (word)))
     (command
-        name: (bracket_expansion (word) (word)))
+        name: (brace_expansion (word) (word)))
     (command
-        name: (bracket_expansion (word) (word))))
+        name: (brace_expansion (word) (word))))
 
 ========================================
-Bracket Expansion - with around string concat
+Brace Expansion - with around string concat
 ========================================
 
 {a,b}c
@@ -143,16 +143,16 @@ $PATH{a,b}c
 (program
     (command
         name: (concatenation
-            (bracket_expansion (variable_name) (variable_name))
+            (brace_expansion (variable_name) (variable_name))
             (variable_name)))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
-            (bracket_expansion (variable_name) (variable_name))
+            (brace_expansion (variable_name) (variable_name))
             (variable_name))))
 
 ========================================
-Bracket Expansion - proper distinction between vars and words
+Brace Expansion - proper distinction between vars and words
 ========================================
 
 {a+b,b}
@@ -161,11 +161,11 @@ Bracket Expansion - proper distinction between vars and words
 
 (program
     (command
-        name: (bracket_expansion (word) (variable_name))))
+        name: (brace_expansion (word) (variable_name))))
 
 
 ========================================
-Bracket Expansion - requires comma between expressions
+Brace Expansion - requires comma between expressions
 ========================================
 
 {,b b}
@@ -174,10 +174,10 @@ Bracket Expansion - requires comma between expressions
 
 (program
     (command
-        name: (bracket_expansion (variable_name) (ERROR (UNEXPECTED '}')))))
+        name: (brace_expansion (variable_name) (ERROR (UNEXPECTED '}')))))
 
 ========================================
-Bracket Expansion - expanded single var
+Brace Expansion - expanded single var
 ========================================
 
 {$PATH}
@@ -186,11 +186,11 @@ Bracket Expansion - expanded single var
 
 (program
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (variable_expansion (variable_name)))))
 
 ========================================
-Bracket Expansion - with glob
+Brace Expansion - with glob
 ========================================
 
 {,*}
@@ -200,10 +200,10 @@ Bracket Expansion - with glob
 
 (program
     (command
-        name: (bracket_expansion (glob)))
+        name: (brace_expansion (glob)))
     (command
         name: (concatenation
-            (bracket_expansion
+            (brace_expansion
                 (concatenation
                     (glob) (word) (glob) (word) (glob) (word)))
             (word))))

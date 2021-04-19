@@ -48,7 +48,7 @@ module.exports = grammar({
 
     externals: $ => [
         $._concat,
-        $._bracket_concat,
+        $._brace_concat,
     ],
 
     inline: $ => [
@@ -175,7 +175,7 @@ module.exports = grammar({
                 $.list_element_access,
                 $.word,
                 $.variable_name,
-                $.bracket_expansion,
+                $.brace_expansion,
             ),
         ),
 
@@ -269,15 +269,15 @@ module.exports = grammar({
             ']',
         ),
 
-        bracket_expansion: $ => prec.right(seq(
+        brace_expansion: $ => prec.right(seq(
             '{',
             choice(
                 $.variable_expansion,
                 seq(
                     optional(','),
-                    optional($._bracket_expression),
+                    optional($._brace_expression),
                     repeat1(
-                        prec.right(seq(',', optional($._bracket_expression))),
+                        prec.right(seq(',', optional($._brace_expression))),
                     ),
                 ),
             ),
@@ -337,30 +337,30 @@ module.exports = grammar({
             $.word,
             $.integer,
             $.variable_name,
-            $.bracket_expansion,
+            $.brace_expansion,
             $.escape_sequence,
             $.glob,
             $.home_dir_expansion,
         ),
 
-        bracket_concatenation: $ => prec(-1, seq(
-            $._base_bracket_expression,
+        brace_concatenation: $ => prec(-1, seq(
+            $._base_brace_expression,
             repeat1(prec(1, seq(
-                $._bracket_concat,
-                $._base_bracket_expression,
+                $._brace_concat,
+                $._base_brace_expression,
             ))),
         )),
 
-        _bracket_expression: $ => choice(
-            alias($.bracket_concatenation, $.concatenation),
-            $._base_bracket_expression,
+        _brace_expression: $ => choice(
+            alias($.brace_concatenation, $.concatenation),
+            $._base_brace_expression,
         ),
 
-        _base_bracket_expression: $ => choice(
+        _base_brace_expression: $ => choice(
             $.single_quote_string,
             $.double_quote_string,
             $.variable_expansion,
-            alias($.bracket_word, $.word),
+            alias($.brace_word, $.word),
             $.escape_sequence,
             $.variable_name,
             $.list_element_access,
@@ -374,7 +374,7 @@ module.exports = grammar({
         // In order to use it as a "word":
         // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),
         word: $ => noneOf(SPECIAL_CHARACTERS),
-        bracket_word: $ => noneOf(['\\s', '$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
+        brace_word: $ => noneOf(['\\s', '$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
     },
 });
 

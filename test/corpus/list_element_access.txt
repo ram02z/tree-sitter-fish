@@ -142,7 +142,7 @@ $ENV[2][1]
             (list_element_access (index)))))
 
 ========================================
-List Access - inside bracket expansion
+List Access - inside brace expansion
 ========================================
 
 {$ENV[2][1],}
@@ -151,7 +151,7 @@ List Access - inside bracket expansion
 
 (program
     (command
-        name: (bracket_expansion
+        name: (brace_expansion
             (concatenation
                 (variable_expansion (variable_name))
                 (list_element_access (index))

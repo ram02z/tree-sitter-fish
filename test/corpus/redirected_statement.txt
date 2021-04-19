@@ -8,6 +8,7 @@ echo ''     >>      test
 echo ''     1>>     test
 echo ''     >?      test
 echo ''     2>?     test
+echo ''     &>?     test
 echo ''     >&0
 echo ''     >>&1
 echo ''     >&-
@@ -16,6 +17,13 @@ echo ''     1>>&-
 ---
 
 (program
+    (redirected_statement
+        (command
+            name: (variable_name)
+            argument: (single_quote_string))
+        (file_redirect
+            operator: (direction)
+            destination: (variable_name)))
     (redirected_statement
         (command
             name: (variable_name)

@@ -129,7 +129,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[012]?(>>?\\??|<)"
+        "value": "[012&]?(>>?\\??|<)"
       }
     },
     "file_redirect": {

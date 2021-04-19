@@ -91,7 +91,7 @@ module.exports = grammar({
         )),
 
         stream_redirect: $ => token(/[012]?(>>|>|<)&[012-]/),
-        direction: $ => token(/[012]?(>>?\??|<)/),
+        direction: $ => token(/[012&]?(>>?\??|<)/),
 
         file_redirect: $ => seq(
             field('operator', $.direction),

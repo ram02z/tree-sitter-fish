@@ -22,7 +22,7 @@ echo ()
             (begin_statement
                 (command
                     name: (variable_name)
-                   argument: (variable_name)))))
+                   argument: (integer)))))
     (command
         name: (variable_name)
         argument: (command_substitution))

@@ -35,7 +35,7 @@ echo 1 >&0 | echo
         (redirected_statement
             (command
                 name: (variable_name)
-                argument: (variable_name))
+                argument: (integer))
             (stream_redirect))
         (command name: (variable_name))))
 

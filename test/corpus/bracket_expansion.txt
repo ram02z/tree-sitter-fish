@@ -116,7 +116,7 @@ Bracket Expansion - with variable_expansion
 Bracket Expansion - with otherwise special characters
 ========================================
 
-{<,>,*,~,#}
+{<,>,~,#}
 {^,&}
 {|,;}
 
@@ -125,7 +125,7 @@ Bracket Expansion - with otherwise special characters
 (program
     (command
         name: (bracket_expansion
-            (word) (word) (word) (word) (comment) (MISSING "}")))
+            (word) (word) (word) (comment) (MISSING "}")))
     (command
         name: (bracket_expansion (word) (word)))
     (command
@@ -175,3 +175,35 @@ Bracket Expansion - requires comma between expressions
 (program
     (command
         name: (bracket_expansion (variable_name) (ERROR (UNEXPECTED '}')))))
+
+========================================
+Bracket Expansion - expanded single var
+========================================
+
+{$PATH}
+
+---
+
+(program
+    (command
+        name: (bracket_expansion
+            (variable_expansion (variable_name)))))
+
+========================================
+Bracket Expansion - with glob
+========================================
+
+{,*}
+{,*/**/*.test}.ts
+
+---
+
+(program
+    (command
+        name: (bracket_expansion (glob)))
+    (command
+        name: (concatenation
+            (bracket_expansion
+                (concatenation
+                    (glob) (word) (glob) (word) (glob) (word)))
+            (word))))

@@ -1314,7 +1314,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "home_dir_expansion"
+          "name": "glob"
         }
       ]
     },
@@ -1338,7 +1338,7 @@
     },
     "bracket_word": {
       "type": "PATTERN",
-      "value": "[^\\s\\$'\",\\\\\\{\\}\\(\\)\\]\\[]+"
+      "value": "[^\\s\\$'\\*\",\\\\\\{\\}\\(\\)\\]\\[]+"
     }
   },
   "extras": [

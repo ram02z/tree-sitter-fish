@@ -1,13 +1,11 @@
-// TODO(2):     Implement glob: '*' is still a special character inside bracket expansion.
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
 // TODO(10):    "test[test]" should be a word
 // TODO(11):    "begin & end" should be invalid
 // TODO(12):    Background commands cannot be used as conditionals "while echo &; end"
-// TODO(13):    "and", "or" should not be part of the regexp so they can be highlighted
-// TODO(14):    "begin >&0 end" should be invalid
-// TODO(15):    implement "not" keyword
-// TODO(16):    "function/while/begin --help" should be a command
-// TODO(17):    How to handle "{}" "{string}"
+// TODO(13):    Should "and", "or" be highlighted as a commands or as operators?
+// TODO(14):    The statement "begin >&0 end" should be invalid
+// TODO(16):    The "function/while/begin --help" should be a command
+// TODO(17):    {"str"} or {} or {nonvar} should be a concatenation / word
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -356,7 +354,7 @@ module.exports = grammar({
             $.escape_sequence,
             $.variable_name,
             $.list_element_access,
-            $.home_dir_expansion,
+            $.glob,
         ),
 
         home_dir_expansion: $ => '~',
@@ -366,7 +364,7 @@ module.exports = grammar({
         // In order to use it as a "word":
         // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),
         word: $ => noneOf(SPECIAL_CHARACTERS),
-        bracket_word: $ => noneOf(['\\s', '$', '\'', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
+        bracket_word: $ => noneOf(['\\s', '$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
     },
 });
 

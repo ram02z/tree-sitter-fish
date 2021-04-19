@@ -53,7 +53,6 @@ module.exports = grammar({
 
     inline: $ => [
         $._terminator,
-        $._top_statement,
         $._statement,
     ],
 
@@ -69,11 +68,6 @@ module.exports = grammar({
                 $._terminator,
             ))),
         )),
-
-        _top_statement: $ => choice(
-            $._statement,
-            $._terminator,
-        ),
 
         conditional_execution: $ => prec.right(-1, seq(
             $._statement,
@@ -134,6 +128,11 @@ module.exports = grammar({
             $._statement,
             $._terminator,
         )),
+
+        _terminated_opt_statement: $ => seq(
+            optional($._statement),
+            $._terminator,
+        ),
 
         negated_statement: $ => prec.left(-1, seq(
             choice('!', 'not'),
@@ -196,21 +195,21 @@ module.exports = grammar({
             'in',
             field('value', repeat1($._expression)),
             $._terminator,
-            optional(repeat1($._top_statement)),
+            optional(repeat1($._terminated_statement)),
             'end',
         ),
 
         while_statement: $ => prec.right(-3, seq(
             'while',
             field('condition', $._terminated_statement),
-            optional(repeat1($._top_statement)),
+            optional(repeat1($._terminated_opt_statement)),
             'end',
         )),
 
         if_statement: $ => prec.right(-3, seq(
             'if',
             field('condition', $._terminated_statement),
-            optional(repeat1($._top_statement)),
+            optional(repeat1($._terminated_opt_statement)),
             repeat($.else_if_clause),
             optional($.else_clause),
             'end'
@@ -218,18 +217,18 @@ module.exports = grammar({
 
         else_if_clause: $ => seq(
             seq('else', 'if'),
-            optional(repeat1($._terminated_statement)),
+            optional(repeat1($._terminated_opt_statement)),
         ),
 
         else_clause: $ => seq(
             'else',
             $._terminator,
-            optional(repeat1($._top_statement)),
+            optional(repeat1($._terminated_opt_statement)),
         ),
 
         begin_statement: $ => prec(6, seq(
             'begin',
-            optional(repeat1($._top_statement)),
+            optional(repeat1($._terminated_opt_statement)),
             'end',
         )),
 

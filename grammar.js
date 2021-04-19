@@ -6,6 +6,8 @@
 // TODO(14):    The statement "begin >&0 end" should be invalid
 // TODO(16):    The "function/while/begin --help" should be a command
 // TODO(17):    {"str"} or {} or {nonvar} should be a concatenation / word
+// TODO(18):    add if [ $i != 0]
+// TODO(19):    echo [ should be a command
 
 const SPECIAL_CHARACTERS = [
     '$',

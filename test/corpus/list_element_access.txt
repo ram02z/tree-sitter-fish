@@ -21,27 +21,27 @@ $ENV["$ONE"]
         name: (concatenation
             (variable_expansion (variable_name))
             (list_element_access
-                (index)
-                (index)
-                (index))))
+                (index (integer))
+                (index (integer))
+                (index (integer)))))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
             (list_element_access
-                (index)
-                (index)
-                (index))))
+                (index (integer))
+                (index (integer))
+                (index (integer)))))
     (command
         name: (concatenation
             (variable_name)
-            (list_element_access (index))))
+            (list_element_access (index (integer)))))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
             (list_element_access
-                (index)
-                (index)
-                (index))))
+                (index (single_quote_string))
+                (index (single_quote_string))
+                (index (single_quote_string)))))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
@@ -71,28 +71,33 @@ $ENV['-1'.."-2"-1..+2 3..$ONE]
     (command
         name: (concatenation
             (variable_expansion (variable_name))
-            (list_element_access (range (index) (index)))))
+            (list_element_access (range
+                (index (integer)) (index (integer))))))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
             (list_element_access
-                (range (index) (index))
-                (range (index) (index)))))
+                (range (index (integer)) (index (integer)))
+                (range (index (integer)) (index (integer))))))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
             (list_element_access
-                (range (index) (index))
-                (range (index) (index))
-                (range (index) (index)))))
+                (range (index (integer)) (index (integer)))
+                (range (index (integer)) (index (integer)))
+                (range (index (integer)) (index (integer))))))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
             (list_element_access
-                (range (index) (index (double_quote_string)))
-                (range (index) (index))
                 (range
-                    (index)
+                    (index (single_quote_string))
+                    (index (double_quote_string)))
+                (range
+                    (index (integer))
+                    (index (integer)))
+                (range
+                    (index (integer))
                     (index (variable_expansion (variable_name))))))))
 
 ========================================
@@ -113,18 +118,24 @@ $PATH[
         name: (concatenation
             (variable_expansion (variable_name))
             (list_element_access
-                (range (index) (index))
-                (index)
-                (range (index) (index))
+                (range
+                    (index (integer))
+                    (index (integer)))
+                (index (integer))
+                (range
+                    (index (integer))
+                    (index (integer)))
                 (range
                     (index
                         (variable_expansion
                             (variable_name)
-                            (list_element_access (index))))
+                            (list_element_access
+                                (index (integer)))))
                     (index
                         (variable_expansion
                             (variable_name)
-                            (list_element_access (index)))))))))
+                            (list_element_access
+                                (index (integer))))))))))
 
 ========================================
 List Access - multiple list access
@@ -138,8 +149,10 @@ $ENV[2][1]
     (command
         name: (concatenation
             (variable_expansion (variable_name))
-            (list_element_access (index))
-            (list_element_access (index)))))
+            (list_element_access
+                (index (integer)))
+                (list_element_access
+                    (index (integer))))))
 
 ========================================
 List Access - inside brace expansion
@@ -154,6 +167,8 @@ List Access - inside brace expansion
         name: (brace_expansion
             (concatenation
                 (variable_expansion (variable_name))
-                (list_element_access (index))
-                (list_element_access (index))))))
+                (list_element_access
+                    (index (integer)))
+                    (list_element_access
+                        (index (integer)))))))
 

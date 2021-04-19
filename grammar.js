@@ -251,8 +251,8 @@ module.exports = grammar({
         )),
 
         index: $ => choice(
-            /(-|\+)?\d+/,
-            /'(-|\+)?\d+'/,
+            $.integer,
+            $.single_quote_string,
             $.variable_expansion,
             $.double_quote_string,
             $.command_substitution,

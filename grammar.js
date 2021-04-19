@@ -233,7 +233,7 @@ module.exports = grammar({
             'end',
         )),
 
-        comment: $ => seq('#', /.*/),
+        comment: $ => token(prec(-11, /#.*/)),
 
         variable_name: $ => /[a-zA-Z0-9_]+/,
 

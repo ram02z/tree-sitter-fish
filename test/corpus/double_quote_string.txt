@@ -3,10 +3,13 @@ Double quote string - simple value
 ========================================
 
 "value"
+"#"
 
 ---
 
 (program
+    (command
+        name: (double_quote_string))
     (command
         name: (double_quote_string)))
 

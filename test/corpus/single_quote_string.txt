@@ -3,10 +3,13 @@ Single quote string - single word
 ========================================
 
 'value'
+'#'
 
 ---
 
 (program
+    (command
+        name: (single_quote_string))
     (command
         name: (single_quote_string)))
 

@@ -121,6 +121,7 @@ module.exports = grammar({
             $.function_definition,
             $.break,
             $.continue,
+            $.return,
             $.negated_statement,
         ),
 
@@ -157,6 +158,13 @@ module.exports = grammar({
             optional(repeat1($._terminated_statement)),
             'end',
         ),
+
+        integer: $ => /(-|\+)?\d+/,
+
+        return: $ => prec.left(seq(
+            'return',
+            optional($._expression),
+        )),
 
         _function_name: $ => choice(
             $.concatenation,
@@ -304,7 +312,7 @@ module.exports = grammar({
 
         command: $ => prec.right(seq(
             field('name', $._expression),
-            field('argument', optional(repeat1($._expression))),
+            field('argument', repeat($._expression)),
         )),
 
         concatenation: $ => prec(-1, seq(
@@ -327,6 +335,7 @@ module.exports = grammar({
             $.variable_expansion,
             $.list_element_access,
             $.word,
+            $.integer,
             $.variable_name,
             $.bracket_expansion,
             $.escape_sequence,

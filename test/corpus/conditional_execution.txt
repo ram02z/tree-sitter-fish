@@ -13,13 +13,13 @@ false ;;or echo 1
             name: (variable_name))
         (command
             name: (variable_name)
-            argument: (variable_name)))
+            argument: (integer)))
     (conditional_execution
         (command
             name: (variable_name))
         (command
             name: (variable_name)
-            argument: (variable_name))))
+            argument: (integer))))
 
 ========================================
 Conditional Execution - and
@@ -36,7 +36,7 @@ true; and and --help
             name: (variable_name))
         (command
             name: (variable_name)
-            argument: (variable_name)))
+            argument: (integer)))
     (conditional_execution
         (command
             name: (variable_name))

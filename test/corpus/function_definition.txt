@@ -7,13 +7,20 @@ function test; end
 function name
 end
 
+function name
+    return 1
+end
+
 ---
 
 (program
     (function_definition
         name: (variable_name))
     (function_definition
-        name: (variable_name)))
+        name: (variable_name))
+    (function_definition
+        name: (variable_name)
+        (return (integer))))
 
 ========================================
 Function Definition - nested
@@ -64,3 +71,36 @@ end
         option: (double_quote_string)
         (command
             name: (variable_name))))
+
+========================================
+Function Definition - return
+========================================
+
+function a
+    if false
+        return $status
+    else if false
+        return (printf 0);
+    else
+        return 99;
+    end
+end
+
+---
+
+(program
+    (function_definition
+        name: (variable_name)
+        (if_statement
+            condition: (command name: (variable_name))
+            (return
+                (variable_expansion (variable_name)))
+            (else_if_clause
+                (command name: (variable_name))
+                (return
+                    (command_substitution
+                        (command
+                            name: (variable_name)
+                            argument: (integer)))))
+            (else_clause
+                (return (integer))))))

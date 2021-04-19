@@ -33,14 +33,14 @@ end;
 (program
     (for_statement
         variable: (variable_name)
-        value: (variable_name)
-        value: (variable_name)
+        value: (integer)
+        value: (integer)
         (command
-            name: (variable_name))
+            name: (integer))
         (command
-            name: (variable_name))
+            name: (integer))
         (command
-            name: (variable_name))
+            name: (integer))
         (command
             name: (variable_name)
             argument: (variable_expansion (variable_name)))))

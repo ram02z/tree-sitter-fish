@@ -299,7 +299,7 @@ module.exports = grammar({
             /[^xu]/,
             /u[0-9a-fA-F]{4}/,
             /u{[0-9a-fA-F]+}/,
-            /x[0-9a-fA-F]{2}/
+            /x[0-9a-fA-F]{1,2}/
         ))),
 
         command: $ => prec.right(seq(

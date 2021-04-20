@@ -100,8 +100,7 @@ Brace Expansion - with variable_expansion
             (variable_expansion (variable_name))))
     (command
         name: (brace_expansion
-            (concatenation
-                (variable_expansion (variable_name))
+            (variable_expansion (variable_name)
                 (list_element_access
                     (index (integer))))))
     (command

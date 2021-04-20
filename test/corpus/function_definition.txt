@@ -49,9 +49,9 @@ end
     (function_definition
         name: (variable_name)
         option: (word)
-        option: (variable_name)
-        option: (variable_name)
-        option: (variable_name)))
+        option: (word)
+        option: (word)
+        option: (word)))
 
 ========================================
 Function Definition - extras
@@ -70,7 +70,7 @@ end
         option: (word)
         option: (double_quote_string)
         (command
-            name: (variable_name))))
+            name: (word))))
 
 ========================================
 Function Definition - return
@@ -92,15 +92,15 @@ end
     (function_definition
         name: (variable_name)
         (if_statement
-            condition: (command name: (variable_name))
+            condition: (command name: (word))
             (return
                 (variable_expansion (variable_name)))
             (else_if_clause
-                (command name: (variable_name))
+                (command name: (word))
                 (return
                     (command_substitution
                         (command
-                            name: (variable_name)
+                            name: (word)
                             argument: (integer)))))
             (else_clause
                 (return (integer))))))

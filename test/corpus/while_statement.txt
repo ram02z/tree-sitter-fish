@@ -14,15 +14,13 @@ end
 
 (program
     (while_statement
-        condition: (command name: (variable_name)))
+        condition: (command name: (word)))
     (while_statement
-        condition: (command name: (variable_name))
-        (command
-            name: (variable_name)))
+        condition: (command name: (word))
+        (command name: (word)))
     (while_statement
-        condition: (command name: (variable_name))
-        (command
-            name: (variable_name))))
+        condition: (command name: (word))
+        (command name: (word))))
 
 ========================================
 While Statement - with conditional execution
@@ -37,8 +35,8 @@ end
     (while_statement
         condition:
             (conditional_execution
-                (command name: (variable_name))
-                (command name: (variable_name)))))
+                (command name: (word))
+                (command name: (word)))))
 
 ========================================
 While Statement - flow control
@@ -55,11 +53,11 @@ end
 (program
     (while_statement
         condition: (command
-            name: (variable_name))
+            name: (word))
         (break))
     (while_statement
         condition: (command
-            name: (variable_name))
+            name: (word))
         (continue)))
 
 ========================================
@@ -76,6 +74,6 @@ end
 
 (program
     (while_statement
-        condition: (command name: (variable_name))
+        condition: (command name: (word))
         (begin_statement
             (break))))

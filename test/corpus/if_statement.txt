@@ -11,9 +11,9 @@ if true; end
 
 (program
     (if_statement
-        condition: (command name: (variable_name)))
+        condition: (command name: (word)))
     (if_statement
-        condition: (command name: (variable_name))))
+        condition: (command name: (word))))
 
 ========================================
 If Statement - else
@@ -34,13 +34,13 @@ end
 
 (program
     (if_statement
-        condition: (command name: (variable_name))
+        condition: (command name: (word))
         (else_clause))
     (if_statement
-        condition: (command name: (variable_name))
+        condition: (command name: (word))
         (else_clause))
     (if_statement
-        condition: (command name: (variable_name))
+        condition: (command name: (word))
         (else_clause (begin_statement))))
 
 ========================================
@@ -65,17 +65,17 @@ if false; else if false; else; end
 
 (program
     (if_statement
-        condition: (command name: (variable_name))
-        (else_if_clause (command name: (variable_name))))
+        condition: (command name: (word))
+        (else_if_clause (command name: (word))))
     (if_statement
-        condition: (command name: (variable_name))
-        (else_if_clause (command name: (variable_name))))
+        condition: (command name: (word))
+        (else_if_clause (command name: (word))))
     (if_statement
-        condition: (command name: (variable_name))
-        (else_if_clause (command name: (variable_name)))
-        (else_if_clause (command name: (variable_name)))
+        condition: (command name: (word))
+        (else_if_clause (command name: (word)))
+        (else_if_clause (command name: (word)))
         (else_clause))
     (if_statement
-        condition: (command name: (variable_name))
-        (else_if_clause (command name: (variable_name)))
+        condition: (command name: (word))
+        (else_if_clause (command name: (word)))
         (else_clause)))

@@ -18,7 +18,7 @@ end
     (begin_statement)
     (begin_statement
         (command
-            name: (variable_name)))
+            name: (word)))
     (begin_statement (comment) (comment)))
 
 ========================================
@@ -38,7 +38,7 @@ begin;;; begin;;  end; end
 
 (program
     (begin_statement (begin_statement))
-    (begin_statement (begin_statement (command name: (variable_name))))
+    (begin_statement (begin_statement (command name: (word))))
     (begin_statement (begin_statement))
     (begin_statement (begin_statement)))
 
@@ -55,14 +55,14 @@ true && begin; end || true
     (conditional_execution
         (begin_statement)
         (command
-            name: (variable_name)))
+            name: (word)))
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (conditional_execution
             (begin_statement)
             (command
-                name: (variable_name)))))
+                name: (word)))))
 
 ========================================
 Begin Statement - with redirection
@@ -89,7 +89,7 @@ begin; end | echo
     (pipe
         (begin_statement)
         (command
-            name: (variable_name))))
+            name: (word))))
 
 ========================================
 Begin Statement - invalid

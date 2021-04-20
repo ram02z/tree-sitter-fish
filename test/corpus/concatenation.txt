@@ -70,7 +70,7 @@ location
         name: (concatenation
             (single_quote_string)
             (escape_sequence)
-            (variable_name))))
+            (word))))
 
 ========================================
 Concatenation - multiple single quote strings with escape sequence
@@ -198,6 +198,6 @@ $PATH\ ological
         name: (concatenation
             (variable_expansion (variable_name))
             (escape_sequence)
-            (variable_name))))
+            (word))))
 
 

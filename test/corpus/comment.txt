@@ -42,11 +42,9 @@ true # a comment
 ---
 
 (program
-    (command
-        name: (variable_name))
+    (command name: (word))
     (comment)
     (comment)
-    (command
-        name: (variable_name))
+    (command name: (word))
     (comment))
 

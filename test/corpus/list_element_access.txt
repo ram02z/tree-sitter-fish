@@ -180,8 +180,8 @@ ENV[1]
         name: (variable_expansion (variable_name))
         argument: (concatenation (integer)))
     (command
-        name: (concatenation (variable_name)))
+        name: (concatenation (word)))
     (command
         name: (concatenation
-            (variable_name)
+            (word)
             (integer))))

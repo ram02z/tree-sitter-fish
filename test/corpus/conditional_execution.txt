@@ -10,15 +10,15 @@ false ;;or echo 1
 (program
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (command
-            name: (variable_name)
+            name: (word)
             argument: (integer)))
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (command
-            name: (variable_name)
+            name: (word)
             argument: (integer))))
 
 ========================================
@@ -33,15 +33,15 @@ true; and and --help
 (program
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (command
-            name: (variable_name)
+            name: (word)
             argument: (integer)))
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (command
-            name: (variable_name)
+            name: (word)
             argument: (word))))
 
 ========================================
@@ -56,20 +56,20 @@ true ;; and printf > file
 (program
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (redirected_statement
-            (command name: (variable_name))
+            (command name: (word))
             (file_redirect
                 operator: (direction)
-                destination: (variable_name))))
+                destination: (word))))
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (redirected_statement
-            (command name: (variable_name))
+            (command name: (word))
             (file_redirect
                 operator: (direction)
-                destination: (variable_name)))))
+                destination: (word)))))
 
 ========================================
 Conditional Execution - and or
@@ -84,6 +84,6 @@ and echo
 (program
     (conditional_execution
         (command
-            name: (variable_name))
+            name: (word))
         (command
-            name: (variable_name))))
+            name: (word))))

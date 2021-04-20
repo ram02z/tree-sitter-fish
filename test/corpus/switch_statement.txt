@@ -11,9 +11,9 @@ end;
 
 (program
     (switch_statement
-        value: (variable_name))
+        value: (word))
     (switch_statement
-        value: (variable_name)))
+        value: (word)))
 
 ========================================
 Switch Statement - with cases
@@ -34,20 +34,20 @@ end
 
 (program
     (switch_statement
-        value: (variable_name)
+        value: (word)
         (case_clause
             (single_quote_string)))
     (switch_statement
-        value: (variable_name)
+        value: (word)
         (case_clause
             (single_quote_string)))
     (switch_statement
-        value: (variable_name)
+        value: (word)
         (case_clause
-            (variable_name)
-            (variable_name)
-            (variable_name)
-            (variable_name)
+            (word)
+            (word)
+            (word)
+            (word)
             (command
-                name: (variable_name)
+                name: (word)
                 argument: (variable_expansion (variable_name))))))

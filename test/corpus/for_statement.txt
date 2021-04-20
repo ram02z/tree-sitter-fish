@@ -42,7 +42,7 @@ end;
         (command
             name: (integer))
         (command
-            name: (variable_name)
+            name: (word)
             argument: (variable_expansion (variable_name)))))
 
 ========================================

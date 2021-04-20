@@ -19,71 +19,71 @@ echo ''     1>>&-
 (program
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (stream_redirect))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (stream_redirect))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (stream_redirect))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (stream_redirect)))
 
@@ -101,29 +101,29 @@ echo ''     2< 	    test
 (program
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name)))
+            destination: (word)))
     (redirected_statement
         (command
-            name: (variable_name)
+            name: (word)
             argument: (single_quote_string))
         (file_redirect
             operator: (direction)
-            destination: (variable_name))))
+            destination: (word))))

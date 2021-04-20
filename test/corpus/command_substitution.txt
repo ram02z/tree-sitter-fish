@@ -11,23 +11,23 @@ echo ()
 
 (program
     (command
-        name: (variable_name)
+        name: (word)
         argument: (command_substitution
             (command
-                name: (variable_name)
-                argument: (variable_name))))
+                name: (word)
+                argument: (word))))
     (command
-        name: (variable_name)
+        name: (word)
         argument: (command_substitution
             (begin_statement
                 (command
-                    name: (variable_name)
+                    name: (word)
                    argument: (integer)))))
     (command
-        name: (variable_name)
+        name: (word)
         argument: (command_substitution))
     (command
-        name: (variable_name)
+        name: (word)
         argument: (command_substitution)))
 
 ========================================
@@ -46,19 +46,19 @@ echo (
 
 (program
     (command
-        name: (variable_name)
+        name: (word)
         argument: (command_substitution
             (command
-                name: (variable_name)
-                argument: (variable_name))))
+                name: (word)
+                argument: (word))))
     (command
-        name: (variable_name)
+        name: (word)
         argument: (command_substitution
             (command
-                name: (variable_name)
-                argument: (variable_name))
+                name: (word)
+                argument: (word))
             (command
-                name: (variable_name)
+                name: (word)
                 argument: (single_quote_string)))))
 
 

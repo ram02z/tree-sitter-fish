@@ -28,7 +28,7 @@ Brace Expansion - missing comma
 (program
     (command
         name: (brace_expansion
-            (variable_name)
+            (word)
             (MISSING ",")))
     (command
         name: (brace_expansion
@@ -48,15 +48,15 @@ Brace Expansion - single value
 
 (program
     (command
-        name: (brace_expansion (variable_name)))
+        name: (brace_expansion (word)))
     (command
-        name: (brace_expansion (variable_name)))
+        name: (brace_expansion (word)))
     (command
-        name: (brace_expansion (variable_name)))
+        name: (brace_expansion (word)))
     (command
-        name: (brace_expansion (variable_name)))
+        name: (brace_expansion (word)))
     (command
-        name: (brace_expansion (variable_name))))
+        name: (brace_expansion (word))))
 
 ========================================
 Brace Expansion - with escapes
@@ -76,9 +76,9 @@ Brace Expansion - with escapes
     (command
         name: (brace_expansion
             (concatenation
-                (variable_name)
+                (word)
                 (escape_sequence)
-                (variable_name))))
+                (word))))
     (command
         name: (brace_expansion
                 (single_quote_string (escape_sequence)))))
@@ -105,7 +105,7 @@ Brace Expansion - with variable_expansion
                     (index (integer))))))
     (command
         name: (brace_expansion
-            (concatenation (escape_sequence) (variable_name))
+            (concatenation (escape_sequence) (word))
             (variable_expansion (variable_name))))
     (command
         name: (brace_expansion
@@ -143,13 +143,13 @@ $PATH{a,b}c
 (program
     (command
         name: (concatenation
-            (brace_expansion (variable_name) (variable_name))
-            (variable_name)))
+            (brace_expansion (word) (word))
+            (word)))
     (command
         name: (concatenation
             (variable_expansion (variable_name))
-            (brace_expansion (variable_name) (variable_name))
-            (variable_name))))
+            (brace_expansion (word) (word))
+            (word))))
 
 ========================================
 Brace Expansion - proper distinction between vars and words
@@ -161,7 +161,7 @@ Brace Expansion - proper distinction between vars and words
 
 (program
     (command
-        name: (brace_expansion (word) (variable_name))))
+        name: (brace_expansion (word) (word))))
 
 
 ========================================
@@ -174,7 +174,7 @@ Brace Expansion - requires comma between expressions
 
 (program
     (command
-        name: (brace_expansion (variable_name) (ERROR (UNEXPECTED '}')))))
+        name: (brace_expansion (word) (ERROR (UNEXPECTED '}')))))
 
 ========================================
 Brace Expansion - expanded single var

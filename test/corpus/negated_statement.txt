@@ -9,9 +9,9 @@ not true
 
 (program
     (negated_statement
-        (command name: (variable_name)))
+        (command name: (word)))
     (negated_statement
-        (command name: (variable_name))))
+        (command name: (word))))
 
 ========================================
 Negated Statement - with conditional
@@ -26,18 +26,18 @@ not true || false
 (program
     (conditional_execution
         (negated_statement
-            (command name: (variable_name)))
-        (command name: (variable_name)))
+            (command name: (word)))
+        (command name: (word)))
     (conditional_execution
         (negated_statement
-            (command name: (variable_name)))
-        (command name: (variable_name)))
+            (command name: (word)))
+        (command name: (word)))
     (conditional_execution
         (negated_statement
             (redirected_statement
-                (command name: (variable_name))
+                (command name: (word))
                 (stream_redirect)))
-        (command name: (variable_name))))
+        (command name: (word))))
 
 ========================================
 Negated Statement - with pipe
@@ -51,9 +51,9 @@ not true | false
 (program
     (negated_statement
         (pipe
-            (command name: (variable_name))
-            (command name: (variable_name))))
+            (command name: (word))
+            (command name: (word))))
     (negated_statement
         (pipe
-            (command name: (variable_name))
-            (command name: (variable_name)))))
+            (command name: (word))
+            (command name: (word)))))

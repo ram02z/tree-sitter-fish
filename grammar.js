@@ -10,6 +10,8 @@
 // TODO(19):    echo [ should be a command, [ / ] should be a word
 // TODO(20):    set paths $paths ( string replace -rfi '^\s*Include\s+' '' <$config \
 //              | string trim | string replace -r -a '\s+' ' ')
+// TODO(21):    (19) tests, list access tests when there is a space after var_exp
+// TODO(22):    Ensure function name attribute is a proper node
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -319,7 +321,7 @@ module.exports = grammar({
         ))),
 
         command: $ => prec.right(seq(
-            field('name', $._expression),
+            field('name', $._command_name_expression),
             field('argument', repeat($._expression)),
         )),
 
@@ -332,6 +334,11 @@ module.exports = grammar({
                 choice($._base_expression, $._special_character)
             )),
         )),
+
+        _command_name_expression: $ => choice(
+            $._base_expression,
+            $.concatenation,
+        ),
 
         _expression: $ => choice(
             $._base_expression,
@@ -346,7 +353,6 @@ module.exports = grammar({
             $.variable_expansion,
             $.word,
             $.integer,
-            $.variable_name,
             $.brace_expansion,
             $.escape_sequence,
             $.glob,
@@ -372,7 +378,6 @@ module.exports = grammar({
             $.variable_expansion,
             alias($.brace_word, $.word),
             $.escape_sequence,
-            $.variable_name,
             $.glob,
         ),
 

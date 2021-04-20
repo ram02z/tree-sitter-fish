@@ -8,7 +8,7 @@ printf "one" &
 
 (program
     (command
-        name: (variable_name)
+        name: (word)
         argument: (double_quote_string)))
 
 ========================================
@@ -21,9 +21,9 @@ printf "one" & echo &
 
 (program
     (command
-        name: (variable_name)
+        name: (word)
         argument: (double_quote_string))
-    (command name: (variable_name)))
+    (command name: (word)))
 
 ========================================
 Background - with redirect
@@ -35,7 +35,7 @@ printf > file &
 
 (program
     (redirected_statement
-        (command name: (variable_name))
+        (command name: (word))
         (file_redirect
             operator: (direction)
-            destination: (variable_name))))
+            destination: (word))))

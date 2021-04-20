@@ -100,7 +100,6 @@ begin && end
 begin | end
 begin > end
 begin < end
-begin 0>&0 end
 
 ---
 
@@ -110,6 +109,3 @@ begin 0>&0 end
     (begin_statement (ERROR))
     (begin_statement (ERROR))
     (begin_statement (ERROR))
-    (begin_statement 
-        (redirection
-            (command name: (variable_name)))))

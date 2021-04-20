@@ -6,6 +6,8 @@
 
 (comment) @comment
 
+(integer) @number
+
 [
   "&&"
   "||"
@@ -34,7 +36,7 @@
 (function_definition (_)* option: (word) @parameter
                      (#match? @parameter "^--?"))
 
-(command name: (variable_name) @function)
+(command name: (word) @function)
 (command (_)* argument: (word) @parameter
          (#match? @parameter "^--?"))
 

@@ -6,8 +6,10 @@
 // TODO(14):    The statement "begin >&0 end" should be invalid
 // TODO(16):    The "function/while/begin --help" should be a command
 // TODO(17):    {"str"} or {} or {nonvar} should be a concatenation / word
-// TODO(18):    add if [ $i != 0]
-// TODO(19):    echo [ should be a command
+// TODO(18):    add (test_command) [ $i != 0 ]
+// TODO(19):    echo [ should be a command, [ / ] should be a word
+// TODO(20):    set paths $paths ( string replace -rfi '^\s*Include\s+' '' <$config \
+//              | string trim | string replace -r -a '\s+' ' ')
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -49,6 +51,7 @@ module.exports = grammar({
     externals: $ => [
         $._concat,
         $._brace_concat,
+        $._concat_list,
     ],
 
     inline: $ => [
@@ -247,7 +250,10 @@ module.exports = grammar({
         variable_expansion: $ => prec.right(seq(
             repeat1('$'),
             $.variable_name,
-            optional(repeat1($.list_element_access)),
+            optional(repeat1(seq(
+                $._concat_list,
+                $.list_element_access,
+            ))),
         )),
 
         index: $ => choice(
@@ -258,16 +264,18 @@ module.exports = grammar({
             $.command_substitution,
         ),
 
-        range: $ => seq($.index, '..', $.index),
+        range: $ => prec.right(2, seq(
+            optional($.index), '..', optional($.index)
+        )),
 
-        list_element_access: $ => seq(
+        list_element_access: $ => prec.right(1, seq(
             '[',
             optional(repeat1(choice(
                 $.index,
                 $.range,
             ))),
             ']',
-        ),
+        )),
 
         brace_expansion: $ => prec.right(seq(
             '{',
@@ -315,11 +323,13 @@ module.exports = grammar({
             field('argument', repeat($._expression)),
         )),
 
+        _special_character: $ => token(choice('[', ']')),
+
         concatenation: $ => prec(-1, seq(
-            $._base_expression,
+            choice($._base_expression, $._special_character),
             repeat1(seq(
                 $._concat,
-                $._base_expression,
+                choice($._base_expression, $._special_character)
             )),
         )),
 
@@ -327,13 +337,13 @@ module.exports = grammar({
             $._base_expression,
             $.concatenation,
             $.command_substitution,
+            alias($._special_character, $.word),
         ),
 
         _base_expression: $ => choice(
             $.single_quote_string,
             $.double_quote_string,
             $.variable_expansion,
-            $.list_element_access,
             $.word,
             $.integer,
             $.variable_name,
@@ -363,7 +373,6 @@ module.exports = grammar({
             alias($.brace_word, $.word),
             $.escape_sequence,
             $.variable_name,
-            $.list_element_access,
             $.glob,
         ),
 

@@ -3,7 +3,8 @@
 
 enum TokenType {
     CONCAT,
-    BRACKET_CONCAT
+    BRACKET_CONCAT,
+    CONCAT_LIST
 };
 
 void *tree_sitter_fish_external_scanner_create() { return NULL; }
@@ -15,6 +16,16 @@ void tree_sitter_fish_external_scanner_deserialize(void *p, const char *b, unsig
 bool tree_sitter_fish_external_scanner_scan(
     void *payload, TSLexer *lexer, const bool *valid_symbols
 ) {
+    if (valid_symbols[CONCAT_LIST]) {
+        if (!(
+            lexer->lookahead == 0 ||
+            lexer->lookahead != '['
+        )) {
+            lexer->result_symbol = CONCAT_LIST;
+            return true;
+        }
+    }
+    
     if (valid_symbols[CONCAT]) {
         if (!(
             lexer->lookahead == 0 ||

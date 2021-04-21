@@ -63,7 +63,7 @@ module.exports = grammar({
 
     extras: $ => [
         $.comment,
-        /\s/,
+        /\\?\s/,
     ],
 
     rules: {

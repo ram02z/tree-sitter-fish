@@ -39,3 +39,22 @@ set (
         (word)
         (word)))
     (UNEXPECTED '\0')))
+
+================================================================================
+Argument after destination breaks file_redirect
+================================================================================
+
+systemctl 2>/dev/null $argv
+
+--------------------------------------------------------------------------------
+
+(program
+  (redirected_statement
+    (command
+      (word))
+    (file_redirect
+      (direction)
+      (ERROR
+        (word))
+      (variable_expansion
+        (variable_name)))))

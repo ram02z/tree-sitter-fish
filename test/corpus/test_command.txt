@@ -30,12 +30,16 @@ Test Command - space required
 Test Command - simple
 ================================================================================
 
+[ ]
+[  ]
 [ $status != 0 ]
 [ \( $status != 0 \) ]
 
 --------------------------------------------------------------------------------
 
 (program
+  (test_command)
+  (test_command)
   (test_command
     (binary_expression
       (variable_expansion

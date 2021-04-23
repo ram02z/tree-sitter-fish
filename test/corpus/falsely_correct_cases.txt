@@ -23,7 +23,7 @@ begin < end
       (direction))))
 
 ================================================================================
-Background commands should not be used as conditionals
+Background commands cannot be used as conditionals
 ================================================================================
 
 while echo &

@@ -14,12 +14,12 @@ false ;;or echo 1
         (command
             name: (word)
             argument: (integer)))
-    (conditional_execution
         (command
             name: (word))
-        (command
-            name: (word)
-            argument: (integer))))
+        (conditional_execution
+            (command
+                name: (word)
+                argument: (integer))))
 
 ========================================
 Conditional Execution - and
@@ -37,12 +37,12 @@ true; and and --help
         (command
             name: (word)
             argument: (integer)))
-    (conditional_execution
         (command
             name: (word))
-        (command
-            name: (word)
-            argument: (word))))
+    (conditional_execution
+        (conditional_execution
+            (command
+                name: (word)))))
 
 ========================================
 Conditional Execution - with redirect
@@ -62,14 +62,14 @@ true ;; and printf > file
             (file_redirect
                 operator: (direction)
                 destination: (word))))
-    (conditional_execution
         (command
             name: (word))
-        (redirected_statement
-            (command name: (word))
-            (file_redirect
-                operator: (direction)
-                destination: (word)))))
+        (conditional_execution
+            (redirected_statement
+                (command name: (word))
+                (file_redirect
+                    operator: (direction)
+                    destination: (word)))))
 
 ========================================
 Conditional Execution - and or
@@ -79,11 +79,16 @@ true;;
 
 and echo
 
+or --help echo
+
 ---
 
 (program
+    (command name: (word))
     (conditional_execution
         (command
-            name: (word))
+            name: (word)))
+    (conditional_execution
         (command
-            name: (word))))
+            name: (word)
+            argument: (word))))

@@ -75,16 +75,10 @@ module.exports = grammar({
             ))),
         )),
 
-        conditional_execution: $ => prec.right(-1, seq(
-            $._statement,
-            choice(
-                '||',
-                /;+\s*or/,
-                '&&',
-                /;+\s*and/,
-            ),
-            $._statement,
-        )),
+        conditional_execution: $ => choice(
+            prec.right(-1, seq(choice('and', 'or'), $._statement)),
+            prec.right(-1, seq($._statement, choice('||', '&&'), $._statement)),
+        ),
 
         // Prec: higher than pipe
         redirected_statement: $ => prec(1, seq(

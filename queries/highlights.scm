@@ -1,7 +1,6 @@
 [
   (double_quote_string)
   (single_quote_string)
-  (concatenation)
 ] @string
 
 (comment) @comment

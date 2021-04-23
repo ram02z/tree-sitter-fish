@@ -7,12 +7,7 @@
 // TODO(16):    The "function/while/begin --help" should be a command
 // TODO(17):    {"str"} or {} or {nonvar} should be a concatenation / word
 // TODO(19):    echo [ should be a command, [ / ] should be a word
-// TODO(20):    set paths $paths ( string replace -rfi '^\s*Include\s+' '' <$config \
-//              | string trim | string replace -r -a '\s+' ' ')
-// TODO(21):    (19) tests, list access tests when there is a space after var_exp
 // TODO(22):    Ensure function name attribute is a proper node
-// TODO(23):    [] is a command [ ] is a test command
-// TODO(24):    test command tests
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -245,8 +240,10 @@ module.exports = grammar({
 
         test_command: $ => seq(
             alias(/\[\s/, '['),
-            optional($._test_expression),
-            alias(/\s\]/, ']'),
+            choice(']', seq(
+                $._test_expression,
+                alias(/\s\]/, ']'),
+            )),
         ),
 
         _test_expression: $ => choice(

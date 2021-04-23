@@ -7,9 +7,10 @@
     "build": "tree-sitter generate",
     "build:wasm": "npm run build && tree-sitter build-wasm",
     "parse": "npm run build && tree-sitter parse",
-    "start": "npm run build && tree-sitter web-ui",
+    "start": "npm run build && npm run build:wasm && tree-sitter web-ui",
     "test": "npm run build && tree-sitter test",
-    "test:watch": "nodemon --ext js,txt --watch grammar.js --watch test  --exec npm run test"
+    "test:watch": "nodemon --ext js,txt,fish --watch grammar.js --watch test  --exec npm run test",
+    "test:fish": "npm run build && fish ./scripts/test_shared.fish"
   },
   "keywords": [
     "tree-sitter",

@@ -6,18 +6,19 @@
 
 (comment) @comment
 
-(integer) @number
+[(integer) (float)] @number
 
 [
   "&&"
   "||"
   "|"
   "&"
+  "="
+  "!="
+  ".."
   (direction)
   (stream_redirect)
 ] @operator
-
-(index) @number
 
 (variable_expansion) @constant
 
@@ -40,6 +41,7 @@
 (command (_)* argument: (word) @parameter
          (#match? @parameter "^--?"))
 
+["-a" "-o" (test_option)] @parameter
 
 [
  "switch"
@@ -54,7 +56,9 @@
  "for"
  "not"
  "!"
- ;"and" "or" - this is invalid now
+ "and"
+ "or"
+ "return"
  (break)
  (continue)
 ] @keyword

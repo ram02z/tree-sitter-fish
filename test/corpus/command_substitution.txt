@@ -1,38 +1,38 @@
-========================================
+================================================================================
 Command Substitudion - simple
-========================================
+================================================================================
 
 echo (printf text)
 echo (begin; print 1; end;;;)
 echo (;;;)
 echo ()
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (command
+  (command
+    name: (word)
+    argument: (command_substitution
+      (command
         name: (word)
-        argument: (command_substitution
-            (command
-                name: (word)
-                argument: (word))))
-    (command
-        name: (word)
-        argument: (command_substitution
-            (begin_statement
-                (command
-                    name: (word)
-                   argument: (integer)))))
-    (command
-        name: (word)
-        argument: (command_substitution))
-    (command
-        name: (word)
-        argument: (command_substitution)))
+        argument: (word))))
+  (command
+    name: (word)
+    argument: (command_substitution
+      (begin_statement
+        (command
+          name: (word)
+          argument: (integer)))))
+  (command
+    name: (word)
+    argument: (command_substitution))
+  (command
+    name: (word)
+    argument: (command_substitution)))
 
-========================================
+================================================================================
 Command Substitudion - multiline
-========================================
+================================================================================
 
 echo (
     printf text
@@ -42,23 +42,21 @@ echo (
     printf ' ing'
 )
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (command
+  (command
+    name: (word)
+    argument: (command_substitution
+      (command
         name: (word)
-        argument: (command_substitution
-            (command
-                name: (word)
-                argument: (word))))
-    (command
+        argument: (word))))
+  (command
+    name: (word)
+    argument: (command_substitution
+      (command
         name: (word)
-        argument: (command_substitution
-            (command
-                name: (word)
-                argument: (word))
-            (command
-                name: (word)
-                argument: (single_quote_string)))))
-
-
+        argument: (word))
+      (command
+        name: (word)
+        argument: (single_quote_string)))))

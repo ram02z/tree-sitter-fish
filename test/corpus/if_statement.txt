@@ -1,23 +1,25 @@
-========================================
+================================================================================
 If Statement - simple
-========================================
+================================================================================
 
 if true
 end
 
 if true; end
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (if_statement
-        condition: (command name: (word)))
-    (if_statement
-        condition: (command name: (word))))
+  (if_statement
+    condition: (command
+      name: (word)))
+  (if_statement
+    condition: (command
+      name: (word))))
 
-========================================
+================================================================================
 If Statement - else
-========================================
+================================================================================
 
 if true
 else
@@ -30,22 +32,26 @@ else
     begin; end
 end
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (if_statement
-        condition: (command name: (word))
-        (else_clause))
-    (if_statement
-        condition: (command name: (word))
-        (else_clause))
-    (if_statement
-        condition: (command name: (word))
-        (else_clause (begin_statement))))
+  (if_statement
+    condition: (command
+      name: (word))
+    (else_clause))
+  (if_statement
+    condition: (command
+      name: (word))
+    (else_clause))
+  (if_statement
+    condition: (command
+      name: (word))
+    (else_clause
+      (begin_statement))))
 
-========================================
+================================================================================
 If Statement - else if
-========================================
+================================================================================
 
 if true
 else if true
@@ -61,21 +67,35 @@ end
 
 if false; else if false; else; end
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (if_statement
-        condition: (command name: (word))
-        (else_if_clause (command name: (word))))
-    (if_statement
-        condition: (command name: (word))
-        (else_if_clause (command name: (word))))
-    (if_statement
-        condition: (command name: (word))
-        (else_if_clause (command name: (word)))
-        (else_if_clause (command name: (word)))
-        (else_clause))
-    (if_statement
-        condition: (command name: (word))
-        (else_if_clause (command name: (word)))
-        (else_clause)))
+  (if_statement
+    condition: (command
+      name: (word))
+    (else_if_clause
+      (command
+        name: (word))))
+  (if_statement
+    condition: (command
+      name: (word))
+    (else_if_clause
+      (command
+        name: (word))))
+  (if_statement
+    condition: (command
+      name: (word))
+    (else_if_clause
+      (command
+        name: (word)))
+    (else_if_clause
+      (command
+        name: (word)))
+    (else_clause))
+  (if_statement
+    condition: (command
+      name: (word))
+    (else_if_clause
+      (command
+        name: (word)))
+    (else_clause)))

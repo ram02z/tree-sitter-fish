@@ -162,6 +162,8 @@ module.exports = grammar({
 
         integer: $ => /(-|\+)?\d+/,
 
+        float: $ => /(-|\+)?\d+\.\d+/,
+
         return: $ => prec.left(seq(
             'return',
             optional($._expression),
@@ -251,16 +253,28 @@ module.exports = grammar({
             $._expression,
             $.unary_expression,
             $.binary_expression,
+            $.conditional_expression,
+            $._parenthesized_test_expression,
+            $.negated_expression,
         ),
 
+        _parenthesized_test_expression: $ => seq('\\(', $._test_expression, '\\)'),
+        negated_expression: $ => prec.right(seq('!', $._test_expression)),
+
+        conditional_expression: $ => prec.right(seq(
+            $._test_expression,
+            choice('-a', '-o'),
+            $._test_expression,
+        )),
+
         unary_expression: $ => seq(
-            choice($.test_option, '!'),
+            $.test_option,
             $._expression,
         ),
 
         binary_expression: $ => seq(
             $._expression,
-            choice('==', '!=', $.test_option),
+            choice('=', '!=', $.test_option),
             $._expression,
         ),
 
@@ -374,6 +388,7 @@ module.exports = grammar({
             $.variable_expansion,
             $.word,
             $.integer,
+            $.float,
             $.brace_expansion,
             $.escape_sequence,
             $.glob,
@@ -398,6 +413,8 @@ module.exports = grammar({
             $.double_quote_string,
             $.variable_expansion,
             alias($.brace_word, $.word),
+            $.integer,
+            $.float,
             $.escape_sequence,
             $.glob,
         ),

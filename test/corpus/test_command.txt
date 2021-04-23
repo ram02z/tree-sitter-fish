@@ -1,0 +1,303 @@
+================================================================================
+Test Command - space required
+================================================================================
+
+[]
+[$status != 0]
+[ $status != 0]
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (concatenation))
+  (command
+    name: (concatenation
+      (variable_expansion
+        (variable_name)))
+    argument: (word)
+    argument: (concatenation
+      (integer)))
+  (ERROR
+    (binary_expression
+      (variable_expansion
+        (variable_name))
+      (concatenation
+        (integer)))
+    (UNEXPECTED '\0')))
+
+================================================================================
+Test Command - simple
+================================================================================
+
+[ $status != 0 ]
+[ \( $status != 0 \) ]
+
+--------------------------------------------------------------------------------
+
+(program
+  (test_command
+    (binary_expression
+      (variable_expansion
+        (variable_name))
+      (integer)))
+  (test_command
+    (binary_expression
+      (variable_expansion
+        (variable_name))
+      (integer))))
+
+================================================================================
+Test Command - cond expression
+================================================================================
+
+[ 0 -a 1 ]
+[ 0.2 -eq 0.3 ]
+[ \( $status -o \( 'te' != 'st' -a $status != '0' \)\) ]
+
+--------------------------------------------------------------------------------
+
+(program
+  (test_command
+    (conditional_expression
+      (integer)
+      (integer)))
+  (test_command
+    (binary_expression
+      (float)
+      (test_option)
+      (float)))
+  (test_command
+    (conditional_expression
+      (variable_expansion
+        (variable_name))
+      (conditional_expression
+        (binary_expression
+          (single_quote_string)
+          (single_quote_string))
+        (binary_expression
+          (variable_expansion
+            (variable_name))
+          (single_quote_string))))))
+
+================================================================================
+Test Command - unary expression
+================================================================================
+
+[ ! $status ]
+[ \( !$status \) -o $status ]
+
+--------------------------------------------------------------------------------
+
+(program
+  (test_command
+    (negated_expression
+      (variable_expansion
+        (variable_name))))
+  (test_command
+    (conditional_expression
+      (negated_expression
+        (variable_expansion
+          (variable_name)))
+      (variable_expansion
+        (variable_name)))))
+
+================================================================================
+Test Command - binary expression
+================================================================================
+
+[ ! 0.0 -eq 1.0 ]
+[ \( ! 0.0 -eq 0 \) -o te = st ]
+
+--------------------------------------------------------------------------------
+
+(program
+  (test_command
+    (negated_expression
+      (binary_expression
+        (float)
+        (test_option)
+        (float))))
+  (test_command
+    (conditional_expression
+      (negated_expression
+        (binary_expression
+          (float)
+          (test_option)
+          (integer)))
+      (binary_expression
+        (word)
+        (word)))))
+
+================================================================================
+Test Command - opearators for files and directories
+================================================================================
+
+[ -b ./test.fish ]
+[ -c ./test.fish ]
+[ -d ./test.fish ]
+[ -e ./test.fish ]
+[ -f ./test.fish ]
+[ -g ./test.fish ]
+[ -G ./test.fish ]
+[ -k ./test.fish ]
+[ -L ./test.fish ]
+[ -O ./test.fish ]
+[ -p ./test.fish ]
+[ -r ./test.fish ]
+[ -s ./test.fish ]
+[ -S ./test.fish ]
+[ -t ./test.fish ]
+[ -u ./test.fish ]
+[ -w ./test.fish ]
+[ -x ./test.fish ]
+
+--------------------------------------------------------------------------------
+
+(program
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word))))
+
+================================================================================
+Test Command - operators for text strings
+================================================================================
+
+[ "test" = 'test' ]
+[ test != 'test' ]
+[ -n 'non-zero-string' ]
+[ -z '' ]
+
+--------------------------------------------------------------------------------
+
+(program
+  (test_command
+    (binary_expression
+      (double_quote_string)
+      (single_quote_string)))
+  (test_command
+    (binary_expression
+      (word)
+      (single_quote_string)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (single_quote_string)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (single_quote_string))))
+
+================================================================================
+Test Command - operators for numbers
+================================================================================
+
+[ 0 -eq 0.0 ]
+[ 0 -ne 0.0 ]
+[ 0 -gt 0.0 ]
+[ 0 -lt 0.0 ]
+[ 0 -ge 0.0 ]
+[ 0 -le 0.0 ]
+
+--------------------------------------------------------------------------------
+
+(program
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float))))

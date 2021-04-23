@@ -1,23 +1,23 @@
-========================================
+================================================================================
 Switch Statement - simple
-========================================
+================================================================================
 
 switch x; end;
 
 switch x;
 end;
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (switch_statement
-        value: (word))
-    (switch_statement
-        value: (word)))
+  (switch_statement
+    value: (word))
+  (switch_statement
+    value: (word)))
 
-========================================
+================================================================================
 Switch Statement - with cases
-========================================
+================================================================================
 
 switch x; case '*'; end;
 
@@ -30,24 +30,25 @@ switch x
         echo $x
 end
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (switch_statement
-        value: (word)
-        (case_clause
-            (single_quote_string)))
-    (switch_statement
-        value: (word)
-        (case_clause
-            (single_quote_string)))
-    (switch_statement
-        value: (word)
-        (case_clause
-            (word)
-            (word)
-            (word)
-            (word)
-            (command
-                name: (word)
-                argument: (variable_expansion (variable_name))))))
+  (switch_statement
+    value: (word)
+    (case_clause
+      (single_quote_string)))
+  (switch_statement
+    value: (word)
+    (case_clause
+      (single_quote_string)))
+  (switch_statement
+    value: (word)
+    (case_clause
+      (word)
+      (word)
+      (word)
+      (word)
+      (command
+        name: (word)
+        argument: (variable_expansion
+          (variable_name))))))

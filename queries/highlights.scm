@@ -33,14 +33,7 @@
 "," @punctuation.delimiter
 
 (function_definition name: (variable_name) @function)
-(function_definition (_)* option: (word) @parameter
-                     (#match? @parameter "^--?"))
-
 (command name: (word) @function)
-(command (_)* argument: (word) @parameter
-         (#match? @parameter "^--?"))
-
-["-a" "-o" (test_option)] @parameter
 
 [
  "switch"

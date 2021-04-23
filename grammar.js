@@ -28,9 +28,7 @@ function charMatch(characterArray, negate) {
     ];
     const escaped = characterArray.map((c) => special.includes(c) ? '\\' + c : c);
 
-    const r = new RegExp(`[${negate ? '^' : ''}${escaped.join('')}]+`);
-    process.stderr.write('>> charMatch:' + r.toString() + '\n');
-    return r;
+    return new RegExp(`[${negate ? '^' : ''}${escaped.join('')}]+`);
 }
 
 function noneOf(characterArray) {

@@ -1,12 +1,6 @@
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
-// TODO(10):    "test[test]" should be a word
-// TODO(11):    "begin & end" should be invalid
-// TODO(12):    Background commands cannot be used as conditionals "while echo &; end"
-// TODO(13):    Should "and", "or" be highlighted as a commands or as operators?
-// TODO(14):    The statement "begin >&0 end" should be invalid
 // TODO(16):    The "function/while/begin --help" should be a command
-// TODO(17):    {"str"} or {} or {nonvar} should be a concatenation / word
-// TODO(19):    echo [ should be a command, [ / ] should be a word
+// TODO(17):    {"str"} or {} or test{nonvar} should be a concatenation / word
 // TODO(22):    Ensure function name attribute is a proper node
 
 const SPECIAL_CHARACTERS = [

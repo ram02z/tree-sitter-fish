@@ -21,3 +21,17 @@ begin < end
   (begin_statement
     (ERROR
       (direction))))
+
+================================================================================
+Background commands should not be used as conditionals
+================================================================================
+
+while echo &
+end
+
+--------------------------------------------------------------------------------
+
+(program
+  (while_statement
+    (command
+      (word))))

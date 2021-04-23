@@ -1,0 +1,23 @@
+================================================================================
+Invalid begin statement content
+================================================================================
+
+begin & end
+begin && end
+begin | end
+begin > end
+begin < end
+
+--------------------------------------------------------------------------------
+
+(program
+  (begin_statement)
+  (begin_statement)
+  (begin_statement
+    (ERROR))
+  (begin_statement
+    (ERROR
+      (direction)))
+  (begin_statement
+    (ERROR
+      (direction))))

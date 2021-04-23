@@ -1,62 +1,70 @@
-========================================
+================================================================================
 Pipe - simple
-========================================
+================================================================================
 
 printf "one" | echo
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (pipe
-        (command
-            name: (word)
-            argument: (double_quote_string))
-        (command
-            name: (word))))
+  (pipe
+    (command
+      name: (word)
+      argument: (double_quote_string))
+    (command
+      name: (word))))
 
-========================================
+================================================================================
 Pipe - with redirection
-========================================
+================================================================================
 
 false | printf > file
 echo 1 >&0 | echo
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (pipe
-        (command name: (word))
-        (redirected_statement
-            (command name: (word))
-            (file_redirect
-                operator: (direction)
-                destination: (word))))
-    (pipe
-        (redirected_statement
-            (command
-                name: (word)
-                argument: (integer))
-            (stream_redirect))
-        (command name: (word))))
+  (pipe
+    (command
+      name: (word))
+    (redirected_statement
+      (command
+        name: (word))
+      (file_redirect
+        operator: (direction)
+        destination: (word))))
+  (pipe
+    (redirected_statement
+      (command
+        name: (word)
+        argument: (integer))
+      (stream_redirect))
+    (command
+      name: (word))))
 
-
-========================================
+================================================================================
 Pipe - with conditional execution
-========================================
+================================================================================
 
 false || printf | file
 echo | echo || echo
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (conditional_execution
-        (command name: (word))
-        (pipe
-            (command name: (word))
-            (command name: (word))))
-    (conditional_execution
-        (pipe
-            (command name: (word))
-            (command name: (word)))
-        (command name: (word))))
+  (conditional_execution
+    (command
+      name: (word))
+    (pipe
+      (command
+        name: (word))
+      (command
+        name: (word))))
+  (conditional_execution
+    (pipe
+      (command
+        name: (word))
+      (command
+        name: (word)))
+    (command
+      name: (word))))

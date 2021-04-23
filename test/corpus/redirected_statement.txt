@@ -1,6 +1,6 @@
-========================================
+================================================================================
 Redirected Statement - write
-========================================
+================================================================================
 
 echo ''     >       test
 echo ''     0>      test
@@ -14,116 +14,116 @@ echo ''     >>&1
 echo ''     >&-
 echo ''     1>>&-
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (stream_redirect))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (stream_redirect))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (stream_redirect))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (stream_redirect)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (stream_redirect))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (stream_redirect))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (stream_redirect))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (stream_redirect)))
 
-========================================
+================================================================================
 Redirected Statement - read
-========================================
+================================================================================
 
 echo ''     < 	    test
 echo ''     0< 	    test
 echo ''     1< 	    test
 echo ''     2< 	    test
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word)))
-    (redirected_statement
-        (command
-            name: (word)
-            argument: (single_quote_string))
-        (file_redirect
-            operator: (direction)
-            destination: (word))))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (redirected_statement
+    (command
+      name: (word)
+      argument: (single_quote_string))
+    (file_redirect
+      operator: (direction)
+      destination: (word))))

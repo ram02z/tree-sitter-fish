@@ -1,25 +1,27 @@
-========================================
+================================================================================
 For Statement - simple
-========================================
+================================================================================
 
 for x in $LIST; end;
 
 for x in $LIST;
 end;
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (for_statement
-        variable: (variable_name)
-        value: (variable_expansion (variable_name)))
-    (for_statement
-        variable: (variable_name)
-        value: (variable_expansion (variable_name))))
+  (for_statement
+    variable: (variable_name)
+    value: (variable_expansion
+      (variable_name)))
+  (for_statement
+    variable: (variable_name)
+    value: (variable_expansion
+      (variable_name))))
 
-========================================
+================================================================================
 For Statement - new line should end value list
-========================================
+================================================================================
 
 for x in 1 2
 3
@@ -28,26 +30,27 @@ for x in 1 2
     echo $x;
 end;
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (for_statement
-        variable: (variable_name)
-        value: (integer)
-        value: (integer)
-        (command
-            name: (integer))
-        (command
-            name: (integer))
-        (command
-            name: (integer))
-        (command
-            name: (word)
-            argument: (variable_expansion (variable_name)))))
+  (for_statement
+    variable: (variable_name)
+    value: (integer)
+    value: (integer)
+    (command
+      name: (integer))
+    (command
+      name: (integer))
+    (command
+      name: (integer))
+    (command
+      name: (word)
+      argument: (variable_expansion
+        (variable_name)))))
 
-========================================
+================================================================================
 For Statement - flow control
-========================================
+================================================================================
 
 for x in $LIST; break; end;
 
@@ -55,14 +58,16 @@ for x in $LIST;
     continue;
 end;
 
----
+--------------------------------------------------------------------------------
 
 (program
-    (for_statement
-        variable: (variable_name)
-        value: (variable_expansion (variable_name))
-        (break))
-    (for_statement
-        variable: (variable_name)
-        value: (variable_expansion (variable_name))
-        (continue)))
+  (for_statement
+    variable: (variable_name)
+    value: (variable_expansion
+      (variable_name))
+    (break))
+  (for_statement
+    variable: (variable_name)
+    value: (variable_expansion
+      (variable_name))
+    (continue)))

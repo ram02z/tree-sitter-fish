@@ -58,19 +58,3 @@ systemctl 2>/dev/null $argv
         (word))
       (variable_expansion
         (variable_name)))))
-
-================================================================================
-Nested brace expansions
-================================================================================
-
-{{max,min}_tx_,}rate
-
---------------------------------------------------------------------------------
-
-(program
-  (ERROR
-    (brace_expansion
-      (word)
-      (word))
-    (word)
-    (UNEXPECTED 'a')))

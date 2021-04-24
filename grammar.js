@@ -385,16 +385,17 @@ module.exports = grammar({
         ),
 
         brace_concatenation: $ => prec(-1, seq(
-            $._base_brace_expression,
+            choice($._base_brace_expression, $.brace_expansion),
             repeat1(prec(1, seq(
                 $._brace_concat,
-                $._base_brace_expression,
+                choice($._base_brace_expression, $.brace_expansion),
             ))),
         )),
 
         _brace_expression: $ => choice(
             alias($.brace_concatenation, $.concatenation),
             $._base_brace_expression,
+            $.brace_expansion,
         ),
 
         _base_brace_expression: $ => choice(

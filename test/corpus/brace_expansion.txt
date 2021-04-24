@@ -258,3 +258,32 @@ Brace Expansion - with numbers
     name: (brace_expansion
       (integer)
       (float))))
+
+================================================================================
+Brace Expansion - nested
+================================================================================
+
+echo {{min,max},}ed
+echo {{min,max}\',}ed
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (word)
+    argument: (concatenation
+      (brace_expansion
+        (brace_expansion
+          (word)
+          (word)))
+      (word)))
+  (command
+    name: (word)
+    argument: (concatenation
+      (brace_expansion
+        (concatenation
+          (brace_expansion
+            (word)
+            (word))
+          (escape_sequence)))
+      (word))))

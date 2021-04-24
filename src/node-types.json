@@ -142,6 +142,10 @@
       "required": false,
       "types": [
         {
+          "type": "brace_expansion",
+          "named": true
+        },
+        {
           "type": "concatenation",
           "named": true
         },

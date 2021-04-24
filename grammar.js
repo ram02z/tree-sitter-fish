@@ -22,11 +22,12 @@ const SPECIAL_CHARACTERS = [
 ];
 
 function charMatch(characterArray, negate) {
-    const special = [
-        '$', '\\', '*', '~', '#', '(', ')', '{', '}',
-        '|', '^', '&',
+    const regexSpecialCharacters = [
+        '$', '\\', '*', '~', '#', '(', ')', '{', '}', '|', '^', '&',
     ];
-    const escaped = characterArray.map((c) => special.includes(c) ? '\\' + c : c);
+
+    const escaped = characterArray.map((c) =>
+        regexSpecialCharacters.includes(c) ? '\\' + c : c);
 
     return new RegExp(`[${negate ? '^' : ''}${escaped.join('')}]+`);
 }
@@ -367,11 +368,11 @@ module.exports = grammar({
         _expression: $ => choice(
             $._base_expression,
             $.concatenation,
-            $.command_substitution,
             alias($._special_character, $.word),
         ),
 
         _base_expression: $ => choice(
+            $.command_substitution,
             $.single_quote_string,
             $.double_quote_string,
             $.variable_expansion,
@@ -399,6 +400,7 @@ module.exports = grammar({
         ),
 
         _base_brace_expression: $ => choice(
+            $.command_substitution,
             $.single_quote_string,
             $.double_quote_string,
             $.variable_expansion,
@@ -413,10 +415,9 @@ module.exports = grammar({
 
         glob: $ => token.immediate(repeat1('*')),
 
-        // In order to use it as a "word":
-        // word: $ => token(prec.left(noneOf(SPECIAL_CHARACTERS))),
         word: $ => noneOf(SPECIAL_CHARACTERS),
-        brace_word: $ => noneOf(['\\s', '$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')', '\\]', '\\[']),
+
+        brace_word: $ => noneOf(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')']),
     },
 });
 

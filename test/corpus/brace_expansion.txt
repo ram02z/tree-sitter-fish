@@ -97,6 +97,7 @@ Brace Expansion - with variable_expansion
 {,$PATH[1]}
 {\$PATH,$env}
 {$$ref,$arr}
+{env[],iron}
 
 --------------------------------------------------------------------------------
 
@@ -124,7 +125,11 @@ Brace Expansion - with variable_expansion
       (variable_expansion
         (variable_name))
       (variable_expansion
-        (variable_name)))))
+        (variable_name))))
+  (command
+    name: (brace_expansion
+      (word)
+      (word))))
 
 ================================================================================
 Brace Expansion - with otherwise special characters
@@ -192,7 +197,7 @@ Brace Expansion - proper distinction between vars and words
       (word))))
 
 ================================================================================
-Brace Expansion - requires comma between expressions
+Brace Expansion - accepts inputs with spaces
 ================================================================================
 
 {,b b}
@@ -202,9 +207,7 @@ Brace Expansion - requires comma between expressions
 (program
   (command
     name: (brace_expansion
-      (word)
-      (ERROR
-        (UNEXPECTED '}')))))
+      (word))))
 
 ================================================================================
 Brace Expansion - expanded single var
@@ -260,11 +263,12 @@ Brace Expansion - with numbers
       (float))))
 
 ================================================================================
-Brace Expansion - nested
+Brace Expansion - nested, substitutions
 ================================================================================
 
 echo {{min,max},}ed
 echo {{min,max}\',}ed
+echo {min,(echo {max,})}ed
 
 --------------------------------------------------------------------------------
 
@@ -286,4 +290,15 @@ echo {{min,max}\',}ed
             (word)
             (word))
           (escape_sequence)))
+      (word)))
+  (command
+    name: (word)
+    argument: (concatenation
+      (brace_expansion
+        (word)
+        (command_substitution
+          (command
+            name: (word)
+            argument: (brace_expansion
+              (word)))))
       (word))))

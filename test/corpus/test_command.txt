@@ -112,6 +112,8 @@ Test Command - binary expression
 
 [ ! 0.0 -eq 1.0 ]
 [ \( ! 0.0 -eq 0 \) -o te = st ]
+[ $status -eq 0 ]
+[ \( !$status -eq 0 \) -a $status -ne 127 ]
 
 --------------------------------------------------------------------------------
 
@@ -131,7 +133,26 @@ Test Command - binary expression
           (integer)))
       (binary_expression
         (word)
-        (word)))))
+        (word))))
+  (test_command
+    (binary_expression
+      (variable_expansion
+        (variable_name))
+      (test_option)
+      (integer)))
+  (test_command
+    (conditional_expression
+      (negated_expression
+        (binary_expression
+          (variable_expansion
+            (variable_name))
+          (test_option)
+          (integer)))
+      (binary_expression
+        (variable_expansion
+          (variable_name))
+        (test_option)
+        (integer)))))
 
 ================================================================================
 Test Command - opearators for files and directories

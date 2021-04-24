@@ -1564,8 +1564,17 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_base_brace_expression"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_base_brace_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "brace_expansion"
+              }
+            ]
           },
           {
             "type": "REPEAT1",
@@ -1580,8 +1589,17 @@
                     "name": "_brace_concat"
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "_base_brace_expression"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_base_brace_expression"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "brace_expansion"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1605,6 +1623,10 @@
         {
           "type": "SYMBOL",
           "name": "_base_brace_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "brace_expansion"
         }
       ]
     },

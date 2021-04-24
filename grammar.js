@@ -340,7 +340,7 @@ module.exports = grammar({
 
         escape_sequence: $ => token(seq('\\', choice(
             /[^xu]/,
-            /u[0-9a-fA-F]{4}/,
+            /u[0-9a-fA-F]{2,4}/,
             /u{[0-9a-fA-F]+}/,
             /x[0-9a-fA-F]{1,2}/
         ))),
@@ -413,7 +413,7 @@ module.exports = grammar({
 
         home_dir_expansion: $ => '~',
 
-        glob: $ => token.immediate(repeat1('*')),
+        glob: $ => token(repeat1('*')),
 
         word: $ => noneOf(SPECIAL_CHARACTERS),
 

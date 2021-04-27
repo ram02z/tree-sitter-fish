@@ -399,7 +399,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "_function_name"
+            "name": "_expression"
           }
         },
         {
@@ -478,48 +478,6 @@
           }
         ]
       }
-    },
-    "_function_name": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "concatenation"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "single_quote_string"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "double_quote_string"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "variable_expansion"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "list_element_access"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "word"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "variable_name"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "brace_expansion"
-            }
-          ]
-        }
-      ]
     },
     "switch_statement": {
       "type": "SEQ",

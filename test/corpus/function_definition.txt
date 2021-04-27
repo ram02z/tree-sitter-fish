@@ -2,6 +2,8 @@
 Function Definition - simple
 ================================================================================
 
+function \*; end
+function []; end
 function test; end
 
 function name
@@ -15,11 +17,15 @@ end
 
 (program
   (function_definition
-    name: (variable_name))
+    name: (escape_sequence))
   (function_definition
-    name: (variable_name))
+    name: (concatenation))
   (function_definition
-    name: (variable_name)
+    name: (word))
+  (function_definition
+    name: (word))
+  (function_definition
+    name: (word)
     (return
       (integer))))
 
@@ -33,9 +39,9 @@ function test; function nested; end; end
 
 (program
   (function_definition
-    name: (variable_name)
+    name: (word)
     (function_definition
-      name: (variable_name))))
+      name: (word))))
 
 ================================================================================
 Function Definition - with options
@@ -48,7 +54,7 @@ end
 
 (program
   (function_definition
-    name: (variable_name)
+    name: (word)
     option: (word)
     option: (word)
     option: (word)
@@ -67,7 +73,7 @@ end
 
 (program
   (function_definition
-    name: (variable_name)
+    name: (word)
     option: (word)
     option: (double_quote_string)
     (command
@@ -91,7 +97,7 @@ end
 
 (program
   (function_definition
-    name: (variable_name)
+    name: (word)
     (if_statement
       condition: (command
         name: (word))

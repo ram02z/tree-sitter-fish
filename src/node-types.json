@@ -1073,6 +1073,10 @@
             "named": true
           },
           {
+            "type": "command_substitution",
+            "named": true
+          },
+          {
             "type": "concatenation",
             "named": true
           },
@@ -1081,7 +1085,23 @@
             "named": true
           },
           {
-            "type": "list_element_access",
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
+            "named": true
+          },
+          {
+            "type": "integer",
             "named": true
           },
           {
@@ -1090,10 +1110,6 @@
           },
           {
             "type": "variable_expansion",
-            "named": true
-          },
-          {
-            "type": "variable_name",
             "named": true
           },
           {

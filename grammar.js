@@ -141,7 +141,7 @@ module.exports = grammar({
 
         function_definition: $ => seq(
             'function',
-            field('name', $._function_name),
+            field('name', $._expression),
             field('option', optional(repeat1($._expression))),
             $._terminator,
             optional(repeat1($._terminated_statement)),
@@ -156,19 +156,6 @@ module.exports = grammar({
             'return',
             optional($._expression),
         )),
-
-        _function_name: $ => choice(
-            $.concatenation,
-            choice(
-                $.single_quote_string,
-                $.double_quote_string,
-                $.variable_expansion,
-                $.list_element_access,
-                $.word,
-                $.variable_name,
-                $.brace_expansion,
-            ),
-        ),
 
         switch_statement: $ => seq(
             'switch',

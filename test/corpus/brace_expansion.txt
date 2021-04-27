@@ -39,6 +39,7 @@ Brace Expansion - single value
 ================================================================================
 
 {name,}
+{name;,}
 {,name}
 {,name,}
 {,,,name,}
@@ -47,6 +48,9 @@ Brace Expansion - single value
 --------------------------------------------------------------------------------
 
 (program
+  (command
+    name: (brace_expansion
+      (word)))
   (command
     name: (brace_expansion
       (word)))

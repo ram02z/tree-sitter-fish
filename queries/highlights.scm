@@ -1,7 +1,5 @@
-[
-  (double_quote_string)
-  (single_quote_string)
-] @string
+[(double_quote_string) (single_quote_string)] @string
+(escape_sequence) @string.escape
 
 (comment) @comment
 
@@ -32,7 +30,7 @@
 
 "," @punctuation.delimiter
 
-(function_definition name: (variable_name) @function)
+(function_definition name: [(word) (concatenation)] @function)
 (command name: (word) @function)
 
 [

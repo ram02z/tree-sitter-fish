@@ -334,7 +334,7 @@ module.exports = grammar({
 
         command: $ => prec.right(seq(
             field('name', $._command_name_expression),
-            field('argument', repeat($._expression)),
+            repeat(field('argument', $._expression)),
         )),
 
         _special_character: $ => token(choice('[', ']')),

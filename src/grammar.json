@@ -1355,10 +1355,10 @@
             }
           },
           {
-            "type": "FIELD",
-            "name": "argument",
+            "type": "REPEAT",
             "content": {
-              "type": "REPEAT",
+              "type": "FIELD",
+              "name": "argument",
               "content": {
                 "type": "SYMBOL",
                 "name": "_expression"

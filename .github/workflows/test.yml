@@ -1,0 +1,15 @@
+name: Tests
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v2
+          - name: Run parser tests
+            run: npm run test
+          - name: Run parser against examples
+            run: npm run test:examples

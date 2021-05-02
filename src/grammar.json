@@ -403,23 +403,23 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "option",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "REPEAT1",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "FIELD",
+                "name": "option",
                 "content": {
                   "type": "SYMBOL",
                   "name": "_expression"
                 }
-              },
-              {
-                "type": "BLANK"
               }
-            ]
-          }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -582,10 +582,10 @@
           "value": "in"
         },
         {
-          "type": "FIELD",
-          "name": "value",
+          "type": "REPEAT1",
           "content": {
-            "type": "REPEAT1",
+            "type": "FIELD",
+            "name": "value",
             "content": {
               "type": "SYMBOL",
               "name": "_expression"

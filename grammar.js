@@ -1,3 +1,5 @@
+'use strict';
+
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
 // TODO(16):    The "function/while/begin --help" should be a command
 // TODO(17):    {"str"} or {} or test{nonvar} should be a concatenation / word
@@ -327,10 +329,13 @@ module.exports = grammar({
         ),
 
         escape_sequence: $ => token(seq('\\', choice(
-            /[^xu]/,
-            /u[0-9a-fA-F]{2,4}/,
-            /u{[0-9a-fA-F]+}/,
-            /x[0-9a-fA-F]{1,2}/
+            /[^xXuUc]/,
+            /[0-7]{1,3}/,
+            /x[0-9a-fA-F]{1,2}/,
+            /X[0-9a-fA-F]{1,2}/,
+            /u[0-9a-fA-F]{1,4}/,
+            /U[0-9a-fA-F]{1,8}/,
+            /c[a-zA-Z]/,
         ))),
 
         command: $ => prec.right(seq(

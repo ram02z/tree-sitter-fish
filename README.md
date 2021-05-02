@@ -9,7 +9,7 @@ Install the dependencies:
 
     npm install
 
-Build and run the tests:
+Run the tests:
 
     npm run test
 
@@ -17,7 +17,7 @@ Run the build and tests in watch mode:
 
     npm run test:watch
 
-Run the build and test parser against [fish-shell](https://github.com/fish-shell/fish-shell/tree/master/share) `/share` fish files:
+Test parser against [fish-shell](https://github.com/fish-shell/fish-shell/tree/master/share) `/share` fish files:
 
     npm run test:examples
 

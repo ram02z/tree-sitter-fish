@@ -105,7 +105,7 @@ end
         (variable_expansion
           (variable_name)))
       (else_if_clause
-        (command
+        condition: (command
           name: (word))
         (return
           (command_substitution

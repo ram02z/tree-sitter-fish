@@ -74,28 +74,28 @@ if false; else if false; else; end
     condition: (command
       name: (word))
     (else_if_clause
-      (command
+      condition: (command
         name: (word))))
   (if_statement
     condition: (command
       name: (word))
     (else_if_clause
-      (command
+      condition: (command
         name: (word))))
   (if_statement
     condition: (command
       name: (word))
     (else_if_clause
-      (command
+      condition: (command
         name: (word)))
     (else_if_clause
-      (command
+      condition: (command
         name: (word)))
     (else_clause))
   (if_statement
     condition: (command
       name: (word))
     (else_if_clause
-      (command
+      condition: (command
         name: (word)))
     (else_clause)))

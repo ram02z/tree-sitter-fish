@@ -1333,7 +1333,7 @@
               },
               {
                 "type": "PATTERN",
-                "value": "c[a-zA-Z]"
+                "value": "c[a-zA-Z]?"
               }
             ]
           }

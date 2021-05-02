@@ -26,7 +26,14 @@
     "tree-sitter-cli": "^0.19.4",
     "nodemon": "^2.0.7"
   },
-  "repository": "https://github.com/krnik/tree-sitter-fish",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krnik/tree-sitter-fish.git"
+  },
+  "homepage": "https://github.com/krnik/tree-sitter-fish#readme",
+  "bugs": {
+    "url": "https://github.com/krnik/tree-sitter-fish/issues"
+  },
   "tree-sitter": [
     {
       "scope": "source.fish",

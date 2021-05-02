@@ -142,7 +142,7 @@ module.exports = grammar({
         function_definition: $ => seq(
             'function',
             field('name', $._expression),
-            field('option', optional(repeat1($._expression))),
+            optional(repeat1(field('option', $._expression))),
             $._terminator,
             optional(repeat1($._terminated_statement)),
             'end',
@@ -179,7 +179,7 @@ module.exports = grammar({
             'for',
             field('variable', $.variable_name),
             'in',
-            field('value', repeat1($._expression)),
+            repeat1(field('value', $._expression)),
             $._terminator,
             optional(repeat1($._terminated_statement)),
             'end',

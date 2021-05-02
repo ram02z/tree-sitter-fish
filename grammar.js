@@ -114,10 +114,10 @@ module.exports = grammar({
             $.test_command,
         ),
 
-        _terminated_statement: $ => prec(1, seq(
+        _terminated_statement: $ => seq(
             $._statement,
             $._terminator,
-        )),
+        ),
 
         _terminated_opt_statement: $ => seq(
             optional($._statement),
@@ -185,21 +185,21 @@ module.exports = grammar({
             'end',
         ),
 
-        while_statement: $ => prec.right(-3, seq(
+        while_statement: $ => seq(
             'while',
             field('condition', $._terminated_statement),
             optional(repeat1($._terminated_opt_statement)),
             'end',
-        )),
+        ),
 
-        if_statement: $ => prec.right(-3, seq(
+        if_statement: $ => seq(
             'if',
             field('condition', $._terminated_statement),
             optional(repeat1($._terminated_opt_statement)),
             repeat($.else_if_clause),
             optional($.else_clause),
             'end'
-        )),
+        ),
 
         else_if_clause: $ => seq(
             seq('else', 'if'),
@@ -212,11 +212,11 @@ module.exports = grammar({
             optional(repeat1($._terminated_opt_statement)),
         ),
 
-        begin_statement: $ => prec(6, seq(
+        begin_statement: $ => seq(
             'begin',
             optional(repeat1($._terminated_opt_statement)),
             'end',
-        )),
+        ),
 
         test_command: $ => seq(
             alias(/\[\s/, '['),
@@ -282,7 +282,7 @@ module.exports = grammar({
             optional($.index), '..', optional($.index)
         )),
 
-        list_element_access: $ => prec.right(1, seq(
+        list_element_access: $ => prec.right(seq(
             '[',
             optional(repeat1(choice(
                 $.index,
@@ -316,14 +316,14 @@ module.exports = grammar({
             '"',
         ),
 
-        single_quote_string: $ => prec(1, seq(
+        single_quote_string: $ => seq(
             '\'',
             repeat(choice(
                 token.immediate(/[^'\\]+/),
                 $.escape_sequence,
             )),
             '\'',
-        )),
+        ),
 
         escape_sequence: $ => token(seq('\\', choice(
             /[^xu]/,
@@ -339,13 +339,13 @@ module.exports = grammar({
 
         _special_character: $ => token(choice('[', ']')),
 
-        concatenation: $ => prec(-1, seq(
+        concatenation: $ => seq(
             choice($._base_expression, $._special_character),
             repeat1(seq(
                 $._concat,
                 choice($._base_expression, $._special_character)
             )),
-        )),
+        ),
 
         _command_name_expression: $ => choice(
             $._base_expression,
@@ -372,13 +372,13 @@ module.exports = grammar({
             $.home_dir_expansion,
         ),
 
-        brace_concatenation: $ => prec(-1, seq(
+        brace_concatenation: $ => seq(
             choice($._base_brace_expression, $.brace_expansion),
             repeat1(prec(1, seq(
                 $._brace_concat,
                 choice($._base_brace_expression, $.brace_expansion),
             ))),
-        )),
+        ),
 
         _brace_expression: $ => choice(
             alias($.brace_concatenation, $.concatenation),

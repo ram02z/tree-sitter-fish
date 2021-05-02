@@ -19,7 +19,7 @@ Run the build and tests in watch mode:
 
 Run the build and test parser against [fish-shell](https://github.com/fish-shell/fish-shell/tree/master/share) `/share` fish files:
 
-    npm run test:fish
+    npm run test:examples
 
 #### References
 * [tree-sitter-bash](https://github.com/tree-sitter/tree-sitter-bash)

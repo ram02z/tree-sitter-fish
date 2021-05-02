@@ -203,6 +203,7 @@ module.exports = grammar({
 
         else_if_clause: $ => seq(
             seq('else', 'if'),
+            field('condition', $._terminated_statement),
             optional(repeat1($._terminated_opt_statement)),
         ),
 

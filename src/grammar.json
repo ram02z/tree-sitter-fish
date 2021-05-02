@@ -721,6 +721,14 @@
           ]
         },
         {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_terminated_statement"
+          }
+        },
+        {
           "type": "CHOICE",
           "members": [
             {

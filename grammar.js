@@ -331,10 +331,10 @@ module.exports = grammar({
         escape_sequence: $ => token(seq('\\', choice(
             /[^xXuUc]/,
             /[0-7]{1,3}/,
-            /x[0-9a-fA-F]{1,2}/,
-            /X[0-9a-fA-F]{1,2}/,
-            /u[0-9a-fA-F]{1,4}/,
-            /U[0-9a-fA-F]{1,8}/,
+            /x[0-9a-fA-F]{0,2}/,
+            /X[0-9a-fA-F]{0,2}/,
+            /u[0-9a-fA-F]{0,4}/,
+            /U[0-9a-fA-F]{0,8}/,
             /c[a-zA-Z]/,
         ))),
 

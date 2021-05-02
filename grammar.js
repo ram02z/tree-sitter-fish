@@ -335,7 +335,7 @@ module.exports = grammar({
             /X[0-9a-fA-F]{0,2}/,
             /u[0-9a-fA-F]{0,4}/,
             /U[0-9a-fA-F]{0,8}/,
-            /c[a-zA-Z]/,
+            /c[a-zA-Z]?/,
         ))),
 
         command: $ => prec.right(seq(

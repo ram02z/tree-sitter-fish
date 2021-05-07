@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tree-sitter generate",
     "build:wasm": "npm run build && tree-sitter build-wasm",
-    "start": "npm run build && npm run build:wasm && tree-sitter web-ui",
+    "start": "npm run build:wasm && tree-sitter web-ui",
     "test": "tree-sitter test",
     "test:watch": "nodemon --ext js,txt,fish,scm --watch grammar.js --watch test --watch queries --exec 'npm run build && npm run test'",
     "test:examples": "bash ./scripts/test_shared.sh"

@@ -12,4 +12,5 @@ else
     printf "output:\n$output"
     printf "\n\n----------\n\n"
     printf "snapshot:\n$snapshot"
+    exit 1
 fi

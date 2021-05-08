@@ -50,6 +50,7 @@ module.exports = grammar({
     inline: $ => [
         $._terminator,
         $._statement,
+        $._base_expression,
     ],
 
     extras: $ => [
@@ -264,14 +265,14 @@ module.exports = grammar({
 
         variable_name: $ => /[a-zA-Z0-9_]+/,
 
-        variable_expansion: $ => prec.right(seq(
+        variable_expansion: $ => seq(
             repeat1('$'),
             $.variable_name,
             optional(repeat1(seq(
                 $._concat_list,
                 $.list_element_access,
             ))),
-        )),
+        ),
 
         index: $ => choice(
             $.integer,
@@ -285,14 +286,14 @@ module.exports = grammar({
             optional($.index), '..', optional($.index)
         )),
 
-        list_element_access: $ => prec.right(seq(
+        list_element_access: $ => seq(
             '[',
             optional(repeat1(choice(
                 $.index,
                 $.range,
             ))),
             ']',
-        )),
+        ),
 
         brace_expansion: $ => prec.right(seq(
             '{',
@@ -338,10 +339,10 @@ module.exports = grammar({
             /c[a-zA-Z]?/,
         ))),
 
-        command: $ => prec.right(seq(
-            field('name', $._command_name_expression),
+        command: $ => seq(
+            field('name', $._expression),
             repeat(field('argument', $._expression)),
-        )),
+        ),
 
         _special_character: $ => token(choice('[', ']')),
 
@@ -351,11 +352,6 @@ module.exports = grammar({
                 $._concat,
                 choice($._base_expression, $._special_character)
             )),
-        ),
-
-        _command_name_expression: $ => choice(
-            $._base_expression,
-            $.concatenation,
         ),
 
         _expression: $ => choice(
@@ -380,10 +376,10 @@ module.exports = grammar({
 
         brace_concatenation: $ => seq(
             choice($._base_brace_expression, $.brace_expansion),
-            repeat1(prec(1, seq(
+            repeat1(seq(
                 $._brace_concat,
                 choice($._base_brace_expression, $.brace_expansion),
-            ))),
+            )),
         ),
 
         _brace_expression: $ => choice(

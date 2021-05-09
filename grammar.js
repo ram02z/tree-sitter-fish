@@ -3,7 +3,6 @@
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
 // TODO(16):    The "function/while/begin --help" should be a command
 // TODO(17):    {"str"} or {} or test{nonvar} should be a concatenation / word
-// TODO(22):    Ensure function name attribute is a proper node
 
 const SPECIAL_CHARACTERS = [
     '$',
@@ -59,11 +58,9 @@ module.exports = grammar({
     ],
 
     rules: {
-        program: $ => prec.right(-1, optional(
-            prec.left(1, repeat1(seq(
-                optional($._statement),
-                $._terminator,
-            ))),
+        program: $ => repeat(seq(
+            optional($._statement),
+            $._terminator,
         )),
 
         conditional_execution: $ => choice(

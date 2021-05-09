@@ -2,41 +2,25 @@
   "name": "fish",
   "rules": {
     "program": {
-      "type": "PREC_RIGHT",
-      "value": -1,
+      "type": "REPEAT",
       "content": {
-        "type": "CHOICE",
+        "type": "SEQ",
         "members": [
           {
-            "type": "PREC_LEFT",
-            "value": 1,
-            "content": {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "_statement"
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_terminator"
-                  }
-                ]
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_statement"
+              },
+              {
+                "type": "BLANK"
               }
-            }
+            ]
           },
           {
-            "type": "BLANK"
+            "type": "SYMBOL",
+            "name": "_terminator"
           }
         ]
       }

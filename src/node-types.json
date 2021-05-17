@@ -679,6 +679,10 @@
           "named": true
         },
         {
+          "type": "test_option",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         },
@@ -2437,14 +2441,6 @@
     "named": false
   },
   {
-    "type": "-a",
-    "named": false
-  },
-  {
-    "type": "-o",
-    "named": false
-  },
-  {
     "type": "..",
     "named": false
   },
@@ -2562,6 +2558,10 @@
   },
   {
     "type": "switch",
+    "named": false
+  },
+  {
+    "type": "test",
     "named": false
   },
   {

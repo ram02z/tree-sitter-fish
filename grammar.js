@@ -219,12 +219,18 @@ module.exports = grammar({
             'end',
         ),
 
-        test_command: $ => seq(
-            alias(/\[\s/, '['),
-            choice(']', seq(
-                $._test_expression,
-                alias(/\s\]/, ']'),
-            )),
+        test_command: $ => choice(
+            seq(
+                alias(/\[\s/, '['),
+                choice(']', seq(
+                    $._test_expression,
+                    alias(/\s\]/, ']'),
+                )),
+            ),
+            seq(
+                'test',
+                optional($._test_expression),
+            ),
         ),
 
         _test_expression: $ => choice(
@@ -241,7 +247,7 @@ module.exports = grammar({
 
         conditional_expression: $ => prec.right(seq(
             $._test_expression,
-            choice('-a', '-o'),
+            alias(choice('-a', '-o'), $.test_option),
             $._test_expression,
         )),
 

@@ -15,6 +15,7 @@
   ".."
   (direction)
   (stream_redirect)
+  (test_option)
 ] @operator
 
 (variable_expansion) @constant

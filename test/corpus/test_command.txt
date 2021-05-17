@@ -35,6 +35,9 @@ Test Command - simple
 [ $status != 0 ]
 [ \( $status != 0 \) ]
 
+test
+test one
+
 --------------------------------------------------------------------------------
 
 (program
@@ -49,7 +52,10 @@ Test Command - simple
     (binary_expression
       (variable_expansion
         (variable_name))
-      (integer))))
+      (integer)))
+  (test_command)
+  (test_command
+    (word)))
 
 ================================================================================
 Test Command - cond expression
@@ -59,12 +65,17 @@ Test Command - cond expression
 [ 0.2 -eq 0.3 ]
 [ \( $status -o \( 'te' != 'st' -a $status != '0' \)\) ]
 
+test 0 -a 1
+test 0.2 -eq 0.3
+test \( $status -o \( 'te' != 'st' -a $status != '0' \)\)
+
 --------------------------------------------------------------------------------
 
 (program
   (test_command
     (conditional_expression
       (integer)
+      (test_option)
       (integer)))
   (test_command
     (binary_expression
@@ -75,10 +86,36 @@ Test Command - cond expression
     (conditional_expression
       (variable_expansion
         (variable_name))
+      (test_option)
       (conditional_expression
         (binary_expression
           (single_quote_string)
           (single_quote_string))
+        (test_option)
+        (binary_expression
+          (variable_expansion
+            (variable_name))
+          (single_quote_string)))))
+  (test_command
+    (conditional_expression
+      (integer)
+      (test_option)
+      (integer)))
+  (test_command
+    (binary_expression
+      (float)
+      (test_option)
+      (float)))
+  (test_command
+    (conditional_expression
+      (variable_expansion
+        (variable_name))
+      (test_option)
+      (conditional_expression
+        (binary_expression
+          (single_quote_string)
+          (single_quote_string))
+        (test_option)
         (binary_expression
           (variable_expansion
             (variable_name))
@@ -90,6 +127,8 @@ Test Command - unary expression
 
 [ ! $status ]
 [ \( !$status \) -o $status ]
+test ! $status
+test \( !$status \) -o $status
 
 --------------------------------------------------------------------------------
 
@@ -103,6 +142,19 @@ Test Command - unary expression
       (negated_expression
         (variable_expansion
           (variable_name)))
+      (test_option)
+      (variable_expansion
+        (variable_name))))
+  (test_command
+    (negated_expression
+      (variable_expansion
+        (variable_name))))
+  (test_command
+    (conditional_expression
+      (negated_expression
+        (variable_expansion
+          (variable_name)))
+      (test_option)
       (variable_expansion
         (variable_name)))))
 
@@ -114,6 +166,11 @@ Test Command - binary expression
 [ \( ! 0.0 -eq 0 \) -o te = st ]
 [ $status -eq 0 ]
 [ \( !$status -eq 0 \) -a $status -ne 127 ]
+
+test ! 0.0 -eq 1.0
+test \( ! 0.0 -eq 0 \) -o te = st
+test $status -eq 0
+test \( !$status -eq 0 \) -a $status -ne 127
 
 --------------------------------------------------------------------------------
 
@@ -131,6 +188,7 @@ Test Command - binary expression
           (float)
           (test_option)
           (integer)))
+      (test_option)
       (binary_expression
         (word)
         (word))))
@@ -148,6 +206,44 @@ Test Command - binary expression
             (variable_name))
           (test_option)
           (integer)))
+      (test_option)
+      (binary_expression
+        (variable_expansion
+          (variable_name))
+        (test_option)
+        (integer))))
+  (test_command
+    (negated_expression
+      (binary_expression
+        (float)
+        (test_option)
+        (float))))
+  (test_command
+    (conditional_expression
+      (negated_expression
+        (binary_expression
+          (float)
+          (test_option)
+          (integer)))
+      (test_option)
+      (binary_expression
+        (word)
+        (word))))
+  (test_command
+    (binary_expression
+      (variable_expansion
+        (variable_name))
+      (test_option)
+      (integer)))
+  (test_command
+    (conditional_expression
+      (negated_expression
+        (binary_expression
+          (variable_expansion
+            (variable_name))
+          (test_option)
+          (integer)))
+      (test_option)
       (binary_expression
         (variable_expansion
           (variable_name))
@@ -177,9 +273,100 @@ Test Command - opearators for files and directories
 [ -w ./test.fish ]
 [ -x ./test.fish ]
 
+test -b ./test.fish
+test -c ./test.fish
+test -d ./test.fish
+test -e ./test.fish
+test -f ./test.fish
+test -g ./test.fish
+test -G ./test.fish
+test -k ./test.fish
+test -L ./test.fish
+test -O ./test.fish
+test -p ./test.fish
+test -r ./test.fish
+test -s ./test.fish
+test -S ./test.fish
+test -t ./test.fish
+test -u ./test.fish
+test -w ./test.fish
+test -x ./test.fish
+
 --------------------------------------------------------------------------------
 
 (program
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (word)))
   (test_command
     (unary_expression
       (test_option)
@@ -262,9 +449,30 @@ Test Command - operators for text strings
 [ -n 'non-zero-string' ]
 [ -z '' ]
 
+test "test" = 'test'
+test test != 'test'
+test -n 'non-zero-string'
+test -z ''
+
 --------------------------------------------------------------------------------
 
 (program
+  (test_command
+    (binary_expression
+      (double_quote_string)
+      (single_quote_string)))
+  (test_command
+    (binary_expression
+      (word)
+      (single_quote_string)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (single_quote_string)))
+  (test_command
+    (unary_expression
+      (test_option)
+      (single_quote_string)))
   (test_command
     (binary_expression
       (double_quote_string)
@@ -293,9 +501,46 @@ Test Command - operators for numbers
 [ 0 -ge 0.0 ]
 [ 0 -le 0.0 ]
 
+test 0 -eq 0.0
+test 0 -ne 0.0
+test 0 -gt 0.0
+test 0 -lt 0.0
+test 0 -ge 0.0
+test 0 -le 0.0
+
 --------------------------------------------------------------------------------
 
 (program
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
+  (test_command
+    (binary_expression
+      (integer)
+      (test_option)
+      (float)))
   (test_command
     (binary_expression
       (integer)

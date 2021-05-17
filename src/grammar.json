@@ -786,39 +786,65 @@
       ]
     },
     "test_command": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\[\\s"
-          },
-          "named": false,
-          "value": "["
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\[\\s"
+              },
+              "named": false,
+              "value": "["
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "]"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_test_expression"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "\\s\\]"
+                      },
+                      "named": false,
+                      "value": "]"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
               "type": "STRING",
-              "value": "]"
+              "value": "test"
             },
             {
-              "type": "SEQ",
+              "type": "CHOICE",
               "members": [
                 {
                   "type": "SYMBOL",
                   "name": "_test_expression"
                 },
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s\\]"
-                  },
-                  "named": false,
-                  "value": "]"
+                  "type": "BLANK"
                 }
               ]
             }
@@ -900,17 +926,22 @@
             "name": "_test_expression"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "-a"
-              },
-              {
-                "type": "STRING",
-                "value": "-o"
-              }
-            ]
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "-a"
+                },
+                {
+                  "type": "STRING",
+                  "value": "-o"
+                }
+              ]
+            },
+            "named": true,
+            "value": "test_option"
           },
           {
             "type": "SYMBOL",

@@ -18,7 +18,6 @@
     "parser"
   ],
   "author": "Krnik",
-  "license": "ISC",
   "dependencies": {
     "nan": "^2.14.2"
   },

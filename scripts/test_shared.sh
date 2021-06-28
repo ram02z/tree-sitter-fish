@@ -1,16 +1,24 @@
-output=$(for file in ./examples/fish/share/**/*.fish
+#!/bin/bash
+
+code=0
+
+for file in ./examples/fish/share/**/*.fish
 do
-    ./node_modules/.bin/tree-sitter parse $file | grep ERROR
-done)
+    errors=$(./node_modules/.bin/tree-sitter parse $file | grep ERROR)
 
-snapshot=$(cat ./scripts/shared_output.txt)
+    if test "$errors" != ""; then
+        snap_file=$(echo $file | sed -r -e "s/[\.\/_]+/_/g")
+        snapshot="$(cat ./scripts/shared_out/$snap_file)"
 
-if test "$output" == "$snapshot"; then
-    echo OK
-else
-    echo Ouput does not match the snapshot
-    printf "output:\n$output"
-    printf "\n\n----------\n\n"
-    printf "snapshot:\n$snapshot"
-    exit 1
-fi
+        if test "$errors" != "$snapshot"; then
+            echo Ouput does not match the snapshot
+            printf "output:\n$errors"
+            printf "\n\n----------\n\n"
+            printf "snapshot:\n$snapshot\n"
+            code=1
+        fi
+    fi
+done
+
+exit $code
+

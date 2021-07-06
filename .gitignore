@@ -2,3 +2,4 @@
 /node_modules/
 /build/
 tree-sitter-fish.wasm
+package-lock.json

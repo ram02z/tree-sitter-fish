@@ -16,6 +16,10 @@ jobs:
               node-version: '14'
           - name: Install dependencies
             run: npm i
+          - name: Init Tree-Sitter config
+            run: |
+              mkdir ~/.tree-sitter
+              echo "{\"parser-directories\": [\"$(realpath ../)\"] }" > ~/.tree-sitter/config.json
           - name: Build
             run: npm run build
           - name: Run parser tests

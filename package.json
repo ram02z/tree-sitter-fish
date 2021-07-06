@@ -22,8 +22,8 @@
     "nan": "^2.14.2"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.19.4",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "tree-sitter-cli": "^0.20.0"
   },
   "repository": {
     "type": "git",

@@ -116,14 +116,14 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[012]?(>>|>|<)&[012-]"
+        "value": "\\d*(>>|>|<)&[012-]"
       }
     },
     "direction": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[012&]?(>>?\\??|<)"
+        "value": "(\\d*|&)(>>?\\??|<)"
       }
     },
     "file_redirect": {

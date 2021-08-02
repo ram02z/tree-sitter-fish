@@ -74,8 +74,8 @@ module.exports = grammar({
             choice($.file_redirect, $.stream_redirect),
         )),
 
-        stream_redirect: $ => token(/[012]?(>>|>|<)&[012-]/),
-        direction: $ => token(/[012&]?(>>?\??|<)/),
+        stream_redirect: $ => token(/\d*(>>|>|<)&[012-]/),
+        direction: $ => token(/(\d*|&)(>>?\??|<)/),
 
         file_redirect: $ => seq(
             field('operator', $.direction),

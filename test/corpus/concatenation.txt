@@ -206,3 +206,34 @@ $PATH\ ological
         (variable_name))
       (escape_sequence)
       (word))))
+
+================================================================================
+Concatenation - # in argument or command position
+================================================================================
+
+echo not#a#comment
+echo (echo 1)#notacomment
+command#with#hash
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (concatenation
+      (word)
+      (word)
+      (word)))
+  (command
+    (word)
+    (concatenation
+      (command_substitution
+        (command
+          (word)
+          (integer)))
+      (word)))
+  (command
+    (concatenation
+      (word)
+      (word)
+      (word))))

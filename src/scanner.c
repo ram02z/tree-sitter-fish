@@ -36,9 +36,13 @@ bool tree_sitter_fish_external_scanner_scan(
             lexer->lookahead == ';' ||
             lexer->lookahead == '&' ||
             lexer->lookahead == '|' ||
-            lexer->lookahead == '#' ||
             iswspace(lexer->lookahead)
         )) {
+
+            if (lexer->lookahead == '#') {
+                lexer->advance(lexer, false);
+            }
+
             lexer->result_symbol = CONCAT;
             return true;
         }

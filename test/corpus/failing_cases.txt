@@ -36,7 +36,7 @@ set (
               (integer)
               (escape_sequence))
             (comment)
-            (MISSING "))))
+            (MISSING ")"))))
       (command
         (word)
         (word)))

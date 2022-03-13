@@ -130,6 +130,7 @@ module.exports = grammar({
         )),
 
         command_substitution: $ => seq(
+            optional('$'),
             '(',
             repeat(seq(
                 optional($._statement),
@@ -319,6 +320,7 @@ module.exports = grammar({
                 token.immediate(/[^\$\\"]+/),
                 $.variable_expansion,
                 $.escape_sequence,
+                $.command_substitution,
             )),
             '"',
         ),

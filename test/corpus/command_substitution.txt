@@ -60,3 +60,29 @@ echo (
       (command
         name: (word)
         argument: (single_quote_string)))))
+
+================================================================================
+Command Substitudion - $ support since 3.4.0 fish version
+================================================================================
+
+echo $(print)
+echo "$(print)"
+echo "(print)"
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (word)
+    argument: (command_substitution
+      (command
+        name: (word))))
+  (command
+    name: (word)
+    argument: (double_quote_string
+      (command_substitution
+        (command
+          name: (word)))))
+  (command
+    name: (word)
+    argument: (double_quote_string)))

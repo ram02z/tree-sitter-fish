@@ -426,6 +426,25 @@
     "named": true,
     "fields": {},
     "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "command_substitution_dollar",
+          "named": true
+        },
+        {
+          "type": "command_substitution_fish",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command_substitution_dollar",
+    "named": true,
+    "fields": {},
+    "children": {
       "multiple": true,
       "required": false,
       "types": [
@@ -439,10 +458,6 @@
         },
         {
           "type": "command",
-          "named": true
-        },
-        {
-          "type": "command_substitution_dollar",
           "named": true
         },
         {
@@ -497,7 +512,7 @@
     }
   },
   {
-    "type": "command_substitution_dollar",
+    "type": "command_substitution_fish",
     "named": true,
     "fields": {},
     "children": {

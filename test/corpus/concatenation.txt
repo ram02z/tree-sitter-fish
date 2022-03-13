@@ -228,9 +228,10 @@ command#with#hash
     (word)
     (concatenation
       (command_substitution
-        (command
-          (word)
-          (integer)))
+        (command_substitution_fish
+          (command
+            (word)
+            (integer))))
       (word)))
   (command
     (concatenation
@@ -243,6 +244,7 @@ Concatenation - variable_expansion and command_substitution
 ================================================================================
 
 echo $variable(echo word)
+echo $variable$(echo word)
 
 --------------------------------------------------------------------------------
 
@@ -253,6 +255,17 @@ echo $variable(echo word)
       (variable_expansion
         (variable_name))
       (command_substitution
-        (command
-          (word)
-          (word))))))
+        (command_substitution_fish
+          (command
+            (word)
+            (word))))))
+  (command
+    (word)
+    (concatenation
+      (variable_expansion
+        (variable_name))
+      (command_substitution
+        (command_substitution_dollar
+          (command
+            (word)
+            (word)))))))

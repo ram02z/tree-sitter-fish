@@ -1748,8 +1748,7 @@
   "inline": [
     "_terminator",
     "_statement",
-    "_base_expression",
-    "command_substitution_fish"
+    "_base_expression"
   ],
   "supertypes": []
 }

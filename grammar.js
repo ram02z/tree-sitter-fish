@@ -50,8 +50,6 @@ module.exports = grammar({
         $._terminator,
         $._statement,
         $._base_expression,
-        // TODO: remove from inline
-        $.command_substitution_fish,
     ],
 
     extras: $ => [

@@ -13,22 +13,26 @@ echo ()
   (command
     name: (word)
     argument: (command_substitution
-      (command
-        name: (word)
-        argument: (word))))
+      (command_substitution_fish
+        (command
+          name: (word)
+          argument: (word)))))
   (command
     name: (word)
     argument: (command_substitution
-      (begin_statement
-        (command
-          name: (word)
-          argument: (integer)))))
+      (command_substitution_fish
+        (begin_statement
+          (command
+            name: (word)
+            argument: (integer))))))
   (command
     name: (word)
-    argument: (command_substitution))
+    argument: (command_substitution
+      (command_substitution_fish)))
   (command
     name: (word)
-    argument: (command_substitution)))
+    argument: (command_substitution
+      (command_substitution_fish))))
 
 ================================================================================
 Command Substitudion - multiline
@@ -48,18 +52,20 @@ echo (
   (command
     name: (word)
     argument: (command_substitution
-      (command
-        name: (word)
-        argument: (word))))
+      (command_substitution_fish
+        (command
+          name: (word)
+          argument: (word)))))
   (command
     name: (word)
     argument: (command_substitution
-      (command
-        name: (word)
-        argument: (word))
-      (command
-        name: (word)
-        argument: (single_quote_string)))))
+      (command_substitution_fish
+        (command
+          name: (word)
+          argument: (word))
+        (command
+          name: (word)
+          argument: (single_quote_string))))))
 
 ================================================================================
 Command Substitudion - $ support since 3.4.0 fish version

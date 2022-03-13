@@ -302,8 +302,9 @@ echo {min,(echo {max,})}ed
       (brace_expansion
         (word)
         (command_substitution
-          (command
-            name: (word)
-            argument: (brace_expansion
-              (word)))))
+          (command_substitution_fish
+            (command
+              name: (word)
+              argument: (brace_expansion
+                (word))))))
       (word))))

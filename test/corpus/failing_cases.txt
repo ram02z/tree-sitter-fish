@@ -16,25 +16,27 @@ set (
   (command
     (word)
     (command_substitution
-      (pipe
-        (command
-          (word)
-          (integer)
-          (escape_sequence))
-        (command
-          (word)
-          (word)))))
+      (command_substitution_fish
+        (pipe
+          (command
+            (word)
+            (integer)
+            (escape_sequence))
+          (command
+            (word)
+            (word))))))
   (ERROR
     (pipe
       (command
         (word)
         (command_substitution
-          (command
-            (word)
-            (integer)
-            (escape_sequence))
-          (comment)
-          (MISSING ")")))
+          (command_substitution_fish
+            (command
+              (word)
+              (integer)
+              (escape_sequence))
+            (comment)
+            (MISSING "))))
       (command
         (word)
         (word)))

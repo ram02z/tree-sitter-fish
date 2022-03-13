@@ -318,20 +318,12 @@
         ]
       }
     },
-    "command_substitution": {
+    "command_substitution_dollar": {
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "$"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "STRING",
+          "value": "$"
         },
         {
           "type": "STRING",
@@ -376,6 +368,68 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "command_substitution_fish": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_statement"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_terminator"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_statement"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "command_substitution": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "command_substitution_dollar"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command_substitution_fish"
         }
       ]
     },
@@ -1025,44 +1079,58 @@
       "value": "[a-zA-Z0-9_]+"
     },
     "variable_expansion": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "REPEAT1",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "STRING",
             "value": "$"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "variable_name"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_concat_list"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "list_element_access"
-                  }
-                ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "variable_name"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "command_substitution_dollar"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "variable_expansion"
               }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_concat_list"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "list_element_access"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "index": {
       "type": "CHOICE",
@@ -1275,7 +1343,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "command_substitution"
+                "name": "command_substitution_dollar"
               }
             ]
           }
@@ -1680,7 +1748,8 @@
   "inline": [
     "_terminator",
     "_statement",
-    "_base_expression"
+    "_base_expression",
+    "command_substitution_fish"
   ],
   "supertypes": []
 }

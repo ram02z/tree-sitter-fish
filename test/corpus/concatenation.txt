@@ -237,3 +237,22 @@ command#with#hash
       (word)
       (word)
       (word))))
+
+================================================================================
+Concatenation - variable_expansion and command_substitution
+================================================================================
+
+echo $variable(echo word)
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (concatenation
+      (variable_expansion
+        (variable_name))
+      (command_substitution
+        (command
+          (word)
+          (word))))))

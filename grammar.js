@@ -50,6 +50,8 @@ module.exports = grammar({
         $._terminator,
         $._statement,
         $._base_expression,
+        // TODO: remove from inline
+        $.command_substitution_fish,
     ],
 
     extras: $ => [
@@ -129,8 +131,9 @@ module.exports = grammar({
             $._statement,
         )),
 
-        command_substitution: $ => seq(
-            optional('$'),
+        /* Added in 3.4.0. Syntax `$(cmd)` */
+        command_substitution_dollar: $ => seq(
+            '$',
             '(',
             repeat(seq(
                 optional($._statement),
@@ -138,6 +141,21 @@ module.exports = grammar({
             )),
             optional($._statement),
             ')',
+        ),
+
+        command_substitution_fish: $ => seq(
+            '(',
+            repeat(seq(
+                optional($._statement),
+                $._terminator,
+            )),
+            optional($._statement),
+            ')',
+        ),
+
+        command_substitution: $ => choice(
+            $.command_substitution_dollar,
+            $.command_substitution_fish,
         ),
 
         function_definition: $ => seq(
@@ -269,14 +287,18 @@ module.exports = grammar({
 
         variable_name: $ => /[a-zA-Z0-9_]+/,
 
-        variable_expansion: $ => seq(
-            repeat1('$'),
-            $.variable_name,
+        variable_expansion: $ => prec.left(seq(
+            '$',
+            choice(
+                $.variable_name,
+                $.command_substitution_dollar,
+                $.variable_expansion,
+            ),
             optional(repeat1(seq(
                 $._concat_list,
                 $.list_element_access,
             ))),
-        ),
+        )),
 
         index: $ => choice(
             $.integer,
@@ -320,7 +342,7 @@ module.exports = grammar({
                 token.immediate(/[^\$\\"]+/),
                 $.variable_expansion,
                 $.escape_sequence,
-                $.command_substitution,
+                $.command_substitution_dollar,
             )),
             '"',
         ),

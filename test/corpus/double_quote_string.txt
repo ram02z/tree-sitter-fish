@@ -4,6 +4,7 @@ Double quote string - simple value
 
 "value"
 "#"
+echo "only (a string)"
 
 --------------------------------------------------------------------------------
 
@@ -11,7 +12,10 @@ Double quote string - simple value
   (command
     name: (double_quote_string))
   (command
-    name: (double_quote_string)))
+    name: (double_quote_string))
+  (command
+    name: (word)
+    argument: (double_quote_string)))
 
 ================================================================================
 Double quote string - multi words
@@ -70,6 +74,7 @@ Double quote string - variable expansion
 
 "$PATH"
 "$$DOUBLE_EXPANSION"
+"$$(echo varname)"
 
 --------------------------------------------------------------------------------
 
@@ -81,7 +86,15 @@ Double quote string - variable expansion
   (command
     name: (double_quote_string
       (variable_expansion
-        (variable_name)))))
+        (variable_expansion
+          (variable_name)))))
+  (command
+    name: (double_quote_string
+      (variable_expansion
+        (command_substitution_dollar
+          (command
+            name: (word)
+            argument: (word)))))))
 
 ================================================================================
 Double quote string - escaped variable expansion

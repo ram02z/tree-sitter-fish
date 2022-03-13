@@ -66,8 +66,9 @@ Command Substitudion - $ support since 3.4.0 fish version
 ================================================================================
 
 echo $(print)
+echo $$(varname)
 echo "$(print)"
-echo "(print)"
+echo "$$(varname)"
 
 --------------------------------------------------------------------------------
 
@@ -75,14 +76,25 @@ echo "(print)"
   (command
     name: (word)
     argument: (command_substitution
-      (command
-        name: (word))))
-  (command
-    name: (word)
-    argument: (double_quote_string
-      (command_substitution
+      (command_substitution_dollar
         (command
           name: (word)))))
   (command
     name: (word)
-    argument: (double_quote_string)))
+    argument: (variable_expansion
+      (command_substitution_dollar
+        (command
+          name: (word)))))
+  (command
+    name: (word)
+    argument: (double_quote_string
+      (command_substitution_dollar
+        (command
+          name: (word)))))
+  (command
+    name: (word)
+    argument: (double_quote_string
+      (variable_expansion
+        (command_substitution_dollar
+          (command
+            name: (word)))))))

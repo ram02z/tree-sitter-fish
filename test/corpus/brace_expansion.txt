@@ -127,7 +127,8 @@ Brace Expansion - with variable_expansion
   (command
     name: (brace_expansion
       (variable_expansion
-        (variable_name))
+        (variable_expansion
+          (variable_name)))
       (variable_expansion
         (variable_name))))
   (command

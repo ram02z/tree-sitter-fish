@@ -32,7 +32,6 @@ bool tree_sitter_fish_external_scanner_scan(
             lexer->lookahead == '>' ||
             lexer->lookahead == '<' ||
             lexer->lookahead == ')' ||
-            lexer->lookahead == '(' ||
             lexer->lookahead == ';' ||
             lexer->lookahead == '&' ||
             lexer->lookahead == '|' ||

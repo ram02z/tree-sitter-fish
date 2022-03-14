@@ -109,9 +109,10 @@ end
           name: (word))
         (return
           (command_substitution
-            (command
-              name: (word)
-              argument: (integer)))))
+            (command_substitution_fish
+              (command
+                name: (word)
+                argument: (integer))))))
       (else_clause
         (return
           (integer))))))

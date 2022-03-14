@@ -127,7 +127,8 @@ Brace Expansion - with variable_expansion
   (command
     name: (brace_expansion
       (variable_expansion
-        (variable_name))
+        (variable_expansion
+          (variable_name)))
       (variable_expansion
         (variable_name))))
   (command
@@ -301,8 +302,9 @@ echo {min,(echo {max,})}ed
       (brace_expansion
         (word)
         (command_substitution
-          (command
-            name: (word)
-            argument: (brace_expansion
-              (word)))))
+          (command_substitution_fish
+            (command
+              name: (word)
+              argument: (brace_expansion
+                (word))))))
       (word))))

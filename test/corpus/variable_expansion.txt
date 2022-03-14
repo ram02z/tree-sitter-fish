@@ -22,7 +22,8 @@ $$CMD_REF
 (program
   (command
     name: (variable_expansion
-      (variable_name))))
+      (variable_expansion
+        (variable_name)))))
 
 ================================================================================
 Variable Expansion - with escape sequence

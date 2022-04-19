@@ -4,12 +4,13 @@
   "description": "Fish tree-sitter grammar",
   "main": "bindings/node",
   "scripts": {
-    "build": "tree-sitter generate",
+    "build": "tsc -p tsconfig.json && tree-sitter generate",
     "build:wasm": "npm run build && tree-sitter build-wasm",
     "start": "npm run build:wasm && tree-sitter web-ui",
     "test": "tree-sitter test",
     "test:watch": "nodemon --ext js,txt,fish,scm --watch grammar.js --watch test --watch queries --exec 'npm run build && npm run test'",
-    "test:examples": "bash ./scripts/test_shared.sh"
+    "test:examples": "bash ./scripts/test_shared.sh",
+    "test:dev": "nodemon --ext fish --watch test.fish --watch grammar.js --exec 'tree-sitter generate && tree-sitter parse ./test.fish -d'"
   },
   "keywords": [
     "tree-sitter",
@@ -22,8 +23,10 @@
     "nan": "^2.14.2"
   },
   "devDependencies": {
+    "@types/node": "^17.0.25",
     "nodemon": "^2.0.7",
-    "tree-sitter-cli": "^0.20.0"
+    "tree-sitter-cli": "^0.20.6",
+    "typescript": "^4.6.3"
   },
   "repository": {
     "type": "git",

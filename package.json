@@ -10,7 +10,7 @@
     "test": "tree-sitter test",
     "test:watch": "nodemon --ext js,txt,fish,scm --watch grammar.js --watch test --watch queries --exec 'npm run build && npm run test'",
     "test:examples": "bash ./scripts/test_shared.sh",
-    "test:dev": "nodemon --ext fish --watch test.fish --watch grammar.js --exec 'tree-sitter generate && tree-sitter parse ./test.fish -d'"
+    "test:dev": "nodemon --ext fish --watch test.fish --watch grammar.ts --exec 'npm run build && tree-sitter parse ./test.fish -d'"
   },
   "keywords": [
     "tree-sitter",

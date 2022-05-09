@@ -59,4 +59,3 @@ systemctl 2>/dev/null $argv
         (word))
       (variable_expansion
         (variable_name)))))
-

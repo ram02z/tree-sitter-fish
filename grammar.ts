@@ -250,8 +250,13 @@ module.exports = grammar({
 
         _test_expression: $ => choice(
             $._expression,
+            $.test_option,
+        ),
+
+        test_option: () => choice(
             '=',
             '!=',
+            /-[a-zA-Z]+/,
         ),
 
         comment: () => token(prec(-11, /#.*/)),

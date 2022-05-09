@@ -1959,14 +1959,6 @@
         "required": false,
         "types": [
           {
-            "type": "!=",
-            "named": false
-          },
-          {
-            "type": "=",
-            "named": false
-          },
-          {
             "type": "brace_expansion",
             "named": true
           },
@@ -2007,6 +1999,10 @@
             "named": true
           },
           {
+            "type": "test_option",
+            "named": true
+          },
+          {
             "type": "variable_expansion",
             "named": true
           },
@@ -2017,6 +2013,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "test_option",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "variable_expansion",

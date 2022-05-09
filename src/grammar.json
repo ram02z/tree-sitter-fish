@@ -918,12 +918,25 @@
           "name": "_expression"
         },
         {
+          "type": "SYMBOL",
+          "name": "test_option"
+        }
+      ]
+    },
+    "test_option": {
+      "type": "CHOICE",
+      "members": [
+        {
           "type": "STRING",
           "value": "="
         },
         {
           "type": "STRING",
           "value": "!="
+        },
+        {
+          "type": "PATTERN",
+          "value": "-[a-zA-Z]+"
         }
       ]
     },

@@ -237,47 +237,22 @@ module.exports = grammar({
         test_command: $ => choice(
             seq(
                 alias(/\[\s/, '['),
-                choice(']', seq(
-                    $._test_expression,
-                    alias(/\s\]/, ']'),
-                )),
+                choice(
+                    ']',
+                    repeat1(field('argument', $._test_expression)),
+                ),
             ),
             seq(
                 'test',
-                optional($._test_expression),
+                repeat(field('argument', $._test_expression)),
             ),
         ),
 
         _test_expression: $ => choice(
             $._expression,
-            $.unary_expression,
-            $.binary_expression,
-            $.conditional_expression,
-            $._parenthesized_test_expression,
-            $.negated_expression,
+            '=',
+            '!=',
         ),
-
-        _parenthesized_test_expression: $ => seq('\\(', $._test_expression, '\\)'),
-        negated_expression: $ => prec.right(seq('!', $._test_expression)),
-
-        conditional_expression: $ => prec.right(seq(
-            $._test_expression,
-            alias(choice('-a', '-o'), $.test_option),
-            $._test_expression,
-        )),
-
-        unary_expression: $ => seq(
-            $.test_option,
-            $._expression,
-        ),
-
-        binary_expression: $ => seq(
-            $._expression,
-            choice('=', '!=', $.test_option),
-            $._expression,
-        ),
-
-        test_option: () => /-[a-zA-Z]+/,
 
         comment: () => token(prec(-11, /#.*/)),
 

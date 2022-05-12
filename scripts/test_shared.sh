@@ -1,24 +1,16 @@
 #!/bin/bash
 
-code=0
+parse_errors=''
 
-for file in ./examples/fish/share/**/*.fish
+for file in ./examples/fish/share/functions/*.fish
 do
-    errors=$(./node_modules/.bin/tree-sitter parse $file | grep -E "^\s*\(ERROR")
+    ./node_modules/.bin/tree-sitter parse $file > /dev/null
 
-    if test "$errors" != ""; then
-        snap_file=$(echo $file | sed -r -e "s/[\.\/_]+/_/g")
-        snapshot="$(cat ./scripts/shared_out/$snap_file)"
-
-        if test "$errors" != "$snapshot"; then
-            echo "Ouput does not match the snapshot for $snap_file"
-            printf "output:\n$errors"
-            printf "\n\n----------\n\n"
-            printf "snapshot:\n$snapshot\n"
-            code=1
-        fi
+    if test "$?" != "0"; then
+        parse_errors+=$file
+        parse_errors+='\n'
     fi
 done
 
-exit $code
-
+echo "Parsing failed for following files:"
+printf $parse_errors

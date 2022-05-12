@@ -39,8 +39,7 @@ set (
             (MISSING ")"))))
       (command
         (word)
-        (word)))
-    (UNEXPECTED '\0')))
+        (word)))))
 
 ================================================================================
 Argument after destination breaks file_redirect
@@ -60,23 +59,3 @@ systemctl 2>/dev/null $argv
         (word))
       (variable_expansion
         (variable_name)))))
-
-================================================================================
-Test command with command argument
-================================================================================
-
-if [ count $argv -gt 2 ]
-end
-
---------------------------------------------------------------------------------
-
-(program
-  (if_statement
-    (test_command
-      (ERROR
-        (word))
-      (binary_expression
-        (variable_expansion
-          (variable_name))
-        (test_option)
-        (integer)))))

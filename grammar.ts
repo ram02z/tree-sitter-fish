@@ -40,6 +40,7 @@ module.exports = grammar({
 
     externals: $ => [
         $._concat,
+        $._concat_oct,
         $._brace_concat,
         $._concat_list,
     ],
@@ -351,10 +352,15 @@ module.exports = grammar({
 
         concatenation: $ => seq(
             choice($._base_expression, $._special_character),
-            repeat1(seq(
-                $._concat,
-                choice($._base_expression, $._special_character)
-            )),
+            repeat1(
+                choice(
+                    $._concat_oct,
+                    seq(
+                        $._concat,
+                        choice($._base_expression, $._special_character),
+                    ),
+                ),
+            ),
         ),
 
         _expression: $ => choice(

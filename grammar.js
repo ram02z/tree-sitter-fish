@@ -33,6 +33,7 @@ module.exports = grammar({
     name: 'fish',
     externals: $ => [
         $._concat,
+        $._concat_oct,
         $._brace_concat,
         $._concat_list,
     ],
@@ -92,7 +93,7 @@ module.exports = grammar({
         escape_sequence: () => token(seq('\\', choice(/[^xXuUc]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/))),
         command: $ => seq(field('name', $._expression), repeat(field('argument', $._expression))),
         _special_character: () => token(choice('[', ']')),
-        concatenation: $ => seq(choice($._base_expression, $._special_character), repeat1(seq($._concat, choice($._base_expression, $._special_character)))),
+        concatenation: $ => seq(choice($._base_expression, $._special_character), repeat1(choice($._concat_oct, seq($._concat, choice($._base_expression, $._special_character))))),
         _expression: $ => choice($._base_expression, $.concatenation, alias($._special_character, $.word)),
         _base_expression: $ => choice($.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, $.word, $.integer, $.float, $.brace_expansion, $.escape_sequence, $.glob, $.home_dir_expansion),
         brace_concatenation: $ => seq(choice($._base_brace_expression, $.brace_expansion), repeat1(seq($._brace_concat, choice($._base_brace_expression, $.brace_expansion)))),

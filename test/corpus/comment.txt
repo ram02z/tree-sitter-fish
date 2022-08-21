@@ -39,6 +39,8 @@ Comment - multi line with escape sequence
 Comment - ending command
 ================================================================================
 
+echo #
+echo ##
 true # a comment
 # in between
 ;; true # a comment
@@ -46,6 +48,12 @@ true # a comment
 --------------------------------------------------------------------------------
 
 (program
+  (command
+    name: (word))
+  (comment)
+  (command
+    name: (word))
+  (comment)
   (command
     name: (word))
   (comment)

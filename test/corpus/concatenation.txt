@@ -208,6 +208,37 @@ $PATH\ ological
       (word))))
 
 ================================================================================
+Concatenation - variable_expansion and command_substitution
+================================================================================
+
+echo $variable(echo word)
+echo $variable$(echo word)
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (concatenation
+      (variable_expansion
+        (variable_name))
+      (command_substitution
+        (command_substitution_fish
+          (command
+            (word)
+            (word))))))
+  (command
+    (word)
+    (concatenation
+      (variable_expansion
+        (variable_name))
+      (command_substitution
+        (command_substitution_dollar
+          (command
+            (word)
+            (word)))))))
+
+================================================================================
 Concatenation - # in argument or command position
 ================================================================================
 
@@ -240,32 +271,117 @@ command#with#hash
       (word))))
 
 ================================================================================
-Concatenation - variable_expansion and command_substitution
+Concatenation - # as the last character of concat
 ================================================================================
 
-echo $variable(echo word)
-echo $variable$(echo word)
+word#
+word##
+word# word
+word#>dest
+word#<dest
+word#&<dest
+word#&>dest
+word#<&0
+word#>&-
+word#>>&1
+word#|echo
+word#;
+word#&
+word#$(1)
+word#(1)
+word#$var
+word#{1,2}
 
 --------------------------------------------------------------------------------
 
 (program
   (command
-    (word)
     (concatenation
-      (variable_expansion
-        (variable_name))
-      (command_substitution
-        (command_substitution_fish
-          (command
-            (word)
-            (word))))))
+      (word)))
   (command
-    (word)
     (concatenation
-      (variable_expansion
-        (variable_name))
+      (word)))
+  (command
+    (concatenation
+      (word))
+    (word))
+  (redirected_statement
+    (command
+      (concatenation
+        (word)))
+    (file_redirect
+      (direction)
+      (word)))
+  (redirected_statement
+    (command
+      (concatenation
+        (word)))
+    (file_redirect
+      (direction)
+      (word)))
+  (redirected_statement
+    (command
+      (concatenation
+        (word)))
+    (file_redirect
+      (direction)
+      (word)))
+  (redirected_statement
+    (command
+      (concatenation
+        (word)))
+    (file_redirect
+      (direction)
+      (word)))
+  (redirected_statement
+    (command
+      (concatenation
+        (word)))
+    (stream_redirect))
+  (redirected_statement
+    (command
+      (concatenation
+        (word)))
+    (stream_redirect))
+  (redirected_statement
+    (command
+      (concatenation
+        (word)))
+    (stream_redirect))
+  (pipe
+    (command
+      (concatenation
+        (word)))
+    (command
+      (word)))
+  (command
+    (concatenation
+      (word)))
+  (command
+    (concatenation
+      (word)))
+  (command
+    (concatenation
+      (word)
       (command_substitution
         (command_substitution_dollar
           (command
-            (word)
-            (word)))))))
+            (integer))))))
+  (command
+    (concatenation
+      (word)
+      (command_substitution
+        (command_substitution_fish
+          (command
+            (integer))))))
+  (command
+    (concatenation
+      (word)
+      (variable_expansion
+        (variable_name))))
+  (command
+    (concatenation
+      (word)
+      (brace_expansion
+        (integer)
+        (integer)))))

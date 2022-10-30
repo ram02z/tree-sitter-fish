@@ -14,7 +14,7 @@ echo "only (a string)"
   (command
     name: (double_quote_string))
   (command
-    name: (word)
+    name: (builtin)
     argument: (double_quote_string)))
 
 ================================================================================
@@ -93,7 +93,7 @@ Double quote string - variable expansion
       (variable_expansion
         (command_substitution_dollar
           (command
-            name: (word)
+            name: (builtin)
             argument: (word)))))))
 
 ================================================================================

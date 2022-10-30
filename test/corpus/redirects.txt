@@ -15,80 +15,80 @@ echo ''    >&0
 echo ''    >>&1
 echo ''    >&-
 echo ''    1>>&-
-# This was a failing test case until 72782892baf48b84133007bb0fddfda55be61b45
+# This was a failing test case until commit 72782892baf48b84133007bb0fddfda55be61b45
 systemctl 2>/dev/null $argv
 
 --------------------------------------------------------------------------------
 
 (program
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (stream_redirect))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (stream_redirect))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (stream_redirect))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (stream_redirect))
   (comment)
@@ -113,29 +113,29 @@ echo ''     2< 	    test
 
 (program
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word)))
+      destination: (builtin)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (single_quote_string)
     redirect: (file_redirect
       operator: (direction)
-      destination: (word))))
+      destination: (builtin))))
 
 ================================================================================
 Redirected block/statement
@@ -157,7 +157,7 @@ function example; end 2> file.o
   (redirect_statement
     (begin_statement
       (command
-        name: (word)
+        name: (builtin)
         argument: (integer)))
     (file_redirect
       operator: (direction)

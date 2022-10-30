@@ -44,7 +44,7 @@ end;
     (command
       name: (integer))
     (command
-      name: (word)
+      name: (builtin)
       argument: (variable_expansion
         (variable_name)))))
 

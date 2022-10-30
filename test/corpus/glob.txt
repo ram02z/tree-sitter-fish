@@ -13,7 +13,7 @@ echo ./**/*.txt
 
 (program
   (command
-    (word)
+    (builtin)
     (glob))
   (command
     (word)
@@ -26,7 +26,7 @@ echo ./**/*.txt
       (glob)
       (word)))
   (command
-    (word)
+    (builtin)
     (concatenation
       (glob)
       (word)))
@@ -37,7 +37,7 @@ echo ./**/*.txt
       (glob)
       (word)))
   (command
-    (word)
+    (builtin)
     (concatenation
       (word)
       (glob)

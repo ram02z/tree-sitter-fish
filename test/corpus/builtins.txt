@@ -1,0 +1,140 @@
+================================================================================
+Builtins - some commands from "builtin -n" output
+================================================================================
+
+.
+:
+_
+argparse
+bg
+bind
+block
+breakpoint
+builtin
+cd
+command
+commandline
+complete
+contains
+count
+disown
+echo
+emit
+eval
+exec
+exit
+false
+fg
+functions
+history
+jobs
+math
+path
+printf
+pwd
+random
+read
+realpath
+set
+set_color
+source
+status
+string
+test
+time
+true
+type
+ulimit
+wait
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin))
+  (command
+    name: (builtin)))

@@ -54,9 +54,9 @@ test one
     argument: (integer)
     argument: (escape_sequence))
   (command
-    name: (word))
+    name: (builtin))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)))
 
 ================================================================================
@@ -100,17 +100,17 @@ test \( $status -o \( 'te' != 'st' -a $status != '0' \)\)
       (escape_sequence)
       (escape_sequence)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (integer)
     argument: (word)
     argument: (integer))
   (command
-    name: (word)
+    name: (builtin)
     argument: (float)
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (escape_sequence)
     argument: (variable_expansion
       (variable_name))
@@ -155,12 +155,12 @@ test \( !$status \) -o $status
     argument: (variable_expansion
       (variable_name)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (variable_expansion
       (variable_name)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (escape_sequence)
     argument: (concatenation
       (word)
@@ -224,13 +224,13 @@ test \( !$status -eq 0 \) -a $status -ne 127
     argument: (word)
     argument: (integer))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (float)
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (escape_sequence)
     argument: (word)
     argument: (float)
@@ -242,13 +242,13 @@ test \( !$status -eq 0 \) -a $status -ne 127
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (variable_expansion
       (variable_name))
     argument: (word)
     argument: (integer))
   (command
-    name: (word)
+    name: (builtin)
     argument: (escape_sequence)
     argument: (concatenation
       (word)
@@ -363,80 +363,80 @@ test -x ./test.fish
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word))
   (command
-    name: (word)
+    name: (builtin)
     argument: (word)
     argument: (word)))
 
 ================================================================================
-Test Command - operators for text strings
+Test Command - operators for strings
 ================================================================================
 
 [ "test" = 'test' ]
@@ -457,7 +457,7 @@ test -z ''
     argument: (word)
     argument: (single_quote_string))
   (test_command
-    argument: (word)
+    argument: (builtin)
     argument: (word)
     argument: (single_quote_string))
   (test_command
@@ -467,21 +467,21 @@ test -z ''
     argument: (word)
     argument: (single_quote_string))
   (command
-    name: (word)
+    name: (builtin)
     argument: (double_quote_string)
     argument: (word)
     argument: (single_quote_string))
   (command
-    name: (word)
-    argument: (word)
-    argument: (word)
-    argument: (single_quote_string))
-  (command
-    name: (word)
+    name: (builtin)
+    argument: (builtin)
     argument: (word)
     argument: (single_quote_string))
   (command
-    name: (word)
+    name: (builtin)
+    argument: (word)
+    argument: (single_quote_string))
+  (command
+    name: (builtin)
     argument: (word)
     argument: (single_quote_string)))
 
@@ -531,32 +531,32 @@ test 0 -le 0.0
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (integer)
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (integer)
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (integer)
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (integer)
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (integer)
     argument: (word)
     argument: (float))
   (command
-    name: (word)
+    name: (builtin)
     argument: (integer)
     argument: (word)
     argument: (float)))

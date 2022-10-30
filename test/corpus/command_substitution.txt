@@ -11,14 +11,14 @@ echo ()
 
 (program
   (command
-    name: (word)
+    name: (builtin)
     argument: (command_substitution
       (command_substitution_fish
         (command
-          name: (word)
+          name: (builtin)
           argument: (word)))))
   (command
-    name: (word)
+    name: (builtin)
     argument: (command_substitution
       (command_substitution_fish
         (begin_statement
@@ -26,11 +26,11 @@ echo ()
             name: (word)
             argument: (integer))))))
   (command
-    name: (word)
+    name: (builtin)
     argument: (command_substitution
       (command_substitution_fish)))
   (command
-    name: (word)
+    name: (builtin)
     argument: (command_substitution
       (command_substitution_fish))))
 
@@ -50,21 +50,21 @@ echo (
 
 (program
   (command
-    name: (word)
+    name: (builtin)
     argument: (command_substitution
       (command_substitution_fish
         (command
-          name: (word)
+          name: (builtin)
           argument: (word)))))
   (command
-    name: (word)
+    name: (builtin)
     argument: (command_substitution
       (command_substitution_fish
         (command
-          name: (word)
+          name: (builtin)
           argument: (word))
         (command
-          name: (word)
+          name: (builtin)
           argument: (single_quote_string))))))
 
 ================================================================================
@@ -80,25 +80,25 @@ echo "$$(varname)"
 
 (program
   (command
-    name: (word)
+    name: (builtin)
     argument: (command_substitution
       (command_substitution_dollar
         (command
           name: (word)))))
   (command
-    name: (word)
+    name: (builtin)
     argument: (variable_expansion
       (command_substitution_dollar
         (command
           name: (word)))))
   (command
-    name: (word)
+    name: (builtin)
     argument: (double_quote_string
       (command_substitution_dollar
         (command
           name: (word)))))
   (command
-    name: (word)
+    name: (builtin)
     argument: (double_quote_string
       (variable_expansion
         (command_substitution_dollar

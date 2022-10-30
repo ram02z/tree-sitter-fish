@@ -218,24 +218,24 @@ echo $variable$(echo word)
 
 (program
   (command
-    (word)
+    (builtin)
     (concatenation
       (variable_expansion
         (variable_name))
       (command_substitution
         (command_substitution_fish
           (command
-            (word)
+            (builtin)
             (word))))))
   (command
-    (word)
+    (builtin)
     (concatenation
       (variable_expansion
         (variable_name))
       (command_substitution
         (command_substitution_dollar
           (command
-            (word)
+            (builtin)
             (word)))))))
 
 ================================================================================
@@ -245,30 +245,35 @@ Concatenation - # in argument or command position
 echo not#a#comment
 echo (echo 1)#notacomment
 command#with#hash
+echo#test
 
 --------------------------------------------------------------------------------
 
 (program
   (command
-    (word)
-    (concatenation
+    name: (builtin)
+    argument: (concatenation
       (word)
       (word)
       (word)))
   (command
-    (word)
-    (concatenation
+    name: (builtin)
+    argument: (concatenation
       (command_substitution
         (command_substitution_fish
           (command
-            (word)
-            (integer))))
+            name: (builtin)
+            argument: (integer))))
       (word)))
   (command
-    (concatenation
+    name: (concatenation
+      (builtin)
       (word)
-      (word)
-      (word))))
+      (word)))
+  (command
+    name: (concatenation
+      (builtin)
+      (builtin))))
 
 ================================================================================
 Concatenation - # as the last character of concat
@@ -346,7 +351,7 @@ word#{1,2}
       name: (concatenation
         (word)))
     (command
-      name: (word)))
+      name: (builtin)))
   (command
     name: (concatenation
       (word)))

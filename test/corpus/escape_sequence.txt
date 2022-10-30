@@ -13,7 +13,7 @@ echo \c \cy \ci \cI
 
 (program
   (command
-    name: (word)
+    name: (builtin)
     argument: (escape_sequence)
     argument: (escape_sequence)
     argument: (escape_sequence)
@@ -22,30 +22,12 @@ echo \c \cy \ci \cI
     argument: (escape_sequence)
     argument: (escape_sequence))
   (command
-    name: (word)
+    name: (builtin)
     argument: (escape_sequence)
     argument: (escape_sequence)
     argument: (escape_sequence))
   (command
-    name: (word)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence))
-  (command
-    name: (word)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence))
-  (command
-    name: (word)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
-    argument: (escape_sequence)
+    name: (builtin)
     argument: (escape_sequence)
     argument: (escape_sequence)
     argument: (escape_sequence)
@@ -53,7 +35,25 @@ echo \c \cy \ci \cI
     argument: (escape_sequence)
     argument: (escape_sequence))
   (command
-    name: (word)
+    name: (builtin)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence))
+  (command
+    name: (builtin)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence)
+    argument: (escape_sequence))
+  (command
+    name: (builtin)
     argument: (escape_sequence)
     argument: (escape_sequence)
     argument: (escape_sequence)

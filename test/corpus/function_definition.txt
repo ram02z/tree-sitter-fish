@@ -109,10 +109,9 @@ end
           name: (builtin))
         (return
           (command_substitution
-            (command_substitution_fish
-              (command
-                name: (builtin)
-                argument: (integer))))))
+            (command
+              name: (builtin)
+              argument: (integer)))))
       (else_clause
         (return
           (integer))))))

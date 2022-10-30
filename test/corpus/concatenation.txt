@@ -223,20 +223,18 @@ echo $variable$(echo word)
       (variable_expansion
         (variable_name))
       (command_substitution
-        (command_substitution_fish
-          (command
-            (builtin)
-            (word))))))
+        (command
+          (builtin)
+          (word)))))
   (command
     (builtin)
     (concatenation
       (variable_expansion
         (variable_name))
       (command_substitution
-        (command_substitution_dollar
-          (command
-            (builtin)
-            (word)))))))
+        (command
+          (builtin)
+          (word))))))
 
 ================================================================================
 Concatenation - # in argument or command position
@@ -260,10 +258,9 @@ echo#test
     name: (builtin)
     argument: (concatenation
       (command_substitution
-        (command_substitution_fish
-          (command
-            name: (builtin)
-            argument: (integer))))
+        (command
+          name: (builtin)
+          argument: (integer)))
       (word)))
   (command
     name: (concatenation
@@ -362,16 +359,14 @@ word#{1,2}
     name: (concatenation
       (word)
       (command_substitution
-        (command_substitution_dollar
-          (command
-            name: (integer))))))
+        (command
+          name: (integer)))))
   (command
     name: (concatenation
       (word)
       (command_substitution
-        (command_substitution_fish
-          (command
-            name: (integer))))))
+        (command
+          name: (integer)))))
   (command
     name: (concatenation
       (word)

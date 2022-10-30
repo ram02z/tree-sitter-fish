@@ -16,7 +16,6 @@ set (
   (command
     (builtin)
     (command_substitution
-      (command_substitution_fish
         (pipe
           (command
             (builtin)
@@ -24,11 +23,10 @@ set (
             (escape_sequence))
           (command
             (builtin)
-            (word))))))
+            (word)))))
   (command
     (builtin)
     (command_substitution
-      (command_substitution_fish
         (command
           (builtin)
           (integer)
@@ -37,4 +35,4 @@ set (
         (ERROR)
         (command
           (builtin)
-          (word))))))
+          (word)))))

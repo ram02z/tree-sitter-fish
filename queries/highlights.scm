@@ -37,8 +37,8 @@
 
 "," @punctuation.delimiter
 
-(function_definition name: [(word) (concatenation)] @function)
-(command name: [(word) (builtin)] @function)
+(function_definition name: (_) @function)
+(command name: (_) @function)
 
 [
  "switch"

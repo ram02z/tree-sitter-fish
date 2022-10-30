@@ -56,10 +56,8 @@ module.exports = grammar({
         _terminated_statement: $ => seq($._statement, $._terminator),
         _terminated_opt_statement: $ => seq(optional($._statement), $._terminator),
         negated_statement: $ => prec.left(-1, seq(choice('!', 'not'), $._statement)),
-        /* Added in 3.4.0. Syntax `$(cmd)` */
-        command_substitution_dollar: $ => seq('$', '(', repeat(seq(optional($._statement), $._terminator)), optional($._statement), ')'),
-        command_substitution_fish: $ => seq('(', repeat(seq(optional($._statement), $._terminator)), optional($._statement), ')'),
-        command_substitution: $ => choice($.command_substitution_dollar, $.command_substitution_fish),
+        /* Syntax `$(cmd)` added in 3.4.0. */
+        command_substitution: $ => seq(optional('$'), '(', repeat(seq(optional($._statement), $._terminator)), optional($._statement), ')'),
         function_definition: $ => seq('function', field('name', $._expression), repeat(field('option', $._expression)), $._terminator, repeat($._terminated_statement), 'end'),
         integer: () => /(-|\+)?\d+/,
         float: () => /(-|\+)?\d+\.\d+/,
@@ -74,30 +72,40 @@ module.exports = grammar({
         else_if_clause: $ => seq(seq('else', 'if'), field('condition', $._terminated_statement), optional(repeat1($._terminated_opt_statement))),
         else_clause: $ => seq('else', $._terminator, optional(repeat1($._terminated_opt_statement))),
         begin_statement: $ => seq('begin', optional(repeat1($._terminated_opt_statement)), 'end'),
-        test_command: $ => choice(seq(alias(/\[\s/, '['), choice(']', seq(repeat1(field('argument', $._test_expression)), alias(/\s]/, ']')))), seq('test', repeat(field('argument', $._test_expression)))),
-        _test_expression: $ => choice($._expression, $.test_option),
-        test_option: () => choice('=', '!=', /-[a-zA-Z]+/),
+        test_command: $ => seq(alias(/\[\s/, '['), 
+        /*
+         * We are expecting a whitespace after each expression.
+         * [ test ] - valid
+         * [ test] - invalid: missing ], ] treated as concat
+         */
+        repeat(field('argument', seq($._expression, /\s/))), ']'),
         comment: () => token(prec(-11, /#.*/)),
         variable_name: () => /[a-zA-Z0-9_]+/,
-        variable_expansion: $ => prec.left(seq('$', choice($.variable_name, $.command_substitution_dollar, $.variable_expansion), repeat(seq($._concat_list, $.list_element_access)))),
+        variable_expansion: $ => prec.left(seq('$', choice($.variable_name, $.variable_expansion), repeat(seq($._concat_list, $.list_element_access)))),
         index: $ => choice($.integer, $.single_quote_string, $.variable_expansion, $.double_quote_string, $.command_substitution),
         range: $ => prec.right(2, seq(optional($.index), '..', optional($.index))),
         list_element_access: $ => seq('[', repeat(choice($.index, $.range)), ']'),
         brace_expansion: $ => prec.right(seq('{', choice($.variable_expansion, seq(optional(','), optional($._brace_expression), repeat1(prec.right(seq(',', optional($._brace_expression)))))), '}')),
-        double_quote_string: $ => seq('"', repeat(choice(token.immediate(/[^\$\\"]+/), $.variable_expansion, $.escape_sequence, $.command_substitution_dollar)), '"'),
+        double_quote_string: $ => seq('"', repeat(choice(token.immediate(/[^\$\\"]+/), $.variable_expansion, $.escape_sequence, 
+        /*
+         * Only new "$()" syntax is expanded inside double quoted strings.
+         * However, "()" matches the regex above - so we're good.
+         */
+        $.command_substitution)), '"'),
         single_quote_string: $ => seq('\'', repeat(choice(token.immediate(/[^'\\]+/), $.escape_sequence)), '\''),
         escape_sequence: () => token(seq('\\', choice(/[^xXuUc]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/))),
         command: $ => prec.right(seq(field('name', $._expression), repeat(choice(field('redirect', choice($.file_redirect, $.stream_redirect)), field('argument', $._expression))))),
+        builtin: () => choice('.', ':', '_', 'argparse', 'bg', 'bind', 'block', 'breakpoint', 'builtin', 'cd', 'command', 'commandline', 'complete', 'contains', 'count', 'disown', 'echo', 'emit', 'eval', 'exec', 'exit', 'false', 'fg', 'functions', 'history', 'jobs', 'math', 'path', 'printf', 'pwd', 'random', 'read', 'realpath', 'set', 'set_color', 'source', 'status', 'string', 'test', 'time', 'true', 'type', 'ulimit', 'wait'),
         stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
         direction: () => token(/(\d*|&)(>>?\??|<)/),
         file_redirect: $ => seq(field('operator', $.direction), field('destination', $._expression)),
-        _special_character: () => token(choice('[', ']')),
+        _special_character: () => choice('[', ']'),
         concatenation: $ => seq(choice($._base_expression, $._special_character), repeat1(choice($._concat_oct, seq($._concat, choice($._base_expression, $._special_character))))),
         _expression: $ => choice($._base_expression, $.concatenation, alias($._special_character, $.word)),
-        _base_expression: $ => choice($.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, $.word, $.integer, $.float, $.brace_expansion, $.escape_sequence, $.glob, $.home_dir_expansion),
+        _base_expression: $ => choice($.builtin, $.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, $.word, $.integer, $.float, $.brace_expansion, $.escape_sequence, $.glob, $.home_dir_expansion),
         brace_concatenation: $ => seq(choice($._base_brace_expression, $.brace_expansion), repeat1(seq($._brace_concat, choice($._base_brace_expression, $.brace_expansion)))),
         _brace_expression: $ => choice(alias($.brace_concatenation, $.concatenation), $._base_brace_expression, $.brace_expansion),
-        _base_brace_expression: $ => choice($.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, alias($.brace_word, $.word), $.integer, $.float, $.escape_sequence, $.glob),
+        _base_brace_expression: $ => choice($.builtin, $.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, alias($.brace_word, $.word), $.integer, $.float, $.escape_sequence, $.glob),
         home_dir_expansion: () => '~',
         glob: () => token(repeat1('*')),
         word: () => noneOf(SPECIAL_CHARACTERS),

@@ -308,8 +308,8 @@ echo { 1, 2{.1,.2}}
     name: (builtin)
     argument: (brace_expansion
       (integer)
-      (ERROR
-        (integer))
-      (brace_expansion
-        (word)
-        (word)))))
+      (concatenation
+        (integer)
+        (brace_expansion
+          (word)
+          (word))))))

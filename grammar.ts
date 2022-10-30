@@ -240,7 +240,10 @@ module.exports = grammar({
                 alias(/\[\s/, '['),
                 choice(
                     ']',
-                    repeat1(field('argument', $._test_expression)),
+                    seq(
+                        repeat1(field('argument', $._test_expression)),
+                        alias(/\s]/, ']'),
+                    ),
                 ),
             ),
             seq(

@@ -39,7 +39,8 @@ set (
             (MISSING ")"))))
       (command
         (word)
-        (word)))))
+        (word)))
+        (UNEXPECTED '\0')))
 
 ================================================================================
 Argument after destination breaks file_redirect

@@ -226,32 +226,15 @@ module.exports = grammar({
             'end',
         ),
 
-        test_command: $ => choice(
-            seq(
-                alias(/\[\s/, '['),
-                choice(
-                    ']',
-                    seq(
-                        repeat1(field('argument', $._test_expression)),
-                        alias(/\s]/, ']'),
-                    ),
-                ),
-            ),
-            seq(
-                'test',
-                repeat(field('argument', $._test_expression)),
-            ),
-        ),
-
-        _test_expression: $ => choice(
-            $._expression,
-            $.test_option,
-        ),
-
-        test_option: () => choice(
-            '=',
-            '!=',
-            /-[a-zA-Z]+/,
+        test_command: $ => seq(
+            alias(/\[\s/, '['),
+            /*
+             * We are expecting a whitespace after each expression.
+             * [ test ] - valid
+             * [ test] - invalid: missing ], ] treated as concat
+             */
+            repeat(field('argument', seq($._expression, /\s/))),
+            ']',
         ),
 
         comment: () => token(prec(-11, /#.*/)),
@@ -353,7 +336,7 @@ module.exports = grammar({
             field('destination', $._expression),
         ),
 
-        _special_character: () => token(choice('[', ']')),
+        _special_character: () => choice('[', ']'),
 
         concatenation: $ => seq(
             choice($._base_expression, $._special_character),

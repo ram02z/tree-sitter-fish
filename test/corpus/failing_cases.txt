@@ -39,6 +39,4 @@ set (
             (MISSING ")"))))
       (command
         (word)
-        (word)))
-        (UNEXPECTED '\0')))
-
+        (word)))))

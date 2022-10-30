@@ -10,13 +10,19 @@
   "||"
   "|"
   "&"
-  "="
-  "!="
   ".."
   (direction)
   (stream_redirect)
-  (test_option)
 ] @operator
+
+; match operators of test command
+(command
+  name: (word) @function (#match? @function "^test$")
+  argument: (word) @operator (#match? @operator "^(!?=|-[a-zA-Z]+)$"))
+
+; match operators of [ command
+(test_command
+  argument: (word) @operator (#match? @operator "^(!?=|-[a-zA-Z]+)$"))
 
 (variable_expansion) @constant
 

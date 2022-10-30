@@ -296,91 +296,84 @@ word#{1,2}
 
 (program
   (command
-    (concatenation
+    name: (concatenation
       (word)))
   (command
-    (concatenation
+    name: (concatenation
       (word)))
   (command
-    (concatenation
+    name: (concatenation
       (word))
-    (word))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (stream_redirect))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (stream_redirect))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (stream_redirect))
+    argument: (word))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (stream_redirect))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (stream_redirect))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (stream_redirect))
   (pipe
     (command
-      (concatenation
+      name: (concatenation
         (word)))
     (command
+      name: (word)))
+  (command
+    name: (concatenation
       (word)))
   (command
-    (concatenation
+    name: (concatenation
       (word)))
   (command
-    (concatenation
-      (word)))
-  (command
-    (concatenation
+    name: (concatenation
       (word)
       (command_substitution
         (command_substitution_dollar
           (command
-            (integer))))))
+            name: (integer))))))
   (command
-    (concatenation
+    name: (concatenation
       (word)
       (command_substitution
         (command_substitution_fish
           (command
-            (integer))))))
+            name: (integer))))))
   (command
-    (concatenation
+    name: (concatenation
       (word)
       (variable_expansion
         (variable_name))))
   (command
-    (concatenation
+    name: (concatenation
       (word)
       (brace_expansion
         (integer)

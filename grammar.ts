@@ -67,25 +67,16 @@ module.exports = grammar({
             prec.right(-1, seq($._statement, choice('||', '&&'), $._statement)),
         ),
 
-        // Prec: higher than pipe
-        redirected_statement: $ => prec(1, seq(
-            $._statement,
-            choice($.file_redirect, $.stream_redirect),
-        )),
-
-        stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
-        direction: () => token(/(\d*|&)(>>?\??|<)/),
-
-        file_redirect: $ => seq(
-            field('operator', $.direction),
-            field('destination', $._expression),
-        ),
-
         pipe: $ => prec.left(seq(
             $._statement,
             '|',
             $._statement,
         )),
+
+        redirect_statement: $ => seq(
+            $._statement,
+            choice($.file_redirect, $.stream_redirect),
+        ),
 
         _terminator: () => choice(
             ';',
@@ -99,7 +90,7 @@ module.exports = grammar({
             $.conditional_execution,
             $.pipe,
             $.command,
-            $.redirected_statement,
+            $.redirect_statement,
             $.begin_statement,
             $.if_statement,
             $.while_statement,
@@ -346,9 +337,20 @@ module.exports = grammar({
             /c[a-zA-Z]?/,
         ))),
 
-        command: $ => seq(
+        command: $ => prec.right(seq(
             field('name', $._expression),
-            repeat(field('argument', $._expression)),
+            repeat(choice(
+                field('redirect', choice($.file_redirect, $.stream_redirect)),
+                field('argument', $._expression),
+            )),
+        )),
+
+        stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
+        direction: () => token(/(\d*|&)(>>?\??|<)/),
+
+        file_redirect: $ => seq(
+            field('operator', $.direction),
+            field('destination', $._expression),
         ),
 
         _special_character: () => token(choice('[', ']')),

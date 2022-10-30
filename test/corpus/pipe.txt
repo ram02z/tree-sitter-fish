@@ -27,18 +27,16 @@ echo 1 >&0 | echo
   (pipe
     (command
       name: (word))
-    (redirected_statement
-      (command
-        name: (word))
-      (file_redirect
+    (command
+      name: (word)
+      redirect: (file_redirect
         operator: (direction)
         destination: (word))))
   (pipe
-    (redirected_statement
-      (command
-        name: (word)
-        argument: (integer))
-      (stream_redirect))
+    (command
+      name: (word)
+      argument: (integer)
+      redirect: (stream_redirect))
     (command
       name: (word))))
 

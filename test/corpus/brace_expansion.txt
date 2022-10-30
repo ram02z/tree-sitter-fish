@@ -294,3 +294,22 @@ echo {min,(echo {max,})}ed
               argument: (brace_expansion
                 (word))))))
       (word))))
+
+================================================================================
+Brace Expansion - nested concatenation
+================================================================================
+
+echo { 1, 2{.1,.2}}
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (builtin)
+    argument: (brace_expansion
+      (integer)
+      (ERROR
+        (integer))
+      (brace_expansion
+        (word)
+        (word)))))

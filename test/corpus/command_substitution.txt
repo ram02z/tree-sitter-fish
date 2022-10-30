@@ -68,13 +68,11 @@ echo (
           argument: (single_quote_string))))))
 
 ================================================================================
-Command Substitudion - $ support since 3.4.0 fish version
+Command Substitution - $ support since 3.4.0 (3.5.0 removed "$$()")
 ================================================================================
 
 echo $(print)
-echo $$(varname)
 echo "$(print)"
-echo "$$(varname)"
 
 --------------------------------------------------------------------------------
 
@@ -87,20 +85,7 @@ echo "$$(varname)"
           name: (word)))))
   (command
     name: (builtin)
-    argument: (variable_expansion
-      (command_substitution_dollar
-        (command
-          name: (word)))))
-  (command
-    name: (builtin)
     argument: (double_quote_string
       (command_substitution_dollar
         (command
-          name: (word)))))
-  (command
-    name: (builtin)
-    argument: (double_quote_string
-      (variable_expansion
-        (command_substitution_dollar
-          (command
-            name: (word)))))))
+          name: (word))))))

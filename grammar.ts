@@ -245,7 +245,6 @@ module.exports = grammar({
             '$',
             choice(
                 $.variable_name,
-                $.command_substitution_dollar,
                 $.variable_expansion,
             ),
             repeat(seq(

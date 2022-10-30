@@ -149,9 +149,9 @@ module.exports = grammar({
         function_definition: $ => seq(
             'function',
             field('name', $._expression),
-            optional(repeat1(field('option', $._expression))),
+            repeat(field('option', $._expression)),
             $._terminator,
-            optional(repeat1($._terminated_statement)),
+            repeat($._terminated_statement),
             'end',
         ),
 
@@ -265,10 +265,10 @@ module.exports = grammar({
                 $.command_substitution_dollar,
                 $.variable_expansion,
             ),
-            optional(repeat1(seq(
+            repeat(seq(
                 $._concat_list,
                 $.list_element_access,
-            ))),
+            )),
         )),
 
         index: $ => choice(
@@ -285,10 +285,10 @@ module.exports = grammar({
 
         list_element_access: $ => seq(
             '[',
-            optional(repeat1(choice(
+            repeat(choice(
                 $.index,
                 $.range,
-            ))),
+            )),
             ']',
         ),
 

@@ -49,15 +49,15 @@ true # a comment
 
 (program
   (command
-    name: (builtin))
+    name: (word))
   (comment)
   (command
-    name: (builtin))
+    name: (word))
   (comment)
   (command
-    name: (builtin))
+    name: (word))
   (comment)
   (comment)
   (command
-    name: (builtin))
+    name: (word))
   (comment))

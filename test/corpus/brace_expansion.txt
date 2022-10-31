@@ -265,7 +265,7 @@ echo {min,(echo {max,})}ed
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
       (brace_expansion
         (brace_expansion
@@ -273,7 +273,7 @@ echo {min,(echo {max,})}ed
           (word)))
       (word)))
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
       (brace_expansion
         (concatenation
@@ -283,13 +283,13 @@ echo {min,(echo {max,})}ed
           (escape_sequence)))
       (word)))
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
       (brace_expansion
         (word)
         (command_substitution
           (command
-            name: (builtin)
+            name: (word)
             argument: (brace_expansion
               (word)))))
       (word))))
@@ -304,7 +304,7 @@ echo { 1, 2{.1,.2}}
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (brace_expansion
       (integer)
       (concatenation

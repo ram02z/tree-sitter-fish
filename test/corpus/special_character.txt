@@ -12,20 +12,20 @@ echo test[]
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (word))
   (command
-    name: (builtin)
+    name: (word)
     argument: (word))
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
-      (builtin)))
+      (word)))
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
-      (builtin)))
+      (word)))
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
-      (builtin))))
+      (word))))

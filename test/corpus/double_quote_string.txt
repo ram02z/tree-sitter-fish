@@ -14,7 +14,7 @@ echo "only (a string)"
   (command
     name: (double_quote_string))
   (command
-    name: (builtin)
+    name: (word)
     argument: (double_quote_string)))
 
 ================================================================================

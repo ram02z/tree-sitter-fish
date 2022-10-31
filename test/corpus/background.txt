@@ -8,7 +8,7 @@ printf "one" &
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (double_quote_string)))
 
 ================================================================================
@@ -21,10 +21,10 @@ printf "one" & echo &
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (double_quote_string))
   (command
-    name: (builtin)))
+    name: (word)))
 
 ================================================================================
 Background - with redirect
@@ -36,7 +36,7 @@ printf > file &
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     redirect: (file_redirect
       operator: (direction)
       destination: (word))))

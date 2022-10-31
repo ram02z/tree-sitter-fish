@@ -34,4 +34,4 @@ end
 (program
   (while_statement
     (command
-      (builtin))))
+      (word))))

@@ -21,7 +21,7 @@ end
   (function_definition
     name: (concatenation))
   (function_definition
-    name: (builtin))
+    name: (word))
   (function_definition
     name: (word))
   (function_definition
@@ -39,7 +39,7 @@ function test; function nested; end; end
 
 (program
   (function_definition
-    name: (builtin)
+    name: (word)
     (function_definition
       name: (word))))
 
@@ -54,7 +54,7 @@ end
 
 (program
   (function_definition
-    name: (builtin)
+    name: (word)
     option: (word)
     option: (word)
     option: (word)
@@ -100,17 +100,17 @@ end
     name: (word)
     (if_statement
       condition: (command
-        name: (builtin))
+        name: (word))
       (return
         (variable_expansion
           (variable_name)))
       (else_if_clause
         condition: (command
-          name: (builtin))
+          name: (word))
         (return
           (command_substitution
             (command
-              name: (builtin)
+              name: (word)
               argument: (integer)))))
       (else_clause
         (return

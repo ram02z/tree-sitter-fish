@@ -1178,187 +1178,6 @@
         ]
       }
     },
-    "builtin": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "STRING",
-          "value": "_"
-        },
-        {
-          "type": "STRING",
-          "value": "argparse"
-        },
-        {
-          "type": "STRING",
-          "value": "bg"
-        },
-        {
-          "type": "STRING",
-          "value": "bind"
-        },
-        {
-          "type": "STRING",
-          "value": "block"
-        },
-        {
-          "type": "STRING",
-          "value": "breakpoint"
-        },
-        {
-          "type": "STRING",
-          "value": "builtin"
-        },
-        {
-          "type": "STRING",
-          "value": "cd"
-        },
-        {
-          "type": "STRING",
-          "value": "command"
-        },
-        {
-          "type": "STRING",
-          "value": "commandline"
-        },
-        {
-          "type": "STRING",
-          "value": "complete"
-        },
-        {
-          "type": "STRING",
-          "value": "contains"
-        },
-        {
-          "type": "STRING",
-          "value": "count"
-        },
-        {
-          "type": "STRING",
-          "value": "disown"
-        },
-        {
-          "type": "STRING",
-          "value": "echo"
-        },
-        {
-          "type": "STRING",
-          "value": "emit"
-        },
-        {
-          "type": "STRING",
-          "value": "eval"
-        },
-        {
-          "type": "STRING",
-          "value": "exec"
-        },
-        {
-          "type": "STRING",
-          "value": "exit"
-        },
-        {
-          "type": "STRING",
-          "value": "false"
-        },
-        {
-          "type": "STRING",
-          "value": "fg"
-        },
-        {
-          "type": "STRING",
-          "value": "functions"
-        },
-        {
-          "type": "STRING",
-          "value": "history"
-        },
-        {
-          "type": "STRING",
-          "value": "jobs"
-        },
-        {
-          "type": "STRING",
-          "value": "math"
-        },
-        {
-          "type": "STRING",
-          "value": "path"
-        },
-        {
-          "type": "STRING",
-          "value": "printf"
-        },
-        {
-          "type": "STRING",
-          "value": "pwd"
-        },
-        {
-          "type": "STRING",
-          "value": "random"
-        },
-        {
-          "type": "STRING",
-          "value": "read"
-        },
-        {
-          "type": "STRING",
-          "value": "realpath"
-        },
-        {
-          "type": "STRING",
-          "value": "set"
-        },
-        {
-          "type": "STRING",
-          "value": "set_color"
-        },
-        {
-          "type": "STRING",
-          "value": "source"
-        },
-        {
-          "type": "STRING",
-          "value": "status"
-        },
-        {
-          "type": "STRING",
-          "value": "string"
-        },
-        {
-          "type": "STRING",
-          "value": "test"
-        },
-        {
-          "type": "STRING",
-          "value": "time"
-        },
-        {
-          "type": "STRING",
-          "value": "true"
-        },
-        {
-          "type": "STRING",
-          "value": "type"
-        },
-        {
-          "type": "STRING",
-          "value": "ulimit"
-        },
-        {
-          "type": "STRING",
-          "value": "wait"
-        }
-      ]
-    },
     "stream_redirect": {
       "type": "TOKEN",
       "content": {
@@ -1486,10 +1305,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "builtin"
-        },
-        {
-          "type": "SYMBOL",
           "name": "command_substitution"
         },
         {
@@ -1602,10 +1417,6 @@
     "_base_brace_expression": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "builtin"
-        },
         {
           "type": "SYMBOL",
           "name": "command_substitution"

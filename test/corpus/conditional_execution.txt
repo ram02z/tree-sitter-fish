@@ -10,15 +10,15 @@ false ;;or echo 1
 (program
   (conditional_execution
     (command
-      name: (builtin))
+      name: (word))
     (command
-      name: (builtin)
+      name: (word)
       argument: (integer)))
   (command
-    name: (builtin))
+    name: (word))
   (conditional_execution
     (command
-      name: (builtin)
+      name: (word)
       argument: (integer))))
 
 ================================================================================
@@ -33,12 +33,12 @@ true; and and --help
 (program
   (conditional_execution
     (command
-      name: (builtin))
+      name: (word))
     (command
-      name: (builtin)
+      name: (word)
       argument: (integer)))
   (command
-    name: (builtin))
+    name: (word))
   (conditional_execution
     (conditional_execution
       (command
@@ -56,17 +56,17 @@ true ;; and printf > file
 (program
   (conditional_execution
     (command
-      name: (builtin))
+      name: (word))
     (command
-      name: (builtin)
+      name: (word)
       redirect: (file_redirect
         operator: (direction)
         destination: (word))))
   (command
-    name: (builtin))
+    name: (word))
   (conditional_execution
     (command
-      name: (builtin)
+      name: (word)
       redirect: (file_redirect
         operator: (direction)
         destination: (word)))))
@@ -85,11 +85,11 @@ or --help echo
 
 (program
   (command
-    name: (builtin))
+    name: (word))
   (conditional_execution
     (command
-      name: (builtin)))
+      name: (word)))
   (conditional_execution
     (command
       name: (word)
-      argument: (builtin))))
+      argument: (word))))

@@ -218,22 +218,22 @@ echo $variable$(echo word)
 
 (program
   (command
-    (builtin)
+    (word)
     (concatenation
       (variable_expansion
         (variable_name))
       (command_substitution
         (command
-          (builtin)
+          (word)
           (word)))))
   (command
-    (builtin)
+    (word)
     (concatenation
       (variable_expansion
         (variable_name))
       (command_substitution
         (command
-          (builtin)
+          (word)
           (word))))))
 
 ================================================================================
@@ -249,28 +249,28 @@ echo#test
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
       (word)
       (word)
       (word)))
   (command
-    name: (builtin)
+    name: (word)
     argument: (concatenation
       (command_substitution
         (command
-          name: (builtin)
+          name: (word)
           argument: (integer)))
       (word)))
   (command
     name: (concatenation
-      (builtin)
+      (word)
       (word)
       (word)))
   (command
     name: (concatenation
-      (builtin)
-      (builtin))))
+      (word)
+      (word))))
 
 ================================================================================
 Concatenation - # as the last character of concat
@@ -348,7 +348,7 @@ word#{1,2}
       name: (concatenation
         (word)))
     (command
-      name: (builtin)))
+      name: (word)))
   (command
     name: (concatenation
       (word)))

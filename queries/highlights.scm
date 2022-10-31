@@ -17,7 +17,7 @@
 
 ; match operators of test command
 (command
-  name: (builtin) @function (#match? @function "^test$")
+  name: (word) @function (#match? @function "^test$")
   argument: (word) @operator (#match? @operator "^(!?=|-[a-zA-Z]+)$"))
 
 ; match operators of [ command
@@ -37,8 +37,8 @@
 
 "," @punctuation.delimiter
 
-(function_definition name: (_) @function)
-(command name: (_) @function)
+(function_definition name: [(word) (concatenation)] @function)
+(command name: (word) @function)
 
 [
  "switch"

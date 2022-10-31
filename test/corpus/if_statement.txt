@@ -12,10 +12,10 @@ if true; end
 (program
   (if_statement
     condition: (command
-      name: (builtin)))
+      name: (word)))
   (if_statement
     condition: (command
-      name: (builtin))))
+      name: (word))))
 
 ================================================================================
 If Statement - else
@@ -37,15 +37,15 @@ end
 (program
   (if_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (else_clause))
   (if_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (else_clause))
   (if_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (else_clause
       (begin_statement))))
 
@@ -72,30 +72,30 @@ if false; else if false; else; end
 (program
   (if_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (else_if_clause
       condition: (command
-        name: (builtin))))
+        name: (word))))
   (if_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (else_if_clause
       condition: (command
-        name: (builtin))))
+        name: (word))))
   (if_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (else_if_clause
       condition: (command
-        name: (builtin)))
+        name: (word)))
     (else_if_clause
       condition: (command
-        name: (builtin)))
+        name: (word)))
     (else_clause))
   (if_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (else_if_clause
       condition: (command
-        name: (builtin)))
+        name: (word)))
     (else_clause)))

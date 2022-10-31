@@ -15,17 +15,17 @@ end
 (program
   (while_statement
     condition: (command
-      name: (builtin)))
+      name: (word)))
   (while_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (command
-      name: (builtin)))
+      name: (word)))
   (while_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (command
-      name: (builtin))))
+      name: (word))))
 
 ================================================================================
 While Statement - with conditional execution
@@ -40,9 +40,9 @@ end
   (while_statement
     condition: (conditional_execution
       (command
-        name: (builtin))
+        name: (word))
       (command
-        name: (builtin)))))
+        name: (word)))))
 
 ================================================================================
 While Statement - flow control
@@ -59,11 +59,11 @@ end
 (program
   (while_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (break))
   (while_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (continue)))
 
 ================================================================================
@@ -81,6 +81,6 @@ end
 (program
   (while_statement
     condition: (command
-      name: (builtin))
+      name: (word))
     (begin_statement
       (break))))

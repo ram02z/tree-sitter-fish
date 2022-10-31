@@ -11,23 +11,23 @@ echo ()
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (command_substitution
       (command
-        name: (builtin)
+        name: (word)
         argument: (word))))
   (command
-    name: (builtin)
+    name: (word)
     argument: (command_substitution
       (begin_statement
         (command
           name: (word)
           argument: (integer)))))
   (command
-    name: (builtin)
+    name: (word)
     argument: (command_substitution))
   (command
-    name: (builtin)
+    name: (word)
     argument: (command_substitution)))
 
 ================================================================================
@@ -46,19 +46,19 @@ echo (
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (command_substitution
       (command
-        name: (builtin)
+        name: (word)
         argument: (word))))
   (command
-    name: (builtin)
+    name: (word)
     argument: (command_substitution
       (command
-        name: (builtin)
+        name: (word)
         argument: (word))
       (command
-        name: (builtin)
+        name: (word)
         argument: (single_quote_string)))))
 
 ================================================================================
@@ -72,12 +72,12 @@ echo "$(print)"
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (command_substitution
       (command
         name: (word))))
   (command
-    name: (builtin)
+    name: (word)
     argument: (double_quote_string
       (command_substitution
         (command
@@ -94,12 +94,12 @@ echo "$( echo )"
 
 (program
   (command
-    name: (builtin)
+    name: (word)
     argument: (double_quote_string))
   (comment)
   (command
-    name: (builtin)
+    name: (word)
     argument: (double_quote_string
       (command_substitution
         (command
-          name: (builtin))))))
+          name: (word))))))

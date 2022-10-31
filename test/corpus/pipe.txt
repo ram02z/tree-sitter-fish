@@ -9,10 +9,10 @@ printf "one" | echo
 (program
   (pipe
     (command
-      name: (builtin)
+      name: (word)
       argument: (double_quote_string))
     (command
-      name: (builtin))))
+      name: (word))))
 
 ================================================================================
 Pipe - with redirection
@@ -26,19 +26,19 @@ echo 1 >&0 | echo
 (program
   (pipe
     (command
-      name: (builtin))
+      name: (word))
     (command
-      name: (builtin)
+      name: (word)
       redirect: (file_redirect
         operator: (direction)
         destination: (word))))
   (pipe
     (command
-      name: (builtin)
+      name: (word)
       argument: (integer)
       redirect: (stream_redirect))
     (command
-      name: (builtin))))
+      name: (word))))
 
 ================================================================================
 Pipe - with conditional execution
@@ -52,17 +52,17 @@ echo | echo || echo
 (program
   (conditional_execution
     (command
-      name: (builtin))
+      name: (word))
     (pipe
       (command
-        name: (builtin))
+        name: (word))
       (command
         name: (word))))
   (conditional_execution
     (pipe
       (command
-        name: (builtin))
+        name: (word))
       (command
-        name: (builtin)))
+        name: (word)))
     (command
-      name: (builtin))))
+      name: (word))))

@@ -14,25 +14,27 @@ set (
 
 (program
   (command
-    (builtin)
+    (word)
     (command_substitution
-        (pipe
-          (command
-            (builtin)
-            (integer)
-            (escape_sequence))
-          (command
-            (builtin)
-            (word)))))
-  (command
-    (builtin)
-    (command_substitution
+      (pipe
         (command
-          (builtin)
+          (word)
           (integer)
           (escape_sequence))
-        (comment)
-        (ERROR)
         (command
-          (builtin)
+          (word)
           (word)))))
+  (ERROR
+    (pipe
+      (command
+        (word)
+        (command_substitution
+          (command
+            (word)
+            (integer)
+            (escape_sequence))
+          (comment)
+          (MISSING ")")))
+      (command
+        (word)
+        (word)))))

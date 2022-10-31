@@ -10,7 +10,7 @@ $cmd ~/app
 
 (program
   (command
-    (builtin)
+    (word)
     (home_dir_expansion))
   (command
     (word)

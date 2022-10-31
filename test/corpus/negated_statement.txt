@@ -10,10 +10,10 @@ not true
 (program
   (negated_statement
     (command
-      name: (builtin)))
+      name: (word)))
   (negated_statement
     (command
-      name: (builtin))))
+      name: (word))))
 
 ================================================================================
 Negated Statement - with conditional
@@ -29,22 +29,22 @@ not true || false
   (conditional_execution
     (negated_statement
       (command
-        name: (builtin)))
+        name: (word)))
     (command
-      name: (builtin)))
+      name: (word)))
   (conditional_execution
     (negated_statement
       (command
-        name: (builtin)))
+        name: (word)))
     (command
-      name: (builtin)))
+      name: (word)))
   (conditional_execution
     (negated_statement
       (command
-        name: (builtin)
+        name: (word)
         redirect: (stream_redirect)))
     (command
-      name: (builtin))))
+      name: (word))))
 
 ================================================================================
 Negated Statement - with pipe
@@ -59,12 +59,12 @@ not true | false
   (negated_statement
     (pipe
       (command
-        name: (builtin))
+        name: (word))
       (command
-        name: (builtin))))
+        name: (word))))
   (negated_statement
     (pipe
       (command
-        name: (builtin))
+        name: (word))
       (command
-        name: (builtin)))))
+        name: (word)))))

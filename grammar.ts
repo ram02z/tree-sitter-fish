@@ -1,5 +1,4 @@
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
-// TODO(16):    The "function/while/begin --help" should be a command
 // TODO(17):    {"str"} or {} or test{nonvar} should be a concatenation / word
 
 const SPECIAL_CHARACTERS = [
@@ -315,7 +314,6 @@ module.exports = grammar({
                 field('argument', $._expression),
             )),
         )),
-
 
         stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
         direction: () => token(/(\d*|&)(>>?\??|<)/),

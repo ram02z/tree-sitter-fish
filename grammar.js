@@ -1,23 +1,5 @@
 "use strict";
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
-// TODO(17):    {"str"} or {} or test{nonvar} should be a concatenation / word
-const SPECIAL_CHARACTERS = [
-    '$',
-    '*',
-    '~',
-    '#',
-    '(', ')',
-    '{', '}',
-    '\\[', '\\]',
-    '<', '>',
-    '"', "'",
-    '^',
-    '&',
-    '|',
-    ';',
-    '\\',
-    '\\s',
-];
 function charMatch(characterArray, negate) {
     const regexSpecialCharacters = [
         '$', '\\', '*', '~', '#', '(', ')', '{', '}', '|', '^', '&',
@@ -84,7 +66,7 @@ module.exports = grammar({
         index: $ => choice($.integer, $.single_quote_string, $.variable_expansion, $.double_quote_string, $.command_substitution),
         range: $ => prec.right(2, seq(optional($.index), '..', optional($.index))),
         list_element_access: $ => seq('[', repeat(choice($.index, $.range)), ']'),
-        brace_expansion: $ => prec.right(seq('{', choice($.variable_expansion, seq(optional(','), optional($._brace_expression), repeat1(prec.right(seq(',', optional($._brace_expression)))))), '}')),
+        brace_expansion: $ => prec.right(seq('{', seq(optional($._brace_expression), repeat(seq(',', optional($._brace_expression)))), '}')),
         double_quote_string: $ => seq('"', repeat(choice(token.immediate(/[^\$\\"]+/), $.variable_expansion, $.escape_sequence, 
         /*
          * Only new "$()" syntax is expanded inside double quoted strings.
@@ -106,7 +88,23 @@ module.exports = grammar({
         _base_brace_expression: $ => choice($.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, alias($.brace_word, $.word), $.integer, $.float, $.escape_sequence, $.glob),
         home_dir_expansion: () => '~',
         glob: () => token(repeat1('*')),
-        word: () => noneOf(SPECIAL_CHARACTERS),
+        word: () => noneOf([
+            '$',
+            '*',
+            '~',
+            '#',
+            '(', ')',
+            '{', '}',
+            '\\[', '\\]',
+            '<', '>',
+            '"', "'",
+            '^',
+            '&',
+            '|',
+            ';',
+            '\\',
+            '\\s',
+        ]),
         brace_word: () => noneOf(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')']),
     },
 });

@@ -17,7 +17,7 @@ Brace Expansion - empty
     name: (brace_expansion)))
 
 ================================================================================
-Brace Expansion - missing comma
+Brace Expansion - empty no comma, single item
 ================================================================================
 
 {a}
@@ -28,11 +28,9 @@ Brace Expansion - missing comma
 (program
   (command
     name: (brace_expansion
-      (word)
-      (MISSING ",")))
+      (word)))
   (command
-    name: (brace_expansion
-      (MISSING ","))))
+    name: (brace_expansion)))
 
 ================================================================================
 Brace Expansion - single value

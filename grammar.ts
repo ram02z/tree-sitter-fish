@@ -1,23 +1,4 @@
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
-// TODO(17):    {"str"} or {} or test{nonvar} should be a concatenation / word
-
-const SPECIAL_CHARACTERS = [
-    '$',
-    '*',
-    '~',
-    '#',
-    '(', ')',
-    '{', '}',
-    '\\[', '\\]',
-    '<', '>',
-    '"', "'",
-    '^',
-    '&',
-    '|',
-    ';',
-    '\\',
-    '\\s',
-];
 
 function charMatch(characterArray: string[], negate: boolean): RegExp {
     const regexSpecialCharacters = [
@@ -260,15 +241,9 @@ module.exports = grammar({
 
         brace_expansion: $ => prec.right(seq(
             '{',
-            choice(
-                $.variable_expansion,
-                seq(
-                    optional(','),
-                    optional($._brace_expression),
-                    repeat1(
-                        prec.right(seq(',', optional($._brace_expression))),
-                    ),
-                ),
+            seq(
+                optional($._brace_expression),
+                repeat(seq(',', optional($._brace_expression))),
             ),
             '}',
         )),
@@ -388,7 +363,23 @@ module.exports = grammar({
 
         glob: () => token(repeat1('*')),
 
-        word: () => noneOf(SPECIAL_CHARACTERS),
+        word: () => noneOf([
+            '$',
+            '*',
+            '~',
+            '#',
+            '(', ')',
+            '{', '}',
+            '\\[', '\\]',
+            '<', '>',
+            '"', "'",
+            '^',
+            '&',
+            '|',
+            ';',
+            '\\',
+            '\\s',
+]),
 
         brace_word: () => noneOf(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')']),
     },

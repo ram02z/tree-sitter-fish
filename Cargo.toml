@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-fish"
 description = "fish grammar for the tree-sitter parsing library"
-version = "0.0.1"
+version = "3.5.1"
 keywords = ["incremental", "parsing", "fish"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/ram02z/tree-sitter-fish"
@@ -20,7 +20,7 @@ include = [
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "0.17"
+tree-sitter = "0.20.9"
 
 [build-dependencies]
 cc = "1.0"

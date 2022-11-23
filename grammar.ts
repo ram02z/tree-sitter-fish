@@ -1,24 +1,4 @@
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
-// TODO(16):    The "function/while/begin --help" should be a command
-// TODO(17):    {"str"} or {} or test{nonvar} should be a concatenation / word
-
-const SPECIAL_CHARACTERS = [
-    '$',
-    '*',
-    '~',
-    '#',
-    '(', ')',
-    '{', '}',
-    '\\[', '\\]',
-    '<', '>',
-    '"', "'",
-    '^',
-    '&',
-    '|',
-    ';',
-    '\\',
-    '\\s',
-];
 
 function charMatch(characterArray: string[], negate: boolean): RegExp {
     const regexSpecialCharacters = [
@@ -67,25 +47,16 @@ module.exports = grammar({
             prec.right(-1, seq($._statement, choice('||', '&&'), $._statement)),
         ),
 
-        // Prec: higher than pipe
-        redirected_statement: $ => prec(1, seq(
-            $._statement,
-            choice($.file_redirect, $.stream_redirect),
-        )),
-
-        stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
-        direction: () => token(/(\d*|&)(>>?\??|<)/),
-
-        file_redirect: $ => seq(
-            field('operator', $.direction),
-            field('destination', $._expression),
-        ),
-
         pipe: $ => prec.left(seq(
             $._statement,
             '|',
             $._statement,
         )),
+
+        redirect_statement: $ => seq(
+            $._statement,
+            choice($.file_redirect, $.stream_redirect),
+        ),
 
         _terminator: () => choice(
             ';',
@@ -99,7 +70,7 @@ module.exports = grammar({
             $.conditional_execution,
             $.pipe,
             $.command,
-            $.redirected_statement,
+            $.redirect_statement,
             $.begin_statement,
             $.if_statement,
             $.while_statement,
@@ -128,9 +99,9 @@ module.exports = grammar({
             $._statement,
         )),
 
-        /* Added in 3.4.0. Syntax `$(cmd)` */
-        command_substitution_dollar: $ => seq(
-            '$',
+        /* Syntax `$(cmd)` added in 3.4.0. */
+        command_substitution: $ => seq(
+            optional('$'),
             '(',
             repeat(seq(
                 optional($._statement),
@@ -138,29 +109,14 @@ module.exports = grammar({
             )),
             optional($._statement),
             ')',
-        ),
-
-        command_substitution_fish: $ => seq(
-            '(',
-            repeat(seq(
-                optional($._statement),
-                $._terminator,
-            )),
-            optional($._statement),
-            ')',
-        ),
-
-        command_substitution: $ => choice(
-            $.command_substitution_dollar,
-            $.command_substitution_fish,
         ),
 
         function_definition: $ => seq(
             'function',
             field('name', $._expression),
-            optional(repeat1(field('option', $._expression))),
+            repeat(field('option', $._expression)),
             $._terminator,
-            optional(repeat1($._terminated_statement)),
+            repeat($._terminated_statement),
             'end',
         ),
 
@@ -235,29 +191,15 @@ module.exports = grammar({
             'end',
         ),
 
-        test_command: $ => choice(
-            seq(
-                alias(/\[\s/, '['),
-                choice(
-                    ']',
-                    repeat1(field('argument', $._test_expression)),
-                ),
-            ),
-            seq(
-                'test',
-                repeat(field('argument', $._test_expression)),
-            ),
-        ),
-
-        _test_expression: $ => choice(
-            $._expression,
-            $.test_option,
-        ),
-
-        test_option: () => choice(
-            '=',
-            '!=',
-            /-[a-zA-Z]+/,
+        test_command: $ => seq(
+            alias(/\[\s/, '['),
+            /*
+             * We are expecting a whitespace after each expression.
+             * [ test ] - valid
+             * [ test] - invalid: missing ], ] treated as concat
+             */
+            repeat(field('argument', seq($._expression, /\s/))),
+            ']',
         ),
 
         comment: () => token(prec(-11, /#.*/)),
@@ -268,13 +210,12 @@ module.exports = grammar({
             '$',
             choice(
                 $.variable_name,
-                $.command_substitution_dollar,
                 $.variable_expansion,
             ),
-            optional(repeat1(seq(
+            repeat(seq(
                 $._concat_list,
                 $.list_element_access,
-            ))),
+            )),
         )),
 
         index: $ => choice(
@@ -291,24 +232,18 @@ module.exports = grammar({
 
         list_element_access: $ => seq(
             '[',
-            optional(repeat1(choice(
+            repeat(choice(
                 $.index,
                 $.range,
-            ))),
+            )),
             ']',
         ),
 
         brace_expansion: $ => prec.right(seq(
             '{',
-            choice(
-                $.variable_expansion,
-                seq(
-                    optional(','),
-                    optional($._brace_expression),
-                    repeat1(
-                        prec.right(seq(',', optional($._brace_expression))),
-                    ),
-                ),
+            seq(
+                optional($._brace_expression),
+                repeat(seq(',', optional($._brace_expression))),
             ),
             '}',
         )),
@@ -319,7 +254,11 @@ module.exports = grammar({
                 token.immediate(/[^\$\\"]+/),
                 $.variable_expansion,
                 $.escape_sequence,
-                $.command_substitution_dollar,
+                /*
+                 * Only new "$()" syntax is expanded inside double quoted strings.
+                 * However, "()" matches the regex above - so we're good.
+                 */
+                $.command_substitution,
             )),
             '"',
         ),
@@ -343,12 +282,23 @@ module.exports = grammar({
             /c[a-zA-Z]?/,
         ))),
 
-        command: $ => seq(
+        command: $ => prec.right(seq(
             field('name', $._expression),
-            repeat(field('argument', $._expression)),
+            repeat(choice(
+                field('redirect', choice($.file_redirect, $.stream_redirect)),
+                field('argument', $._expression),
+            )),
+        )),
+
+        stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
+        direction: () => token(/(\d*|&)(>>?\??|<)/),
+
+        file_redirect: $ => seq(
+            field('operator', $.direction),
+            field('destination', $._expression),
         ),
 
-        _special_character: () => token(choice('[', ']')),
+        _special_character: () => choice('[', ']'),
 
         concatenation: $ => seq(
             choice($._base_expression, $._special_character),
@@ -413,7 +363,23 @@ module.exports = grammar({
 
         glob: () => token(repeat1('*')),
 
-        word: () => noneOf(SPECIAL_CHARACTERS),
+        word: () => noneOf([
+            '$',
+            '*',
+            '~',
+            '#',
+            '(', ')',
+            '{', '}',
+            '\\[', '\\]',
+            '<', '>',
+            '"', "'",
+            '^',
+            '&',
+            '|',
+            ';',
+            '\\',
+            '\\s',
+]),
 
         brace_word: () => noneOf(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')']),
     },

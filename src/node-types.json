@@ -48,7 +48,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -210,7 +210,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -355,6 +355,20 @@
             "named": true
           }
         ]
+      },
+      "redirect": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "file_redirect",
+            "named": true
+          },
+          {
+            "type": "stream_redirect",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -363,25 +377,6 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "command_substitution_dollar",
-          "named": true
-        },
-        {
-          "type": "command_substitution_fish",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "command_substitution_dollar",
-    "named": true,
-    "fields": {},
-    "children": {
       "multiple": true,
       "required": false,
       "types": [
@@ -426,78 +421,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
-          "named": true
-        },
-        {
-          "type": "return",
-          "named": true
-        },
-        {
-          "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "test_command",
-          "named": true
-        },
-        {
-          "type": "while_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "command_substitution_fish",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "begin_statement",
-          "named": true
-        },
-        {
-          "type": "break",
-          "named": true
-        },
-        {
-          "type": "command",
-          "named": true
-        },
-        {
-          "type": "conditional_execution",
-          "named": true
-        },
-        {
-          "type": "continue",
-          "named": true
-        },
-        {
-          "type": "for_statement",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "negated_statement",
-          "named": true
-        },
-        {
-          "type": "pipe",
-          "named": true
-        },
-        {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -623,7 +547,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -654,7 +578,7 @@
       "required": false,
       "types": [
         {
-          "type": "command_substitution_dollar",
+          "type": "command_substitution",
           "named": true
         },
         {
@@ -717,7 +641,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -808,7 +732,7 @@
             "named": true
           },
           {
-            "type": "redirected_statement",
+            "type": "redirect_statement",
             "named": true
           },
           {
@@ -875,7 +799,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1081,7 +1005,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1261,7 +1185,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1352,7 +1276,7 @@
             "named": true
           },
           {
-            "type": "redirected_statement",
+            "type": "redirect_statement",
             "named": true
           },
           {
@@ -1427,7 +1351,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1548,7 +1472,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1619,7 +1543,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1690,7 +1614,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1728,7 +1652,7 @@
     }
   },
   {
-    "type": "redirected_statement",
+    "type": "redirect_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -1780,7 +1704,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -1999,10 +1923,6 @@
             "named": true
           },
           {
-            "type": "test_option",
-            "named": true
-          },
-          {
             "type": "variable_expansion",
             "named": true
           },
@@ -2015,11 +1935,6 @@
     }
   },
   {
-    "type": "test_option",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "variable_expansion",
     "named": true,
     "fields": {},
@@ -2027,10 +1942,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "command_substitution_dollar",
-          "named": true
-        },
         {
           "type": "list_element_access",
           "named": true
@@ -2115,7 +2026,7 @@
             "named": true
           },
           {
-            "type": "redirected_statement",
+            "type": "redirect_statement",
             "named": true
           },
           {
@@ -2182,7 +2093,7 @@
           "named": true
         },
         {
-          "type": "redirected_statement",
+          "type": "redirect_statement",
           "named": true
         },
         {
@@ -2205,6 +2116,11 @@
     }
   },
   {
+    "type": "word",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -2218,10 +2134,6 @@
   },
   {
     "type": "!",
-    "named": false
-  },
-  {
-    "type": "!=",
     "named": false
   },
   {
@@ -2262,10 +2174,6 @@
   },
   {
     "type": ";",
-    "named": false
-  },
-  {
-    "type": "=",
     "named": false
   },
   {
@@ -2369,20 +2277,12 @@
     "named": false
   },
   {
-    "type": "test",
-    "named": false
-  },
-  {
     "type": "variable_name",
     "named": true
   },
   {
     "type": "while",
     "named": false
-  },
-  {
-    "type": "word",
-    "named": true
   },
   {
     "type": "{",

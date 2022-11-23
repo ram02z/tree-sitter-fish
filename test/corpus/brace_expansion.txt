@@ -17,7 +17,7 @@ Brace Expansion - empty
     name: (brace_expansion)))
 
 ================================================================================
-Brace Expansion - missing comma
+Brace Expansion - empty no comma, single item
 ================================================================================
 
 {a}
@@ -28,11 +28,9 @@ Brace Expansion - missing comma
 (program
   (command
     name: (brace_expansion
-      (word)
-      (MISSING ",")))
+      (word)))
   (command
-    name: (brace_expansion
-      (MISSING ","))))
+    name: (brace_expansion)))
 
 ================================================================================
 Brace Expansion - single value
@@ -188,20 +186,6 @@ $PATH{a,b}c
       (word))))
 
 ================================================================================
-Brace Expansion - proper distinction between vars and words
-================================================================================
-
-{a+b,b}
-
---------------------------------------------------------------------------------
-
-(program
-  (command
-    name: (brace_expansion
-      (word)
-      (word))))
-
-================================================================================
 Brace Expansion - accepts inputs with spaces
 ================================================================================
 
@@ -302,9 +286,27 @@ echo {min,(echo {max,})}ed
       (brace_expansion
         (word)
         (command_substitution
-          (command_substitution_fish
-            (command
-              name: (word)
-              argument: (brace_expansion
-                (word))))))
+          (command
+            name: (word)
+            argument: (brace_expansion
+              (word)))))
       (word))))
+
+================================================================================
+Brace Expansion - nested concatenation
+================================================================================
+
+echo { 1, 2{.1,.2}}
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (word)
+    argument: (brace_expansion
+      (integer)
+      (concatenation
+        (integer)
+        (brace_expansion
+          (word)
+          (word))))))

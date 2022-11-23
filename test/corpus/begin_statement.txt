@@ -73,7 +73,7 @@ true && begin; end || true
         name: (word)))))
 
 ================================================================================
-Begin Statement - with redirection
+Begin Statement - with redirect
 ================================================================================
 
 begin; end >&-
@@ -81,7 +81,7 @@ begin; end >&-
 --------------------------------------------------------------------------------
 
 (program
-  (redirected_statement
+  (redirect_statement
     (begin_statement)
     (stream_redirect)))
 

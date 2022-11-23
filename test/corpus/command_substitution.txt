@@ -1,5 +1,5 @@
 ================================================================================
-Command Substitudion - simple
+Command Substitution - simple
 ================================================================================
 
 echo (printf text)
@@ -13,29 +13,25 @@ echo ()
   (command
     name: (word)
     argument: (command_substitution
-      (command_substitution_fish
+      (command
+        name: (word)
+        argument: (word))))
+  (command
+    name: (word)
+    argument: (command_substitution
+      (begin_statement
         (command
           name: (word)
-          argument: (word)))))
+          argument: (integer)))))
   (command
     name: (word)
-    argument: (command_substitution
-      (command_substitution_fish
-        (begin_statement
-          (command
-            name: (word)
-            argument: (integer))))))
+    argument: (command_substitution))
   (command
     name: (word)
-    argument: (command_substitution
-      (command_substitution_fish)))
-  (command
-    name: (word)
-    argument: (command_substitution
-      (command_substitution_fish))))
+    argument: (command_substitution)))
 
 ================================================================================
-Command Substitudion - multiline
+Command Substitution - multiline
 ================================================================================
 
 echo (
@@ -52,29 +48,25 @@ echo (
   (command
     name: (word)
     argument: (command_substitution
-      (command_substitution_fish
-        (command
-          name: (word)
-          argument: (word)))))
+      (command
+        name: (word)
+        argument: (word))))
   (command
     name: (word)
     argument: (command_substitution
-      (command_substitution_fish
-        (command
-          name: (word)
-          argument: (word))
-        (command
-          name: (word)
-          argument: (single_quote_string))))))
+      (command
+        name: (word)
+        argument: (word))
+      (command
+        name: (word)
+        argument: (single_quote_string)))))
 
 ================================================================================
-Command Substitudion - $ support since 3.4.0 fish version
+Command Substitution - $ support since 3.4.0 (3.5.0 removed "$$()")
 ================================================================================
 
 echo $(print)
-echo $$(varname)
 echo "$(print)"
-echo "$$(varname)"
 
 --------------------------------------------------------------------------------
 
@@ -82,25 +74,32 @@ echo "$$(varname)"
   (command
     name: (word)
     argument: (command_substitution
-      (command_substitution_dollar
-        (command
-          name: (word)))))
-  (command
-    name: (word)
-    argument: (variable_expansion
-      (command_substitution_dollar
-        (command
-          name: (word)))))
+      (command
+        name: (word))))
   (command
     name: (word)
     argument: (double_quote_string
-      (command_substitution_dollar
+      (command_substitution
         (command
-          name: (word)))))
+          name: (word))))))
+
+================================================================================
+Command Substitution - inside double quoted string
+================================================================================
+
+echo "( echo )" # All good if this is not parsed as command_substitution
+echo "$( echo )"
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (word)
+    argument: (double_quote_string))
+  (comment)
   (command
     name: (word)
     argument: (double_quote_string
-      (variable_expansion
-        (command_substitution_dollar
-          (command
-            name: (word)))))))
+      (command_substitution
+        (command
+          name: (word))))))

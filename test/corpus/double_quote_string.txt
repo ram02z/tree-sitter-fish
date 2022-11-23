@@ -74,7 +74,6 @@ Double quote string - variable expansion
 
 "$PATH"
 "$$DOUBLE_EXPANSION"
-"$$(echo varname)"
 
 --------------------------------------------------------------------------------
 
@@ -87,14 +86,7 @@ Double quote string - variable expansion
     name: (double_quote_string
       (variable_expansion
         (variable_expansion
-          (variable_name)))))
-  (command
-    name: (double_quote_string
-      (variable_expansion
-        (command_substitution_dollar
-          (command
-            name: (word)
-            argument: (word)))))))
+          (variable_name))))))
 
 ================================================================================
 Double quote string - escaped variable expansion

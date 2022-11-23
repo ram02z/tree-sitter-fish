@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-fish",
-  "version": "0.0.1",
+  "version": "3.5.1",
   "description": "Fish tree-sitter grammar",
   "main": "bindings/node",
   "scripts": {
@@ -23,18 +23,18 @@
     "nan": "^2.14.2"
   },
   "devDependencies": {
-    "@types/node": "^17.0.25",
+    "@types/node": "^18.11.9",
     "nodemon": "^2.0.7",
-    "tree-sitter-cli": "^0.20.6",
-    "typescript": "^4.6.3"
+    "tree-sitter-cli": "^0.20.7",
+    "typescript": "^4.9.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krnik/tree-sitter-fish.git"
+    "url": "git+https://github.com/ram02z/tree-sitter-fish.git"
   },
-  "homepage": "https://github.com/krnik/tree-sitter-fish#readme",
+  "homepage": "https://github.com/ram02z/tree-sitter-fish#readme",
   "bugs": {
-    "url": "https://github.com/krnik/tree-sitter-fish/issues"
+    "url": "https://github.com/ram02z/tree-sitter-fish/issues"
   },
   "tree-sitter": [
     {

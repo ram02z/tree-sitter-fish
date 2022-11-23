@@ -40,10 +40,9 @@ not true || false
       name: (word)))
   (conditional_execution
     (negated_statement
-      (redirected_statement
-        (command
-          name: (word))
-        (stream_redirect)))
+      (command
+        name: (word)
+        redirect: (stream_redirect)))
     (command
       name: (word))))
 

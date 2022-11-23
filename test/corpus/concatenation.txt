@@ -223,20 +223,18 @@ echo $variable$(echo word)
       (variable_expansion
         (variable_name))
       (command_substitution
-        (command_substitution_fish
-          (command
-            (word)
-            (word))))))
+        (command
+          (word)
+          (word)))))
   (command
     (word)
     (concatenation
       (variable_expansion
         (variable_name))
       (command_substitution
-        (command_substitution_dollar
-          (command
-            (word)
-            (word)))))))
+        (command
+          (word)
+          (word))))))
 
 ================================================================================
 Concatenation - # in argument or command position
@@ -245,28 +243,32 @@ Concatenation - # in argument or command position
 echo not#a#comment
 echo (echo 1)#notacomment
 command#with#hash
+echo#test
 
 --------------------------------------------------------------------------------
 
 (program
   (command
-    (word)
-    (concatenation
+    name: (word)
+    argument: (concatenation
       (word)
       (word)
       (word)))
   (command
-    (word)
-    (concatenation
+    name: (word)
+    argument: (concatenation
       (command_substitution
-        (command_substitution_fish
-          (command
-            (word)
-            (integer))))
+        (command
+          name: (word)
+          argument: (integer)))
       (word)))
   (command
-    (concatenation
+    name: (concatenation
       (word)
+      (word)
+      (word)))
+  (command
+    name: (concatenation
       (word)
       (word))))
 
@@ -296,91 +298,82 @@ word#{1,2}
 
 (program
   (command
-    (concatenation
+    name: (concatenation
       (word)))
   (command
-    (concatenation
+    name: (concatenation
       (word)))
   (command
-    (concatenation
+    name: (concatenation
       (word))
-    (word))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (file_redirect
-      (direction)
-      (word)))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (stream_redirect))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (stream_redirect))
-  (redirected_statement
-    (command
-      (concatenation
-        (word)))
-    (stream_redirect))
+    argument: (word))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (stream_redirect))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (stream_redirect))
+  (command
+    name: (concatenation
+      (word))
+    redirect: (stream_redirect))
   (pipe
     (command
-      (concatenation
+      name: (concatenation
         (word)))
     (command
+      name: (word)))
+  (command
+    name: (concatenation
       (word)))
   (command
-    (concatenation
+    name: (concatenation
       (word)))
   (command
-    (concatenation
-      (word)))
-  (command
-    (concatenation
+    name: (concatenation
       (word)
       (command_substitution
-        (command_substitution_dollar
-          (command
-            (integer))))))
+        (command
+          name: (integer)))))
   (command
-    (concatenation
+    name: (concatenation
       (word)
       (command_substitution
-        (command_substitution_fish
-          (command
-            (integer))))))
+        (command
+          name: (integer)))))
   (command
-    (concatenation
+    name: (concatenation
       (word)
       (variable_expansion
         (variable_name))))
   (command
-    (concatenation
+    name: (concatenation
       (word)
       (brace_expansion
         (integer)

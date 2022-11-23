@@ -4,7 +4,7 @@ Test Command - space required
 
 []
 [$status != 0]
-[ $status != 0]
+[ $status != 0 ]
 
 --------------------------------------------------------------------------------
 
@@ -21,9 +21,8 @@ Test Command - space required
   (test_command
     argument: (variable_expansion
       (variable_name))
-    argument: (test_option)
-    argument: (concatenation
-      (integer))))
+    argument: (word)
+    argument: (integer)))
 
 ================================================================================
 Test Command - simple
@@ -45,19 +44,19 @@ test one
   (test_command
     argument: (variable_expansion
       (variable_name))
-    argument: (test_option)
-    argument: (integer)
-    argument: (word))
+    argument: (word)
+    argument: (integer))
   (test_command
     argument: (escape_sequence)
     argument: (variable_expansion
       (variable_name))
-    argument: (test_option)
+    argument: (word)
     argument: (integer)
-    argument: (escape_sequence)
-    argument: (word))
-  (test_command)
-  (test_command
+    argument: (escape_sequence))
+  (command
+    name: (word))
+  (command
+    name: (word)
     argument: (word)))
 
 ================================================================================
@@ -77,53 +76,53 @@ test \( $status -o \( 'te' != 'st' -a $status != '0' \)\)
 (program
   (test_command
     argument: (integer)
-    argument: (test_option)
-    argument: (integer)
-    argument: (word))
-  (test_command
-    argument: (float)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (escape_sequence)
-    argument: (variable_expansion
-      (variable_name))
-    argument: (test_option)
-    argument: (escape_sequence)
-    argument: (single_quote_string)
-    argument: (test_option)
-    argument: (single_quote_string)
-    argument: (test_option)
-    argument: (variable_expansion
-      (variable_name))
-    argument: (test_option)
-    argument: (single_quote_string)
-    argument: (concatenation
-      (escape_sequence)
-      (escape_sequence))
-    argument: (word))
-  (test_command
-    argument: (integer)
-    argument: (test_option)
+    argument: (word)
     argument: (integer))
   (test_command
     argument: (float)
-    argument: (test_option)
+    argument: (word)
     argument: (float))
   (test_command
     argument: (escape_sequence)
     argument: (variable_expansion
       (variable_name))
-    argument: (test_option)
+    argument: (word)
     argument: (escape_sequence)
     argument: (single_quote_string)
-    argument: (test_option)
+    argument: (word)
     argument: (single_quote_string)
-    argument: (test_option)
+    argument: (word)
     argument: (variable_expansion
       (variable_name))
-    argument: (test_option)
+    argument: (word)
+    argument: (single_quote_string)
+    argument: (concatenation
+      (escape_sequence)
+      (escape_sequence)))
+  (command
+    name: (word)
+    argument: (integer)
+    argument: (word)
+    argument: (integer))
+  (command
+    name: (word)
+    argument: (float)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (escape_sequence)
+    argument: (variable_expansion
+      (variable_name))
+    argument: (word)
+    argument: (escape_sequence)
+    argument: (single_quote_string)
+    argument: (word)
+    argument: (single_quote_string)
+    argument: (word)
+    argument: (variable_expansion
+      (variable_name))
+    argument: (word)
     argument: (single_quote_string)
     argument: (concatenation
       (escape_sequence)
@@ -144,22 +143,6 @@ test \( !$status \) -o $status
   (test_command
     argument: (word)
     argument: (variable_expansion
-      (variable_name))
-    argument: (word))
-  (test_command
-    argument: (escape_sequence)
-    argument: (concatenation
-      (word)
-      (variable_expansion
-        (variable_name)))
-    argument: (escape_sequence)
-    argument: (test_option)
-    argument: (variable_expansion
-      (variable_name))
-    argument: (word))
-  (test_command
-    argument: (word)
-    argument: (variable_expansion
       (variable_name)))
   (test_command
     argument: (escape_sequence)
@@ -168,7 +151,23 @@ test \( !$status \) -o $status
       (variable_expansion
         (variable_name)))
     argument: (escape_sequence)
-    argument: (test_option)
+    argument: (word)
+    argument: (variable_expansion
+      (variable_name)))
+  (command
+    name: (word)
+    argument: (word)
+    argument: (variable_expansion
+      (variable_name)))
+  (command
+    name: (word)
+    argument: (escape_sequence)
+    argument: (concatenation
+      (word)
+      (variable_expansion
+        (variable_name)))
+    argument: (escape_sequence)
+    argument: (word)
     argument: (variable_expansion
       (variable_name))))
 
@@ -192,62 +191,23 @@ test \( !$status -eq 0 \) -a $status -ne 127
   (test_command
     argument: (word)
     argument: (float)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (escape_sequence)
     argument: (word)
-    argument: (float)
-    argument: (test_option)
-    argument: (integer)
-    argument: (escape_sequence)
-    argument: (test_option)
-    argument: (word)
-    argument: (test_option)
-    argument: (word)
-    argument: (word))
-  (test_command
-    argument: (variable_expansion
-      (variable_name))
-    argument: (test_option)
-    argument: (integer)
-    argument: (word))
-  (test_command
-    argument: (escape_sequence)
-    argument: (concatenation
-      (word)
-      (variable_expansion
-        (variable_name)))
-    argument: (test_option)
-    argument: (integer)
-    argument: (escape_sequence)
-    argument: (test_option)
-    argument: (variable_expansion
-      (variable_name))
-    argument: (test_option)
-    argument: (integer)
-    argument: (word))
-  (test_command
-    argument: (word)
-    argument: (float)
-    argument: (test_option)
     argument: (float))
   (test_command
     argument: (escape_sequence)
     argument: (word)
     argument: (float)
-    argument: (test_option)
+    argument: (word)
     argument: (integer)
     argument: (escape_sequence)
-    argument: (test_option)
     argument: (word)
-    argument: (test_option)
+    argument: (word)
+    argument: (word)
     argument: (word))
   (test_command
     argument: (variable_expansion
       (variable_name))
-    argument: (test_option)
+    argument: (word)
     argument: (integer))
   (test_command
     argument: (escape_sequence)
@@ -255,13 +215,52 @@ test \( !$status -eq 0 \) -a $status -ne 127
       (word)
       (variable_expansion
         (variable_name)))
-    argument: (test_option)
+    argument: (word)
     argument: (integer)
     argument: (escape_sequence)
-    argument: (test_option)
+    argument: (word)
     argument: (variable_expansion
       (variable_name))
-    argument: (test_option)
+    argument: (word)
+    argument: (integer))
+  (command
+    name: (word)
+    argument: (word)
+    argument: (float)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (escape_sequence)
+    argument: (word)
+    argument: (float)
+    argument: (word)
+    argument: (integer)
+    argument: (escape_sequence)
+    argument: (word)
+    argument: (word)
+    argument: (word)
+    argument: (word))
+  (command
+    name: (word)
+    argument: (variable_expansion
+      (variable_name))
+    argument: (word)
+    argument: (integer))
+  (command
+    name: (word)
+    argument: (escape_sequence)
+    argument: (concatenation
+      (word)
+      (variable_expansion
+        (variable_name)))
+    argument: (word)
+    argument: (integer)
+    argument: (escape_sequence)
+    argument: (word)
+    argument: (variable_expansion
+      (variable_name))
+    argument: (word)
     argument: (integer)))
 
 ================================================================================
@@ -310,134 +309,134 @@ test -x ./test.fish
 
 (program
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
   (test_command
-    argument: (test_option)
     argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
     argument: (word)))
 
 ================================================================================
-Test Command - operators for text strings
+Test Command - operators for strings
 ================================================================================
 
 [ "test" = 'test' ]
@@ -455,35 +454,35 @@ test -z ''
 (program
   (test_command
     argument: (double_quote_string)
-    argument: (test_option)
-    argument: (single_quote_string)
-    argument: (word))
+    argument: (word)
+    argument: (single_quote_string))
   (test_command
     argument: (word)
-    argument: (test_option)
-    argument: (single_quote_string)
-    argument: (word))
+    argument: (word)
+    argument: (single_quote_string))
   (test_command
-    argument: (test_option)
-    argument: (single_quote_string)
-    argument: (word))
+    argument: (word)
+    argument: (single_quote_string))
   (test_command
-    argument: (test_option)
-    argument: (single_quote_string)
-    argument: (word))
-  (test_command
+    argument: (word)
+    argument: (single_quote_string))
+  (command
+    name: (word)
     argument: (double_quote_string)
-    argument: (test_option)
-    argument: (single_quote_string))
-  (test_command
     argument: (word)
-    argument: (test_option)
     argument: (single_quote_string))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
+    argument: (word)
     argument: (single_quote_string))
-  (test_command
-    argument: (test_option)
+  (command
+    name: (word)
+    argument: (word)
+    argument: (single_quote_string))
+  (command
+    name: (word)
+    argument: (word)
     argument: (single_quote_string)))
 
 ================================================================================
@@ -509,55 +508,55 @@ test 0 -le 0.0
 (program
   (test_command
     argument: (integer)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (integer)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (integer)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (integer)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (integer)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (integer)
-    argument: (test_option)
-    argument: (float)
-    argument: (word))
-  (test_command
-    argument: (integer)
-    argument: (test_option)
+    argument: (word)
     argument: (float))
   (test_command
     argument: (integer)
-    argument: (test_option)
+    argument: (word)
     argument: (float))
   (test_command
     argument: (integer)
-    argument: (test_option)
+    argument: (word)
     argument: (float))
   (test_command
     argument: (integer)
-    argument: (test_option)
+    argument: (word)
     argument: (float))
   (test_command
     argument: (integer)
-    argument: (test_option)
+    argument: (word)
     argument: (float))
   (test_command
     argument: (integer)
-    argument: (test_option)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (integer)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (integer)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (integer)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (integer)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (integer)
+    argument: (word)
+    argument: (float))
+  (command
+    name: (word)
+    argument: (integer)
+    argument: (word)
     argument: (float)))

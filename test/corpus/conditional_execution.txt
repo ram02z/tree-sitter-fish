@@ -57,19 +57,17 @@ true ;; and printf > file
   (conditional_execution
     (command
       name: (word))
-    (redirected_statement
-      (command
-        name: (word))
-      (file_redirect
+    (command
+      name: (word)
+      redirect: (file_redirect
         operator: (direction)
         destination: (word))))
   (command
     name: (word))
   (conditional_execution
-    (redirected_statement
-      (command
-        name: (word))
-      (file_redirect
+    (command
+      name: (word)
+      redirect: (file_redirect
         operator: (direction)
         destination: (word)))))
 
@@ -81,7 +79,7 @@ true;;
 
 and echo
 
-or --help echo
+or echo hello_world
 
 --------------------------------------------------------------------------------
 

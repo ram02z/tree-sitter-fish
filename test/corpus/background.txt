@@ -35,9 +35,8 @@ printf > file &
 --------------------------------------------------------------------------------
 
 (program
-  (redirected_statement
-    (command
-      name: (word))
-    (file_redirect
+  (command
+    name: (word)
+    redirect: (file_redirect
       operator: (direction)
       destination: (word))))

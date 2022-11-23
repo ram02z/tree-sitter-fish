@@ -13,7 +13,7 @@ jobs:
               submodules: true
           - uses: actions/setup-node@v2
             with:
-              node-version: '14'
+              node-version: '18'
           - name: Install dependencies
             run: npm i
           - name: Init Tree-Sitter config

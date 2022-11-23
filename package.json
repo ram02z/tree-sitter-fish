@@ -30,11 +30,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krnik/tree-sitter-fish.git"
+    "url": "git+https://github.com/ram02z/tree-sitter-fish.git"
   },
-  "homepage": "https://github.com/krnik/tree-sitter-fish#readme",
+  "homepage": "https://github.com/ram02z/tree-sitter-fish#readme",
   "bugs": {
-    "url": "https://github.com/krnik/tree-sitter-fish/issues"
+    "url": "https://github.com/ram02z/tree-sitter-fish/issues"
   },
   "tree-sitter": [
     {

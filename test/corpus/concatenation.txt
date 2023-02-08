@@ -250,10 +250,7 @@ echo#test
 (program
   (command
     name: (word)
-    argument: (concatenation
-      (word)
-      (word)
-      (word)))
+    argument: (word))
   (command
     name: (word)
     argument: (concatenation
@@ -263,14 +260,9 @@ echo#test
           argument: (integer)))
       (word)))
   (command
-    name: (concatenation
-      (word)
-      (word)
-      (word)))
+    name: (word))
   (command
-    name: (concatenation
-      (word)
-      (word))))
+    name: (word)))
 
 ================================================================================
 Concatenation - # as the last character of concat
@@ -298,63 +290,50 @@ word#{1,2}
 
 (program
   (command
-    name: (concatenation
-      (word)))
+    name: (word))
   (command
-    name: (concatenation
-      (word)))
+    name: (word))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     argument: (word))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     redirect: (file_redirect
       operator: (direction)
       destination: (word)))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     redirect: (file_redirect
       operator: (direction)
       destination: (word)))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     redirect: (file_redirect
       operator: (direction)
       destination: (word)))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     redirect: (file_redirect
       operator: (direction)
       destination: (word)))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     redirect: (stream_redirect))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     redirect: (stream_redirect))
   (command
-    name: (concatenation
-      (word))
+    name: (word)
     redirect: (stream_redirect))
   (pipe
     (command
-      name: (concatenation
-        (word)))
+      name: (word))
     (command
       name: (word)))
   (command
-    name: (concatenation
-      (word)))
+    name: (word))
   (command
-    name: (concatenation
-      (word)))
+    name: (word))
   (command
     name: (concatenation
       (word)

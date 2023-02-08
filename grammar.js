@@ -2,7 +2,7 @@
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
 function charMatch(characterArray, negate) {
     const regexSpecialCharacters = [
-        '$', '\\', '*', '~', '#', '(', ')', '{', '}', '|', '^', '&',
+        '$', '\\', '*', '(', ')', '{', '}', '[', ']', '|', '^'
     ];
     const escaped = characterArray.map((c) => regexSpecialCharacters.includes(c) ? '\\' + c : c);
     return new RegExp(`[${negate ? '^' : ''}${escaped.join('')}]+`);
@@ -10,6 +10,8 @@ function charMatch(characterArray, negate) {
 function noneOf(characterArray) {
     return charMatch(characterArray, true);
 }
+// https://util.unicode.org/UnicodeJsps/list-unicodeset.jsp?a=%5B%3AWhite_Space%3DYes%3A%5D&g=&i=
+const WHITESPACE = /[\u0009-\u000D\u0085\u2028 \u2029\u0020\u3000\u1680\u2000-\u2006\u2008-\u200A\u205F\u00A0\u2007\u202F]+/;
 module.exports = grammar({
     name: 'fish',
     externals: $ => [
@@ -25,7 +27,7 @@ module.exports = grammar({
     ],
     extras: $ => [
         $.comment,
-        /\\?\s/,
+        WHITESPACE,
     ],
     rules: {
         program: $ => repeat(seq(optional($._statement), $._terminator)),
@@ -33,7 +35,7 @@ module.exports = grammar({
         pipe: $ => prec.left(seq($._statement, '|', $._statement)),
         redirect_statement: $ => seq($._statement, choice($.file_redirect, $.stream_redirect)),
         _terminator: () => choice(';', '&', '\n', '\r', '\r\n'),
-        _statement: $ => choice($.conditional_execution, $.pipe, $.command, $.redirect_statement, $.begin_statement, $.if_statement, $.while_statement, $.for_statement, $.switch_statement, $.function_definition, $.break, $.continue, $.return, $.negated_statement, $.test_command),
+        _statement: $ => choice($.conditional_execution, $.pipe, $.command, $.redirect_statement, $.begin_statement, $.if_statement, $.while_statement, $.for_statement, $.switch_statement, $.function_definition, $.break, $.continue, $.return, $.negated_statement),
         _terminated_statement: $ => seq($._statement, $._terminator),
         _terminated_opt_statement: $ => seq(optional($._statement), $._terminator),
         negated_statement: $ => prec.left(-1, seq(choice('!', 'not'), $._statement)),
@@ -53,13 +55,6 @@ module.exports = grammar({
         else_if_clause: $ => seq(seq('else', 'if'), field('condition', $._terminated_statement), optional(repeat1($._terminated_opt_statement))),
         else_clause: $ => seq('else', $._terminator, optional(repeat1($._terminated_opt_statement))),
         begin_statement: $ => seq('begin', optional(repeat1($._terminated_opt_statement)), 'end'),
-        test_command: $ => seq(alias(/\[\s/, '['), 
-        /*
-         * We are expecting a whitespace after each expression.
-         * [ test ] - valid
-         * [ test] - invalid: missing ], ] treated as concat
-         */
-        repeat(field('argument', seq($._expression, /\s/))), ']'),
         comment: () => token(prec(-11, /#.*/)),
         variable_name: () => /[a-zA-Z0-9_]+/,
         variable_expansion: $ => prec.left(seq('$', choice($.variable_name, $.variable_expansion), repeat(seq($._concat_list, $.list_element_access)))),
@@ -95,7 +90,7 @@ module.exports = grammar({
             '#',
             '(', ')',
             '{', '}',
-            '\\[', '\\]',
+            '[', ']',
             '<', '>',
             '"', "'",
             '^',

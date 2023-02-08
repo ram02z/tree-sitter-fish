@@ -212,10 +212,6 @@
         {
           "type": "SYMBOL",
           "name": "negated_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "test_command"
         }
       ]
     },
@@ -739,44 +735,6 @@
         {
           "type": "STRING",
           "value": "end"
-        }
-      ]
-    },
-    "test_command": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\[\\s"
-          },
-          "named": false,
-          "value": "["
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "FIELD",
-            "name": "argument",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_expression"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "\\s"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "]"
         }
       ]
     },
@@ -1451,7 +1409,7 @@
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^\\$\\*\\~\\#\\(\\)\\{\\}\\[\\]<>\"'\\^\\&\\|;\\\\\\s]+"
+      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'\\^&\\|;\\\\\\s]+"
     },
     "brace_word": {
       "type": "PATTERN",
@@ -1465,7 +1423,7 @@
     },
     {
       "type": "PATTERN",
-      "value": "\\\\?\\s"
+      "value": "[\\u0009-\\u000D\\u0085\\u2028 \\u2029\\u0020\\u3000\\u1680\\u2000-\\u2006\\u2008-\\u200A\\u205F\\u00A0\\u2007\\u202F]+"
     }
   ],
   "conflicts": [],

@@ -2,7 +2,7 @@
 
 function charMatch(characterArray: string[], negate: boolean): RegExp {
     const regexSpecialCharacters = [
-        '$', '\\', '*', '~', '#', '(', ')', '{', '}', '|', '^', '&',
+        '$', '\\', '*', '(', ')', '{', '}', '[', ']', '|', '^'
     ];
 
     const escaped = characterArray.map((c) =>
@@ -14,6 +14,9 @@ function charMatch(characterArray: string[], negate: boolean): RegExp {
 function noneOf(characterArray: string[]): RegExp {
     return charMatch(characterArray, true);
 }
+
+// https://util.unicode.org/UnicodeJsps/list-unicodeset.jsp?a=%5B%3AWhite_Space%3DYes%3A%5D&g=&i=
+const WHITESPACE = /[\u0009-\u000D\u0085\u2028 \u2029\u0020\u3000\u1680\u2000-\u2006\u2008-\u200A\u205F\u00A0\u2007\u202F]+/;
 
 module.exports = grammar({
     name: 'fish',
@@ -33,7 +36,7 @@ module.exports = grammar({
 
     extras: $ => [
         $.comment,
-        /\\?\s/,
+        WHITESPACE,
     ],
 
     rules: {
@@ -81,7 +84,6 @@ module.exports = grammar({
             $.continue,
             $.return,
             $.negated_statement,
-            $.test_command,
         ),
 
         _terminated_statement: $ => seq(
@@ -189,17 +191,6 @@ module.exports = grammar({
             'begin',
             optional(repeat1($._terminated_opt_statement)),
             'end',
-        ),
-
-        test_command: $ => seq(
-            alias(/\[\s/, '['),
-            /*
-             * We are expecting a whitespace after each expression.
-             * [ test ] - valid
-             * [ test] - invalid: missing ], ] treated as concat
-             */
-            repeat(field('argument', seq($._expression, /\s/))),
-            ']',
         ),
 
         comment: () => token(prec(-11, /#.*/)),
@@ -370,7 +361,7 @@ module.exports = grammar({
             '#',
             '(', ')',
             '{', '}',
-            '\\[', '\\]',
+            '[', ']',
             '<', '>',
             '"', "'",
             '^',

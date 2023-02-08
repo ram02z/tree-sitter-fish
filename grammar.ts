@@ -71,6 +71,8 @@ module.exports = grammar({
         WHITESPACE,
     ],
 
+    word: ($) => $.word,
+
     rules: {
         program: $ => repeat(seq(
             optional($._statement),

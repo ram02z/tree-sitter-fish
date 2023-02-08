@@ -62,6 +62,7 @@ module.exports = grammar({
         $.comment,
         WHITESPACE,
     ],
+    word: ($) => $.word,
     rules: {
         program: $ => repeat(seq(optional($._statement), $._terminator)),
         conditional_execution: $ => choice(prec.right(-1, seq(choice('and', 'or'), $._statement)), prec.right(-1, seq($._statement, choice('||', '&&'), $._statement))),

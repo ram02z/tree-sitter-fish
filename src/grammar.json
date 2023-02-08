@@ -1,5 +1,6 @@
 {
   "name": "fish",
+  "word": "word",
   "rules": {
     "program": {
       "type": "REPEAT",

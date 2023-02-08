@@ -274,7 +274,7 @@ module.exports = grammar({
         double_quote_string: $ => seq(
             '"',
             repeat(choice(
-                token.immediate(/[^\$\\"]+/),
+                /[^\$\\"]+/,
                 $.variable_expansion,
                 $.escape_sequence,
                 /*
@@ -289,13 +289,13 @@ module.exports = grammar({
         single_quote_string: $ => seq(
             '\'',
             repeat(choice(
-                token.immediate(/[^'\\]+/),
+                /[^'\\]+/,
                 $.escape_sequence,
             )),
             '\'',
         ),
 
-        escape_sequence: () => token(seq('\\', choice(
+        escape_sequence: () => token(seq('\\', token.immediate(choice(
             /[^xXuUc]/,
             /[0-7]{1,3}/,
             /x[0-9a-fA-F]{0,2}/,
@@ -303,7 +303,7 @@ module.exports = grammar({
             /u[0-9a-fA-F]{0,4}/,
             /U[0-9a-fA-F]{0,8}/,
             /c[a-zA-Z]?/,
-        ))),
+        )))),
 
         command: $ => prec.right(seq(
             field('name', $._expression),
@@ -313,8 +313,8 @@ module.exports = grammar({
             )),
         )),
 
-        stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
-        direction: () => token(/(\d*|&)(>>?\??|<)/),
+        stream_redirect: () => /\d*(>>|>|<)&[012-]/,
+        direction: () => /(\d*|&)(>>?\??|<)/,
 
         file_redirect: $ => seq(
             field('operator', $.direction),

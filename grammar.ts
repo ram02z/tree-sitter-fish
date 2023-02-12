@@ -1,26 +1,61 @@
 // TODO(9):     Go through SPECIAL_CARACTERS for `word` and `bracket_word` and ensure they are correct.
 
-function charMatch(characterArray: string[], negate: boolean): RegExp {
+function regexChars(characters: string[]): string {
     const regexSpecialCharacters = [
-        '$', '\\', '*', '~', '#', '(', ')', '{', '}', '|', '^', '&',
+        '$', '\\', '*', '(', ')', '{', '}', '[', ']', '|', '^'
     ];
 
-    const escaped = characterArray.map((c) =>
-        regexSpecialCharacters.includes(c) ? '\\' + c : c);
-
-    return new RegExp(`[${negate ? '^' : ''}${escaped.join('')}]+`);
+    return characters
+        .map((c) => regexSpecialCharacters.includes(c) ? '\\' + c : c)
+        .join('');
 }
 
-function noneOf(characterArray: string[]): RegExp {
-    return charMatch(characterArray, true);
-}
+// https://util.unicode.org/UnicodeJsps/list-unicodeset.jsp?a=%5B%3AWhite_Space%3DYes%3A%5D&g=&i=
+const WHITESPACE = /[\u0009-\u000D\u0085\u2028\u2029\u0020\u3000\u1680\u2000-\u2006\u2008-\u200A\u205F\u00A0\u2007\u202F]+/;
+
+// Set of characters that cannot start a word.
+const WORD_START_NEG_PATTERN = regexChars([
+    '$',
+    '*',
+    '~',
+    '#',
+    '(', ')',
+    '{', '}',
+    '[', ']',
+    '<', '>',
+    '"', "'",
+    '^',
+    '&',
+    '|',
+    ';',
+    '\\',
+    '\\s',
+]);
+// Set of characters that cannot continue a word.
+const WORD_CONTINUE_NEG_PATTERN = regexChars([
+    '$',
+    '*',
+    '~',
+    '(', ')',
+    '{', '}',
+    '[', ']',
+    '<', '>',
+    '"', "'",
+    '^',
+    '&',
+    '|',
+    ';',
+    '\\',
+    '\\s',
+]);
+
+const WORD_PATTERN = new RegExp(`[^${WORD_START_NEG_PATTERN}][^${WORD_CONTINUE_NEG_PATTERN}]*`);
 
 module.exports = grammar({
     name: 'fish',
 
     externals: $ => [
         $._concat,
-        $._concat_oct,
         $._brace_concat,
         $._concat_list,
     ],
@@ -33,8 +68,10 @@ module.exports = grammar({
 
     extras: $ => [
         $.comment,
-        /\\?\s/,
+        WHITESPACE,
     ],
+
+    word: ($) => $.word,
 
     rules: {
         program: $ => repeat(seq(
@@ -81,7 +118,6 @@ module.exports = grammar({
             $.continue,
             $.return,
             $.negated_statement,
-            $.test_command,
         ),
 
         _terminated_statement: $ => seq(
@@ -191,17 +227,6 @@ module.exports = grammar({
             'end',
         ),
 
-        test_command: $ => seq(
-            alias(/\[\s/, '['),
-            /*
-             * We are expecting a whitespace after each expression.
-             * [ test ] - valid
-             * [ test] - invalid: missing ], ] treated as concat
-             */
-            repeat(field('argument', seq($._expression, /\s/))),
-            ']',
-        ),
-
         comment: () => token(prec(-11, /#.*/)),
 
         variable_name: () => /[a-zA-Z0-9_]+/,
@@ -251,7 +276,7 @@ module.exports = grammar({
         double_quote_string: $ => seq(
             '"',
             repeat(choice(
-                token.immediate(/[^\$\\"]+/),
+                /[^\$\\"]+/,
                 $.variable_expansion,
                 $.escape_sequence,
                 /*
@@ -266,13 +291,13 @@ module.exports = grammar({
         single_quote_string: $ => seq(
             '\'',
             repeat(choice(
-                token.immediate(/[^'\\]+/),
+                /[^'\\]+/,
                 $.escape_sequence,
             )),
             '\'',
         ),
 
-        escape_sequence: () => token(seq('\\', choice(
+        escape_sequence: () => token(seq('\\', token.immediate(choice(
             /[^xXuUc]/,
             /[0-7]{1,3}/,
             /x[0-9a-fA-F]{0,2}/,
@@ -280,7 +305,7 @@ module.exports = grammar({
             /u[0-9a-fA-F]{0,4}/,
             /U[0-9a-fA-F]{0,8}/,
             /c[a-zA-Z]?/,
-        ))),
+        )))),
 
         command: $ => prec.right(seq(
             field('name', $._expression),
@@ -290,8 +315,8 @@ module.exports = grammar({
             )),
         )),
 
-        stream_redirect: () => token(/\d*(>>|>|<)&[012-]/),
-        direction: () => token(/(\d*|&)(>>?\??|<)/),
+        stream_redirect: () => /\d*(>>|>|<)&[012-]/,
+        direction: () => /(\d*|&)(>>?\??|<)/,
 
         file_redirect: $ => seq(
             field('operator', $.direction),
@@ -303,12 +328,9 @@ module.exports = grammar({
         concatenation: $ => seq(
             choice($._base_expression, $._special_character),
             repeat1(
-                choice(
-                    $._concat_oct,
-                    seq(
-                        $._concat,
-                        choice($._base_expression, $._special_character),
-                    ),
+                seq(
+                    $._concat,
+                    choice($._base_expression, $._special_character, '#'),
                 ),
             ),
         ),
@@ -363,25 +385,11 @@ module.exports = grammar({
 
         glob: () => token(repeat1('*')),
 
-        word: () => noneOf([
-            '$',
-            '*',
-            '~',
-            '#',
-            '(', ')',
-            '{', '}',
-            '\\[', '\\]',
-            '<', '>',
-            '"', "'",
-            '^',
-            '&',
-            '|',
-            ';',
-            '\\',
-            '\\s',
-]),
+        word: () => WORD_PATTERN,
 
-        brace_word: () => noneOf(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')']),
+        brace_word: () => new RegExp(`[^${
+            regexChars(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')'])
+        }]+`),
     },
 });
 

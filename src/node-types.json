@@ -60,10 +60,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -223,10 +219,6 @@
         },
         {
           "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "test_command",
           "named": true
         },
         {
@@ -433,10 +425,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -559,10 +547,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -653,10 +637,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -744,10 +724,6 @@
             "named": true
           },
           {
-            "type": "test_command",
-            "named": true
-          },
-          {
             "type": "while_statement",
             "named": true
           }
@@ -808,10 +784,6 @@
         },
         {
           "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "test_command",
           "named": true
         },
         {
@@ -1017,10 +989,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -1197,10 +1165,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -1288,10 +1252,6 @@
             "named": true
           },
           {
-            "type": "test_command",
-            "named": true
-          },
-          {
             "type": "while_statement",
             "named": true
           }
@@ -1360,10 +1320,6 @@
         },
         {
           "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "test_command",
           "named": true
         },
         {
@@ -1484,10 +1440,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -1555,10 +1507,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -1623,10 +1571,6 @@
         },
         {
           "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "test_command",
           "named": true
         },
         {
@@ -1717,10 +1661,6 @@
         },
         {
           "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "test_command",
           "named": true
         },
         {
@@ -1875,66 +1815,6 @@
     }
   },
   {
-    "type": "test_command",
-    "named": true,
-    "fields": {
-      "argument": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "brace_expansion",
-            "named": true
-          },
-          {
-            "type": "command_substitution",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "double_quote_string",
-            "named": true
-          },
-          {
-            "type": "escape_sequence",
-            "named": true
-          },
-          {
-            "type": "float",
-            "named": true
-          },
-          {
-            "type": "glob",
-            "named": true
-          },
-          {
-            "type": "home_dir_expansion",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "single_quote_string",
-            "named": true
-          },
-          {
-            "type": "variable_expansion",
-            "named": true
-          },
-          {
-            "type": "word",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "variable_expansion",
     "named": true,
     "fields": {},
@@ -2038,10 +1918,6 @@
             "named": true
           },
           {
-            "type": "test_command",
-            "named": true
-          },
-          {
             "type": "while_statement",
             "named": true
           }
@@ -2105,10 +1981,6 @@
           "named": true
         },
         {
-          "type": "test_command",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -2138,6 +2010,10 @@
   },
   {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "#",
     "named": false
   },
   {

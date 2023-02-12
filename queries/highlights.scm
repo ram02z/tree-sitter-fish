@@ -21,7 +21,8 @@
   argument: (word) @operator (#match? @operator "^(!?=|-[a-zA-Z]+)$"))
 
 ; match operators of [ command
-(test_command
+(command
+  name: (word) @punctuation.bracket (#match? @punctuation.bracket "^\\[$")
   argument: (word) @operator (#match? @operator "^(!?=|-[a-zA-Z]+)$"))
 
 (variable_expansion) @constant

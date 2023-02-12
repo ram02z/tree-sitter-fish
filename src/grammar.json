@@ -1,5 +1,6 @@
 {
   "name": "fish",
+  "word": "word",
   "rules": {
     "program": {
       "type": "REPEAT",
@@ -212,10 +213,6 @@
         {
           "type": "SYMBOL",
           "name": "negated_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "test_command"
         }
       ]
     },
@@ -742,44 +739,6 @@
         }
       ]
     },
-    "test_command": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\[\\s"
-          },
-          "named": false,
-          "value": "["
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "FIELD",
-            "name": "argument",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_expression"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "\\s"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "]"
-        }
-      ]
-    },
     "comment": {
       "type": "TOKEN",
       "content": {
@@ -999,11 +958,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[^\\$\\\\\"]+"
-                }
+                "type": "PATTERN",
+                "value": "[^\\$\\\\\"]+"
               },
               {
                 "type": "SYMBOL",
@@ -1039,11 +995,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[^'\\\\]+"
-                }
+                "type": "PATTERN",
+                "value": "[^'\\\\]+"
               },
               {
                 "type": "SYMBOL",
@@ -1068,37 +1021,40 @@
             "value": "\\"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[^xXuUc]"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[0-7]{1,3}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "x[0-9a-fA-F]{0,2}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "X[0-9a-fA-F]{0,2}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "u[0-9a-fA-F]{0,4}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "U[0-9a-fA-F]{0,8}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "c[a-zA-Z]?"
-              }
-            ]
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[^xXuUc]"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[0-7]{1,3}"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "x[0-9a-fA-F]{0,2}"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "X[0-9a-fA-F]{0,2}"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "u[0-9a-fA-F]{0,4}"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "U[0-9a-fA-F]{0,8}"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "c[a-zA-Z]?"
+                }
+              ]
+            }
           }
         ]
       }
@@ -1154,18 +1110,12 @@
       }
     },
     "stream_redirect": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\d*(>>|>|<)&[012-]"
-      }
+      "type": "PATTERN",
+      "value": "\\d*(>>|>|<)&[012-]"
     },
     "direction": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "(\\d*|&)(>>?\\??|<)"
-      }
+      "type": "PATTERN",
+      "value": "(\\d*|&)(>>?\\??|<)"
     },
     "file_redirect": {
       "type": "SEQ",
@@ -1220,31 +1170,26 @@
         {
           "type": "REPEAT1",
           "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_concat_oct"
+                "name": "_concat"
               },
               {
-                "type": "SEQ",
+                "type": "CHOICE",
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_concat"
+                    "name": "_base_expression"
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "_base_expression"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "_special_character"
-                      }
-                    ]
+                    "type": "SYMBOL",
+                    "name": "_special_character"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "#"
                   }
                 ]
               }
@@ -1451,7 +1396,7 @@
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^\\$\\*\\~\\#\\(\\)\\{\\}\\[\\]<>\"'\\^\\&\\|;\\\\\\s]+"
+      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'\\^&\\|;\\\\\\s][^\\$\\*~\\(\\)\\{\\}\\[\\]<>\"'\\^&\\|;\\\\\\s]*"
     },
     "brace_word": {
       "type": "PATTERN",
@@ -1465,7 +1410,7 @@
     },
     {
       "type": "PATTERN",
-      "value": "\\\\?\\s"
+      "value": "[\\u0009-\\u000D\\u0085\\u2028\\u2029\\u0020\\u3000\\u1680\\u2000-\\u2006\\u2008-\\u200A\\u205F\\u00A0\\u2007\\u202F]+"
     }
   ],
   "conflicts": [],
@@ -1474,10 +1419,6 @@
     {
       "type": "SYMBOL",
       "name": "_concat"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_concat_oct"
     },
     {
       "type": "SYMBOL",

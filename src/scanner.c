@@ -3,7 +3,6 @@
 
 enum TokenType {
     CONCAT,
-    CONCAT_OCT,
     BRACKET_CONCAT,
     CONCAT_LIST
 };
@@ -38,32 +37,6 @@ bool tree_sitter_fish_external_scanner_scan(
             lexer->lookahead == '|' ||
             iswspace(lexer->lookahead)
         )) {
-
-            if (lexer->lookahead == '#') {
-               /*
-                * Consume # characters so that they not start a comment
-                * when concat is possible.
-                */
-                while (lexer->lookahead == '#') {
-                    lexer->advance(lexer, false);
-                }
-
-                /*
-                 * If the character after # is one of the characters:
-                 * whitespace, redirect, command substitution, brace expansion, ';', '|', '$', '&', or '['
-                 * then another expression begins that should be concatenated or concat ends.
-                 * 
-                 * For simplicity iswalnum is used.
-                 */
-                if (
-                    iswspace(lexer->lookahead) ||
-                    !iswalnum(lexer->lookahead)
-                ) {
-                    lexer->result_symbol = CONCAT_OCT;
-                    return true;
-                }
-            }
-
             lexer->result_symbol = CONCAT;
             return true;
         }

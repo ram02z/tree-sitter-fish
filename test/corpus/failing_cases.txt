@@ -24,17 +24,15 @@ set (
         (command
           (word)
           (word)))))
-  (ERROR
-    (pipe
+  (command
+    (word)
+    (command_substitution
       (command
         (word)
-        (command_substitution
-          (command
-            (word)
-            (integer)
-            (escape_sequence))
-          (comment)
-          (MISSING ")")))
+        (integer)
+        (escape_sequence))
+      (comment)
+      (ERROR)
       (command
         (word)
         (word)))))

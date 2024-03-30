@@ -66,7 +66,7 @@ module.exports = grammar({
     rules: {
         program: $ => repeat(seq(optional($._statement), $._terminator)),
         conditional_execution: $ => choice(prec.right(-1, seq(choice('and', 'or'), $._statement)), prec.right(-1, seq($._statement, choice('||', '&&'), $._statement))),
-        pipe: $ => prec.left(seq($._statement, '|', $._statement)),
+        pipe: $ => prec.left(seq($._statement, choice('&|', '2>|', '|'), $._statement)),
         redirect_statement: $ => seq($._statement, choice($.file_redirect, $.stream_redirect)),
         _terminator: () => choice(';', '&', '\n', '\r', '\r\n'),
         _statement: $ => choice($.conditional_execution, $.pipe, $.command, $.redirect_statement, $.begin_statement, $.if_statement, $.while_statement, $.for_statement, $.switch_statement, $.function_definition, $.break, $.continue, $.return, $.negated_statement),

@@ -86,7 +86,7 @@ module.exports = grammar({
 
         pipe: $ => prec.left(seq(
             $._statement,
-            '|',
+            choice('&|', '2>|', '|'),
             $._statement,
         )),
 

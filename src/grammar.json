@@ -98,8 +98,21 @@
             "name": "_statement"
           },
           {
-            "type": "STRING",
-            "value": "|"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "&|"
+              },
+              {
+                "type": "STRING",
+                "value": "2>|"
+              },
+              {
+                "type": "STRING",
+                "value": "|"
+              }
+            ]
           },
           {
             "type": "SYMBOL",
@@ -1436,4 +1449,3 @@
   ],
   "supertypes": []
 }
-

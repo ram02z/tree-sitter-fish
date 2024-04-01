@@ -2029,6 +2029,10 @@
     "named": false
   },
   {
+    "type": "&|",
+    "named": false
+  },
+  {
     "type": "'",
     "named": false
   },
@@ -2046,6 +2050,10 @@
   },
   {
     "type": "..",
+    "named": false
+  },
+  {
+    "type": "2>|",
     "named": false
   },
   {

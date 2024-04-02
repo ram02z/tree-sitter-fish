@@ -3,6 +3,7 @@
   "version": "3.5.1",
   "description": "Fish tree-sitter grammar",
   "main": "bindings/node",
+  "types": "bindings/node",
   "scripts": {
     "build": "tsc -p tsconfig.json && tree-sitter generate",
     "build:wasm": "npm run build && tree-sitter build-wasm",
@@ -10,7 +11,9 @@
     "test": "tree-sitter test",
     "test:watch": "nodemon --ext ts,txt,fish,scm --watch grammar.ts --watch test --watch queries --exec 'npm run build && npm run test'",
     "test:examples": "bash ./scripts/test_shared.sh",
-    "test:dev": "nodemon --ext fish --watch test.fish --watch grammar.ts --exec 'npm run build && tree-sitter parse ./test.fish -d'"
+    "test:dev": "nodemon --ext fish --watch test.fish --watch grammar.ts --exec 'npm run build && tree-sitter parse ./test.fish -d'",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
   },
   "keywords": [
     "tree-sitter",
@@ -18,15 +21,33 @@
     "shell",
     "parser"
   ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
   "author": "Krnik",
   "dependencies": {
-    "nan": "^2.14.2"
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
     "nodemon": "^2.0.7",
     "tree-sitter-cli": "^0.20.7",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "prebuildify": "^6.0.0"
   },
   "repository": {
     "type": "git",

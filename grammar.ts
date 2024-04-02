@@ -24,7 +24,6 @@ const WORD_START_NEG_PATTERN = regexChars([
     '[', ']',
     '<', '>',
     '"', "'",
-    '^',
     '&',
     '|',
     ';',
@@ -41,7 +40,6 @@ const WORD_CONTINUE_NEG_PATTERN = regexChars([
     '[', ']',
     '<', '>',
     '"', "'",
-    '^',
     '&',
     '|',
     ';',
@@ -86,7 +84,7 @@ module.exports = grammar({
 
         pipe: $ => prec.left(seq(
             $._statement,
-            '|',
+            choice('&|', '2>|', '|'),
             $._statement,
         )),
 
@@ -392,4 +390,3 @@ module.exports = grammar({
         }]+`),
     },
 });
-

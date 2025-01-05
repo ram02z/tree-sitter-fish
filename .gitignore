@@ -1,5 +1,7 @@
 /.git/
 /node_modules/
 /build/
+/target/
 tree-sitter-fish.wasm
 package-lock.json
+Cargo.lock

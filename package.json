@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-fish",
-  "version": "3.5.1",
+  "version": "3.6.0",
   "description": "Fish tree-sitter grammar",
   "main": "bindings/node",
   "types": "bindings/node",

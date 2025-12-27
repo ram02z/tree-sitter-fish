@@ -36,11 +36,13 @@ end
   (switch_statement
     value: (word)
     (case_clause
-      (single_quote_string)))
+      (single_quote_string
+        (string_content))))
   (switch_statement
     value: (word)
     (case_clause
-      (single_quote_string)))
+      (single_quote_string
+        (string_content))))
   (switch_statement
     value: (word)
     (case_clause

@@ -112,14 +112,17 @@ test \( $status -o \( 'te' != 'st' -a $status != '0' \)\)
       (variable_name))
     argument: (word)
     argument: (escape_sequence)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
     argument: (word)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
     argument: (word)
     argument: (variable_expansion
       (variable_name))
     argument: (word)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
     argument: (concatenation
       (escape_sequence)
       (escape_sequence))
@@ -141,14 +144,17 @@ test \( $status -o \( 'te' != 'st' -a $status != '0' \)\)
       (variable_name))
     argument: (word)
     argument: (escape_sequence)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
     argument: (word)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
     argument: (word)
     argument: (variable_expansion
       (variable_name))
     argument: (word)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
     argument: (concatenation
       (escape_sequence)
       (escape_sequence))))
@@ -527,15 +533,24 @@ test -z ''
 (program
   (command
     name: (word)
-    argument: (double_quote_string)
+    argument: (double_quote_string
+      (string_content))
     argument: (word)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
     argument: (word))
   (command
     name: (word)
     argument: (word)
     argument: (word)
-    argument: (single_quote_string)
+    argument: (single_quote_string
+      (string_content))
+    argument: (word))
+  (command
+    name: (word)
+    argument: (word)
+    argument: (single_quote_string
+      (string_content))
     argument: (word))
   (command
     name: (word)
@@ -544,23 +559,22 @@ test -z ''
     argument: (word))
   (command
     name: (word)
+    argument: (double_quote_string
+      (string_content))
     argument: (word)
-    argument: (single_quote_string)
-    argument: (word))
-  (command
-    name: (word)
-    argument: (double_quote_string)
-    argument: (word)
-    argument: (single_quote_string))
+    argument: (single_quote_string
+      (string_content)))
   (command
     name: (word)
     argument: (word)
     argument: (word)
-    argument: (single_quote_string))
+    argument: (single_quote_string
+      (string_content)))
   (command
     name: (word)
     argument: (word)
-    argument: (single_quote_string))
+    argument: (single_quote_string
+      (string_content)))
   (command
     name: (word)
     argument: (word)

@@ -9,8 +9,10 @@ Concatenation - two single quote strings
 (program
   (command
     name: (concatenation
-      (single_quote_string)
-      (single_quote_string))))
+      (single_quote_string
+        (string_content))
+      (single_quote_string
+        (string_content)))))
 
 ================================================================================
 Concatenation - two double quote strings
@@ -23,8 +25,10 @@ Concatenation - two double quote strings
 (program
   (command
     name: (concatenation
-      (double_quote_string)
-      (double_quote_string))))
+      (double_quote_string
+        (string_content))
+      (double_quote_string
+        (string_content)))))
 
 ================================================================================
 Concatenation - two mixed strings
@@ -37,8 +41,10 @@ Concatenation - two mixed strings
 (program
   (command
     name: (concatenation
-      (double_quote_string)
-      (single_quote_string))))
+      (double_quote_string
+        (string_content))
+      (single_quote_string
+        (string_content)))))
 
 ================================================================================
 Concatenation - multiple mixed strings
@@ -51,10 +57,14 @@ Concatenation - multiple mixed strings
 (program
   (command
     name: (concatenation
-      (double_quote_string)
-      (single_quote_string)
-      (double_quote_string)
-      (double_quote_string))))
+      (double_quote_string
+        (string_content))
+      (single_quote_string
+        (string_content))
+      (double_quote_string
+        (string_content))
+      (double_quote_string
+        (string_content)))))
 
 ================================================================================
 Concatenation - single quote string with escape sequence
@@ -68,7 +78,8 @@ location
 (program
   (command
     name: (concatenation
-      (single_quote_string)
+      (single_quote_string
+        (string_content))
       (escape_sequence)
       (word))))
 
@@ -84,11 +95,14 @@ Concatenation - multiple single quote strings with escape sequence
 (program
   (command
     name: (concatenation
-      (single_quote_string)
+      (single_quote_string
+        (string_content))
       (escape_sequence)
-      (single_quote_string)
+      (single_quote_string
+        (string_content))
       (escape_sequence)
-      (single_quote_string))))
+      (single_quote_string
+        (string_content)))))
 
 ================================================================================
 Concatenation - double quote string with escape sequence
@@ -101,7 +115,8 @@ Concatenation - double quote string with escape sequence
 (program
   (command
     name: (concatenation
-      (double_quote_string)
+      (double_quote_string
+        (string_content))
       (escape_sequence))))
 
 ================================================================================
@@ -116,11 +131,14 @@ Concatenation - multiple double quote strings with escape sequence
 (program
   (command
     name: (concatenation
-      (double_quote_string)
+      (double_quote_string
+        (string_content))
       (escape_sequence)
-      (double_quote_string)
+      (double_quote_string
+        (string_content))
       (escape_sequence)
-      (double_quote_string))))
+      (double_quote_string
+        (string_content)))))
 
 ================================================================================
 Concatenation - mixed strings with escape sequence
@@ -134,11 +152,14 @@ Concatenation - mixed strings with escape sequence
 (program
   (command
     name: (concatenation
-      (double_quote_string)
+      (double_quote_string
+        (string_content))
       (escape_sequence)
-      (single_quote_string)
+      (single_quote_string
+        (string_content))
       (escape_sequence)
-      (single_quote_string))))
+      (single_quote_string
+        (string_content)))))
 
 ================================================================================
 Concatenation - double quote strings with escape sequence and variable expansion
@@ -152,6 +173,7 @@ Concatenation - double quote strings with escape sequence and variable expansion
   (command
     name: (concatenation
       (double_quote_string
+        (string_content)
         (variable_expansion
           (variable_name)))
       (escape_sequence)
@@ -169,13 +191,20 @@ Concatenation - mixed quote strings with escape sequence and variable expansion
 --------------------------------------------------------------------------------
 
 (program
-  (command
-    name: (concatenation
-      (single_quote_string)
-      (escape_sequence)
-      (double_quote_string
-        (variable_expansion
-          (variable_name))))))
+  (ERROR
+    (single_quote_string
+      (string_content)
+      (MISSING "'"))
+    argument: (concatenation
+      (variable_expansion
+        (variable_name))
+      (single_quote_string
+        (escape_sequence)
+        (string_content)
+        (MISSING "'")))
+    (variable_expansion
+      (variable_name))
+    (string_content)))
 
 ================================================================================
 Concatenation - variable expansion concat
@@ -193,13 +222,15 @@ $PATH\ ological
       (variable_expansion
         (variable_name))
       (escape_sequence)
-      (single_quote_string)))
+      (single_quote_string
+        (string_content))))
   (command
     name: (concatenation
       (variable_expansion
         (variable_name))
       (escape_sequence)
-      (double_quote_string)))
+      (double_quote_string
+        (string_content))))
   (command
     name: (concatenation
       (variable_expansion

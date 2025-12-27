@@ -24,9 +24,11 @@ end
   (if_statement
     condition: (command
       name: (word)
-      argument: (single_quote_string)
+      argument: (single_quote_string
+        (string_content))
       argument: (word)
-      argument: (single_quote_string)
+      argument: (single_quote_string
+        (string_content))
       argument: (word)))
   (if_statement
     condition: (command

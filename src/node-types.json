@@ -570,6 +570,10 @@
           "named": true
         },
         {
+          "type": "string_content",
+          "named": true
+        },
+        {
           "type": "variable_expansion",
           "named": true
         }
@@ -1740,6 +1744,10 @@
         {
           "type": "escape_sequence",
           "named": true
+        },
+        {
+          "type": "string_content",
+          "named": true
         }
       ]
     }
@@ -2154,6 +2162,10 @@
   },
   {
     "type": "stream_redirect",
+    "named": true
+  },
+  {
+    "type": "string_content",
     "named": true
   },
   {

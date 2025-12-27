@@ -958,6 +958,14 @@
         ]
       }
     },
+    "string_content": {
+      "type": "PATTERN",
+      "value": "[^\\$\\\\'\"]+"
+    },
+    "double_quote_string_content": {
+      "type": "PATTERN",
+      "value": "[^\\$\\\\\"]+"
+    },
     "double_quote_string": {
       "type": "SEQ",
       "members": [
@@ -971,8 +979,13 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "[^\\$\\\\\"]+"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "double_quote_string_content"
+                },
+                "named": true,
+                "value": "string_content"
               },
               {
                 "type": "SYMBOL",
@@ -995,6 +1008,10 @@
         }
       ]
     },
+    "single_quote_string_content": {
+      "type": "PATTERN",
+      "value": "[^\\$\\\\']+"
+    },
     "single_quote_string": {
       "type": "SEQ",
       "members": [
@@ -1008,8 +1025,13 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "[^'\\\\]+"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "single_quote_string_content"
+                },
+                "named": true,
+                "value": "string_content"
               },
               {
                 "type": "SYMBOL",
@@ -1409,7 +1431,7 @@
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'\\^&\\|;\\\\\\s][^\\$\\*~\\(\\)\\{\\}\\[\\]<>\"'\\^&\\|;\\\\\\s]*"
+      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s][^\\$\\*~\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s]*"
     },
     "brace_word": {
       "type": "PATTERN",
@@ -1449,3 +1471,4 @@
   ],
   "supertypes": []
 }
+

@@ -59,7 +59,8 @@ echo (
         argument: (word))
       (command
         name: (word)
-        argument: (single_quote_string)))))
+        argument: (single_quote_string
+          (string_content))))))
 
 ================================================================================
 Command Substitution - $ support since 3.4.0 (3.5.0 removed "$$()")
@@ -95,7 +96,8 @@ echo "$( echo )"
 (program
   (command
     name: (word)
-    argument: (double_quote_string))
+    argument: (double_quote_string
+      (string_content)))
   (comment)
   (command
     name: (word)

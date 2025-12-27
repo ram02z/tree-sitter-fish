@@ -9,9 +9,11 @@ Single quote string - single word
 
 (program
   (command
-    name: (single_quote_string))
+    name: (single_quote_string
+      (string_content)))
   (command
-    name: (single_quote_string)))
+    name: (single_quote_string
+      (string_content))))
 
 ================================================================================
 Single quote string - multi words
@@ -23,7 +25,8 @@ Single quote string - multi words
 
 (program
   (command
-    name: (single_quote_string)))
+    name: (single_quote_string
+      (string_content))))
 
 ================================================================================
 Single quote string - escape sequences
@@ -37,7 +40,9 @@ a string can span two lines'
 (program
   (command
     name: (single_quote_string
-      (escape_sequence))))
+      (string_content)
+      (escape_sequence)
+      (string_content))))
 
 ================================================================================
 Single quote string - escaped quotes
@@ -50,6 +55,7 @@ Single quote string - escaped quotes
 (program
   (command
     name: (single_quote_string
+      (string_content)
       (escape_sequence))))
 
 ================================================================================
@@ -61,8 +67,13 @@ Single quote string - double quotes with no meaning
 --------------------------------------------------------------------------------
 
 (program
-  (command
-    name: (single_quote_string)))
+  (ERROR
+    (single_quote_string
+      (string_content)
+      (MISSING "'"))
+    (variable_expansion
+      (variable_name))
+    (string_content)))
 
 ================================================================================
 Single quote string - no variable expansion
@@ -73,5 +84,7 @@ Single quote string - no variable expansion
 --------------------------------------------------------------------------------
 
 (program
-  (command
-    name: (single_quote_string)))
+  (ERROR
+    (variable_expansion
+      (variable_name))
+    (string_content)))

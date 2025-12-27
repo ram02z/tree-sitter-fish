@@ -94,13 +94,16 @@ module.exports = grammar({
         range: $ => prec.right(2, seq(optional($.index), '..', optional($.index))),
         list_element_access: $ => seq('[', repeat(choice($.index, $.range)), ']'),
         brace_expansion: $ => prec.right(seq('{', seq(optional($._brace_expression), repeat(seq(',', optional($._brace_expression)))), '}')),
-        double_quote_string: $ => seq('"', repeat(choice(/[^\$\\"]+/, $.variable_expansion, $.escape_sequence, 
+        string_content: () => /[^\$\\'"]+/,
+        double_quote_string_content: () => /[^\$\\"]+/,
+        double_quote_string: $ => seq('"', repeat(choice(alias($.double_quote_string_content, $.string_content), $.variable_expansion, $.escape_sequence, 
         /*
          * Only new "$()" syntax is expanded inside double quoted strings.
          * However, "()" matches the regex above - so we're good.
          */
         $.command_substitution)), '"'),
-        single_quote_string: $ => seq('\'', repeat(choice(/[^'\\]+/, $.escape_sequence)), '\''),
+        single_quote_string_content: () => /[^\$\\']+/,
+        single_quote_string: $ => seq('\'', repeat(choice(alias($.single_quote_string_content, $.string_content), $.escape_sequence)), '\''),
         escape_sequence: () => token(seq('\\', token.immediate(choice(/[^xXuUc]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/)))),
         command: $ => prec.right(seq(field('name', $._expression), repeat(choice(field('redirect', choice($.file_redirect, $.stream_redirect)), field('argument', $._expression))))),
         stream_redirect: () => /\d*(>>|>|<)&[012-]/,

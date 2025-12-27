@@ -75,7 +75,8 @@ end
   (function_definition
     name: (word)
     option: (word)
-    option: (double_quote_string)
+    option: (double_quote_string
+      (string_content))
     (command
       name: (word))))
 

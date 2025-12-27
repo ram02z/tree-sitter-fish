@@ -89,7 +89,9 @@ Brace Expansion - with escapes
   (command
     name: (brace_expansion
       (single_quote_string
-        (escape_sequence)))))
+        (string_content)
+        (escape_sequence)
+        (string_content)))))
 
 ================================================================================
 Brace Expansion - with variable_expansion

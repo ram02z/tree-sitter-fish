@@ -41,21 +41,27 @@ $ENV["$ONE"]
       (variable_name)
       (list_element_access
         (index
-          (single_quote_string))
+          (single_quote_string
+            (string_content)))
         (index
-          (single_quote_string))
+          (single_quote_string
+            (string_content)))
         (index
-          (single_quote_string)))))
+          (single_quote_string
+            (string_content))))))
   (command
     name: (variable_expansion
       (variable_name)
       (list_element_access
         (index
-          (double_quote_string))
+          (double_quote_string
+            (string_content)))
         (index
-          (double_quote_string))
+          (double_quote_string
+            (string_content)))
         (index
-          (double_quote_string)))))
+          (double_quote_string
+            (string_content))))))
   (command
     name: (variable_expansion
       (variable_name)
@@ -125,9 +131,11 @@ $ENV['-1'.."-2"-1..+2 3..$ONE]
       (list_element_access
         (range
           (index
-            (single_quote_string))
+            (single_quote_string
+              (string_content)))
           (index
-            (double_quote_string)))
+            (double_quote_string
+              (string_content))))
         (range
           (index
             (integer))

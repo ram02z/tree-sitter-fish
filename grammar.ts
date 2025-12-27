@@ -271,10 +271,14 @@ module.exports = grammar({
             '}',
         )),
 
+        string_content: () => /[^\$\\'"]+/,
+
+        double_quote_string_content: () => /[^\$\\"]+/,
+
         double_quote_string: $ => seq(
             '"',
             repeat(choice(
-                /[^\$\\"]+/,
+                alias($.double_quote_string_content, $.string_content),
                 $.variable_expansion,
                 $.escape_sequence,
                 /*
@@ -286,10 +290,12 @@ module.exports = grammar({
             '"',
         ),
 
+        single_quote_string_content: () => /[^\$\\']+/,
+
         single_quote_string: $ => seq(
             '\'',
             repeat(choice(
-                /[^'\\]+/,
+                alias($.single_quote_string_content, $.string_content),
                 $.escape_sequence,
             )),
             '\'',

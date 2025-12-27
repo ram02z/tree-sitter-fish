@@ -10,12 +10,15 @@ echo "only (a string)"
 
 (program
   (command
-    name: (double_quote_string))
+    name: (double_quote_string
+      (string_content)))
   (command
-    name: (double_quote_string))
+    name: (double_quote_string
+      (string_content)))
   (command
     name: (word)
-    argument: (double_quote_string)))
+    argument: (double_quote_string
+      (string_content))))
 
 ================================================================================
 Double quote string - multi words
@@ -27,7 +30,8 @@ Double quote string - multi words
 
 (program
   (command
-    name: (double_quote_string)))
+    name: (double_quote_string
+      (string_content))))
 
 ================================================================================
 Double quote string - escape sequences
@@ -41,7 +45,9 @@ a string can span two lines"
 (program
   (command
     name: (double_quote_string
-      (escape_sequence))))
+      (string_content)
+      (escape_sequence)
+      (string_content))))
 
 ================================================================================
 Double quote string - escaped quotes
@@ -54,6 +60,7 @@ Double quote string - escaped quotes
 (program
   (command
     name: (double_quote_string
+      (string_content)
       (escape_sequence))))
 
 ================================================================================
@@ -66,7 +73,8 @@ Double quote string - single quotes with no meaning
 
 (program
   (command
-    name: (double_quote_string)))
+    name: (double_quote_string
+      (string_content))))
 
 ================================================================================
 Double quote string - variable expansion
@@ -99,7 +107,8 @@ Double quote string - escaped variable expansion
 (program
   (command
     name: (double_quote_string
-      (escape_sequence))))
+      (escape_sequence)
+      (string_content))))
 
 ================================================================================
 Double quote string - escaped variable expansion
@@ -112,6 +121,8 @@ Double quote string - escaped variable expansion
 (program
   (command
     name: (double_quote_string
+      (string_content)
       (escape_sequence)
+      (string_content)
       (variable_expansion
         (variable_name)))))

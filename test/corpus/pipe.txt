@@ -10,7 +10,8 @@ printf "one" | echo
   (pipe
     (command
       name: (word)
-      argument: (double_quote_string))
+      argument: (double_quote_string
+        (string_content)))
     (command
       name: (word))))
 
@@ -27,13 +28,15 @@ printf "stdout+stderr" &| echo
   (pipe
     (command
       name: (word)
-      argument: (double_quote_string))
+      argument: (double_quote_string
+        (string_content)))
     (command
       name: (word)))
   (pipe
     (command
       name: (word)
-      argument: (double_quote_string))
+      argument: (double_quote_string
+        (string_content)))
     (command
       name: (word))))
 

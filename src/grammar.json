@@ -725,30 +725,88 @@
       ]
     },
     "begin_statement": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "begin"
-        },
-        {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "REPEAT1",
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "{"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ";"
+                      },
+                      {
+                        "type": "PATTERN",
+                        "value": "\\s"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "REPEAT",
               "content": {
                 "type": "SYMBOL",
                 "name": "_terminated_opt_statement"
               }
             },
             {
-              "type": "BLANK"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_statement"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "}"
             }
           ]
         },
         {
-          "type": "STRING",
-          "value": "end"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "begin"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_terminated_opt_statement"
+                  }
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "end"
+            }
+          ]
         }
       ]
     },
@@ -1409,7 +1467,7 @@
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'\\^&\\|;\\\\\\s][^\\$\\*~\\(\\)\\{\\}\\[\\]<>\"'\\^&\\|;\\\\\\s]*"
+      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s][^\\$\\*~\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s]*"
     },
     "brace_word": {
       "type": "PATTERN",
@@ -1449,3 +1507,4 @@
   ],
   "supertypes": []
 }
+

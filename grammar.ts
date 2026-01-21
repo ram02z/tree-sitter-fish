@@ -219,10 +219,20 @@ module.exports = grammar({
             optional(repeat1($._terminated_opt_statement)),
         ),
 
-        begin_statement: $ => seq(
-            'begin',
-            optional(repeat1($._terminated_opt_statement)),
-            'end',
+
+        /* Syntax `{ [COMMANDS ...] }` added in 4.1.0 */
+        begin_statement: $ => choice(
+            seq(
+                seq('{', token.immediate(choice(';', /\s/))),
+                repeat($._terminated_opt_statement),
+                optional($._statement),
+                '}',
+            ),
+            seq(
+                'begin',
+                optional(repeat1($._terminated_opt_statement)),
+                'end',
+            ),
         ),
 
         comment: () => token(prec(-11, /#.*/)),

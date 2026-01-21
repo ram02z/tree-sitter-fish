@@ -219,11 +219,10 @@ module.exports = grammar({
             optional(repeat1($._terminated_opt_statement)),
         ),
 
-
         /* Syntax `{ [COMMANDS ...] }` added in 4.1.0 */
         begin_statement: $ => choice(
             seq(
-                seq('{', token.immediate(choice(';', /\s/))),
+                token(/\{[\s;]/),
                 repeat($._terminated_opt_statement),
                 optional($._statement),
                 '}',

@@ -731,11 +731,41 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "TOKEN",
+              "type": "STRING",
+              "value": "begin"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_terminated_opt_statement"
+                  }
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": "\\{[\\s;]"
-              }
+                "type": "SYMBOL",
+                "name": "_begin_brace"
+              },
+              "named": false,
+              "value": "{"
             },
             {
               "type": "REPEAT",
@@ -759,34 +789,6 @@
             {
               "type": "STRING",
               "value": "}"
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "begin"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "REPEAT1",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_terminated_opt_statement"
-                  }
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "STRING",
-              "value": "end"
             }
           ]
         }
@@ -1480,6 +1482,10 @@
     {
       "type": "SYMBOL",
       "name": "_concat_list"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_begin_brace"
     }
   ],
   "inline": [

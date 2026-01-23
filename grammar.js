@@ -50,6 +50,7 @@ module.exports = grammar({
         $._concat,
         $._brace_concat,
         $._concat_list,
+        $._begin_brace,
     ],
     inline: $ => [
         $._terminator,
@@ -87,7 +88,7 @@ module.exports = grammar({
         else_if_clause: $ => seq(seq('else', 'if'), field('condition', $._terminated_statement), optional(repeat1($._terminated_opt_statement))),
         else_clause: $ => seq('else', $._terminator, optional(repeat1($._terminated_opt_statement))),
         /* Syntax `{ [COMMANDS ...] }` added in 4.1.0 */
-        begin_statement: $ => choice(seq(token(/\{[\s;]/), repeat($._terminated_opt_statement), optional($._statement), '}'), seq('begin', optional(repeat1($._terminated_opt_statement)), 'end')),
+        begin_statement: $ => choice(seq('begin', optional(repeat1($._terminated_opt_statement)), 'end'), seq(alias($._begin_brace, '{'), repeat($._terminated_opt_statement), optional($._statement), '}')),
         comment: () => token(prec(-11, /#.*/)),
         variable_name: () => /[a-zA-Z0-9_]+/,
         variable_expansion: $ => prec.left(seq('$', choice($.variable_name, $.variable_expansion), repeat(seq($._concat_list, $.list_element_access)))),

@@ -56,6 +56,7 @@ module.exports = grammar({
         $._concat,
         $._brace_concat,
         $._concat_list,
+        $._begin_brace,
     ],
 
     inline: $ => [
@@ -219,10 +220,19 @@ module.exports = grammar({
             optional(repeat1($._terminated_opt_statement)),
         ),
 
-        begin_statement: $ => seq(
-            'begin',
-            optional(repeat1($._terminated_opt_statement)),
-            'end',
+        /* Syntax `{ [COMMANDS ...] }` added in 4.1.0 */
+        begin_statement: $ => choice(
+            seq(
+                'begin',
+                optional(repeat1($._terminated_opt_statement)),
+                'end',
+            ),
+            seq(
+                alias($._begin_brace, '{'),
+                repeat($._terminated_opt_statement),
+                optional($._statement),
+                '}',
+            ),
         ),
 
         comment: () => token(prec(-11, /#.*/)),

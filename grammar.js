@@ -57,6 +57,9 @@ module.exports = grammar({
         $._statement,
         $._base_expression,
     ],
+    conflicts: $ => [
+        [$.command_substitution, $.string_command_substitution],
+    ],
     extras: $ => [
         $.comment,
         WHITESPACE,
@@ -74,6 +77,8 @@ module.exports = grammar({
         negated_statement: $ => prec.left(-1, seq(choice('!', 'not'), $._statement)),
         /* Syntax `$(cmd)` added in 3.4.0. */
         command_substitution: $ => seq(optional('$'), '(', repeat(seq(optional($._statement), $._terminator)), optional($._statement), ')'),
+        /* Command substitution that requires $ prefix - used inside strings */
+        string_command_substitution: $ => seq('$', '(', repeat(seq(optional($._statement), $._terminator)), optional($._statement), ')'),
         function_definition: $ => seq('function', field('name', $._expression), repeat(field('option', $._expression)), $._terminator, repeat($._terminated_statement), 'end'),
         integer: () => /(-|\+)?\d+/,
         float: () => /(-|\+)?\d+\.\d+/,
@@ -101,7 +106,7 @@ module.exports = grammar({
          * Only new "$()" syntax is expanded inside double quoted strings.
          * However, "()" matches the regex above - so we're good.
          */
-        $.command_substitution)), '"'),
+        $.string_command_substitution)), '"'),
         single_quote_string: $ => seq('\'', repeat(choice(/[^'\\]+/, $.escape_sequence)), '\''),
         escape_sequence: () => token(seq('\\', token.immediate(choice(/[^xXuUc]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/)))),
         command: $ => prec.right(seq(field('name', $._expression), repeat(choice(field('redirect', choice($.file_redirect, $.stream_redirect)), field('argument', $._expression))))),
@@ -111,7 +116,7 @@ module.exports = grammar({
         _special_character: () => choice('[', ']'),
         concatenation: $ => seq(choice($._base_expression, $._special_character), repeat1(seq($._concat, choice($._base_expression, $._special_character, '#')))),
         _expression: $ => choice($._base_expression, $.concatenation, alias($._special_character, $.word)),
-        _base_expression: $ => choice($.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, $.word, $.integer, $.float, $.brace_expansion, $.escape_sequence, $.glob, $.home_dir_expansion),
+        _base_expression: $ => choice($.command_substitution, $.string_command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, $.word, $.integer, $.float, $.brace_expansion, $.escape_sequence, $.glob, $.home_dir_expansion),
         brace_concatenation: $ => seq(choice($._base_brace_expression, $.brace_expansion), repeat1(seq($._brace_concat, choice($._base_brace_expression, $.brace_expansion)))),
         _brace_expression: $ => choice(alias($.brace_concatenation, $.concatenation), $._base_brace_expression, $.brace_expansion),
         _base_brace_expression: $ => choice($.command_substitution, $.single_quote_string, $.double_quote_string, $.variable_expansion, alias($.brace_word, $.word), $.integer, $.float, $.escape_sequence, $.glob),

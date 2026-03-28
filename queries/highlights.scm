@@ -30,18 +30,23 @@
 (variable_expansion) @constant
 
 [
- "["
- "]"
- "{"
- "}"
- "("
- ")"
+  "["
+  "]"
+  "{"
+  "}"
 ] @punctuation.bracket
 
 "," @punctuation.delimiter
 
 (function_definition name: [(word) (concatenation)] @function)
 (command name: (word) @function)
+
+(string_command_substitution
+  "$" @punctuation.special)
+
+(command_substitution
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
 
 [
  "switch"

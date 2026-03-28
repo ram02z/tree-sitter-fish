@@ -79,7 +79,7 @@ echo "$(print)"
   (command
     name: (word)
     argument: (double_quote_string
-      (command_substitution
+      (string_command_substitution
         (command
           name: (word))))))
 
@@ -100,6 +100,35 @@ echo "$( echo )"
   (command
     name: (word)
     argument: (double_quote_string
-      (command_substitution
+      (string_command_substitution
         (command
           name: (word))))))
+
+================================================================================
+Double Quote String - open delimiters are literal string content
+================================================================================
+
+echo "("
+echo "[" 
+echo "{"
+echo '"'
+echo "'"
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (word)
+    argument: (double_quote_string))
+  (command
+    name: (word)
+    argument: (double_quote_string))
+  (command
+    name: (word)
+    argument: (double_quote_string))
+  (command
+    name: (word)
+    argument: (single_quote_string))
+  (command
+    name: (word)
+    argument: (double_quote_string)))

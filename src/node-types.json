@@ -218,6 +218,10 @@
           "named": true
         },
         {
+          "type": "string_command_substitution",
+          "named": true
+        },
+        {
           "type": "switch_statement",
           "named": true
         },
@@ -285,6 +289,10 @@
             "named": true
           },
           {
+            "type": "string_command_substitution",
+            "named": true
+          },
+          {
             "type": "variable_expansion",
             "named": true
           },
@@ -336,6 +344,10 @@
           },
           {
             "type": "single_quote_string",
+            "named": true
+          },
+          {
+            "type": "string_command_substitution",
             "named": true
           },
           {
@@ -476,6 +488,10 @@
           "named": true
         },
         {
+          "type": "string_command_substitution",
+          "named": true
+        },
+        {
           "type": "variable_expansion",
           "named": true
         },
@@ -562,11 +578,11 @@
       "required": false,
       "types": [
         {
-          "type": "command_substitution",
+          "type": "escape_sequence",
           "named": true
         },
         {
-          "type": "escape_sequence",
+          "type": "string_command_substitution",
           "named": true
         },
         {
@@ -842,6 +858,10 @@
             "named": true
           },
           {
+            "type": "string_command_substitution",
+            "named": true
+          },
+          {
             "type": "variable_expansion",
             "named": true
           },
@@ -909,6 +929,10 @@
           },
           {
             "type": "single_quote_string",
+            "named": true
+          },
+          {
+            "type": "string_command_substitution",
             "named": true
           },
           {
@@ -1044,6 +1068,10 @@
             "named": true
           },
           {
+            "type": "string_command_substitution",
+            "named": true
+          },
+          {
             "type": "variable_expansion",
             "named": true
           },
@@ -1095,6 +1123,10 @@
           },
           {
             "type": "single_quote_string",
+            "named": true
+          },
+          {
+            "type": "string_command_substitution",
             "named": true
           },
           {
@@ -1719,6 +1751,10 @@
           "named": true
         },
         {
+          "type": "string_command_substitution",
+          "named": true
+        },
+        {
           "type": "variable_expansion",
           "named": true
         },
@@ -1739,6 +1775,73 @@
       "types": [
         {
           "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_command_substitution",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "begin_statement",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "conditional_execution",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "negated_statement",
+          "named": true
+        },
+        {
+          "type": "pipe",
+          "named": true
+        },
+        {
+          "type": "redirect_statement",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -1790,6 +1893,10 @@
           },
           {
             "type": "single_quote_string",
+            "named": true
+          },
+          {
+            "type": "string_command_substitution",
             "named": true
           },
           {

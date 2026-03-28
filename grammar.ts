@@ -65,6 +65,10 @@ module.exports = grammar({
         $._base_expression,
     ],
 
+    conflicts: $ => [
+        [$.command_substitution, $.string_command_substitution],
+    ],
+
     extras: $ => [
         $.comment,
         WHITESPACE,
@@ -137,6 +141,18 @@ module.exports = grammar({
         /* Syntax `$(cmd)` added in 3.4.0. */
         command_substitution: $ => seq(
             optional('$'),
+            '(',
+            repeat(seq(
+                optional($._statement),
+                $._terminator,
+            )),
+            optional($._statement),
+            ')',
+        ),
+
+        /* Command substitution that requires $ prefix - used inside strings */
+        string_command_substitution: $ => seq(
+            '$',
             '(',
             repeat(seq(
                 optional($._statement),
@@ -291,7 +307,7 @@ module.exports = grammar({
                  * Only new "$()" syntax is expanded inside double quoted strings.
                  * However, "()" matches the regex above - so we're good.
                  */
-                $.command_substitution,
+                $.string_command_substitution,
             )),
             '"',
         ),
@@ -351,6 +367,7 @@ module.exports = grammar({
 
         _base_expression: $ => choice(
             $.command_substitution,
+            $.string_command_substitution,
             $.single_quote_string,
             $.double_quote_string,
             $.variable_expansion,

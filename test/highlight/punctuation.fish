@@ -8,3 +8,15 @@ echo $PATH[1..2]
 echo (printf 1)
 #    ^ punctuation.bracket
 #             ^ punctuation.bracket
+echo {$PATH[..]}two
+#    ^ punctuation.bracket
+#          ^ punctuation.bracket
+#             ^ punctuation.bracket
+#              ^ punctuation.bracket
+
+{
+// <- punctuation.bracket
+  ls
+  ls
+}
+// <- punctuation.bracket

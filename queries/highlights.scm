@@ -29,14 +29,11 @@
 
 (variable_expansion) @constant
 
-[
- "["
- "]"
- "{"
- "}"
- "("
- ")"
-] @punctuation.bracket
+(command_substitution "$" @punctuation.special)
+(command_substitution ["(" ")"] @punctuation.bracket)
+(list_element_access  ["[" "]"] @punctuation.bracket)
+(brace_expansion      ["{" "}"] @punctuation.bracket)
+(begin_statement      ["{" "}"] @punctuation.bracket)
 
 "," @punctuation.delimiter
 

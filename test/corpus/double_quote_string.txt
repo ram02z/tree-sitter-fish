@@ -5,6 +5,9 @@ Double quote string - simple value
 "value"
 "#"
 echo "only (a string)"
+echo "()"
+echo ")"
+echo "("
 
 --------------------------------------------------------------------------------
 
@@ -13,6 +16,15 @@ echo "only (a string)"
     name: (double_quote_string))
   (command
     name: (double_quote_string))
+  (command
+    name: (word)
+    argument: (double_quote_string))
+  (command
+    name: (word)
+    argument: (double_quote_string))
+  (command
+    name: (word)
+    argument: (double_quote_string))
   (command
     name: (word)
     argument: (double_quote_string)))

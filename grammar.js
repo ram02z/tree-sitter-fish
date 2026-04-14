@@ -73,7 +73,9 @@ module.exports = grammar({
         _terminated_opt_statement: $ => seq(optional($._statement), $._terminator),
         negated_statement: $ => prec.left(-1, seq(choice('!', 'not'), $._statement)),
         /* Syntax `$(cmd)` added in 3.4.0. */
-        command_substitution: $ => seq(optional('$'), '(', repeat(seq(optional($._statement), $._terminator)), optional($._statement), ')'),
+        _command_substitution_dollar: $ => seq('$', $._command_substitution_inner),
+        _command_substitution_inner: $ => seq('(', repeat(seq(optional($._statement), $._terminator)), optional($._statement), ')'),
+        command_substitution: $ => choice($._command_substitution_dollar, $._command_substitution_inner),
         function_definition: $ => seq('function', field('name', $._expression), repeat(field('option', $._expression)), $._terminator, repeat($._terminated_statement), 'end'),
         integer: () => /(-|\+)?\d+/,
         float: () => /(-|\+)?\d+\.\d+/,
@@ -96,12 +98,7 @@ module.exports = grammar({
         range: $ => prec.right(2, seq(optional($.index), '..', optional($.index))),
         list_element_access: $ => seq('[', repeat(choice($.index, $.range)), ']'),
         brace_expansion: $ => prec.right(seq('{', seq(optional($._brace_expression), repeat(seq(',', optional($._brace_expression)))), '}')),
-        double_quote_string: $ => seq('"', repeat(choice(/[^\$\\"]+/, $.variable_expansion, $.escape_sequence, 
-        /*
-         * Only new "$()" syntax is expanded inside double quoted strings.
-         * However, "()" matches the regex above - so we're good.
-         */
-        $.command_substitution)), '"'),
+        double_quote_string: $ => seq('"', repeat(choice(/[^\$\\"]+/, $.variable_expansion, $.escape_sequence, alias($._command_substitution_dollar, $.command_substitution))), '"'),
         single_quote_string: $ => seq('\'', repeat(choice(/[^'\\]+/, $.escape_sequence)), '\''),
         escape_sequence: () => token(seq('\\', token.immediate(choice(/[^xXuUc]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/)))),
         command: $ => prec.right(seq(field('name', $._expression), repeat(choice(field('redirect', choice($.file_redirect, $.stream_redirect)), field('argument', $._expression))))),

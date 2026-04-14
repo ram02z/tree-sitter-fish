@@ -135,8 +135,11 @@ module.exports = grammar({
         )),
 
         /* Syntax `$(cmd)` added in 3.4.0. */
-        command_substitution: $ => seq(
-            optional('$'),
+        _command_substitution_dollar: $ => seq(
+            '$',
+            $._command_substitution_inner,
+        ),
+        _command_substitution_inner: $ => seq(
             '(',
             repeat(seq(
                 optional($._statement),
@@ -144,6 +147,10 @@ module.exports = grammar({
             )),
             optional($._statement),
             ')',
+        ),
+        command_substitution: $ => choice(
+            $._command_substitution_dollar,
+            $._command_substitution_inner,
         ),
 
         function_definition: $ => seq(
@@ -287,11 +294,7 @@ module.exports = grammar({
                 /[^\$\\"]+/,
                 $.variable_expansion,
                 $.escape_sequence,
-                /*
-                 * Only new "$()" syntax is expanded inside double quoted strings.
-                 * However, "()" matches the regex above - so we're good.
-                 */
-                $.command_substitution,
+                alias($._command_substitution_dollar, $.command_substitution),
             )),
             '"',
         ),

@@ -1,0 +1,291 @@
+================================================================================
+Override Variable - single override with value
+================================================================================
+
+FOO=bar command
+FOO="bar" command
+FOO='bar' command
+FOO=$var command
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (double_quote_string))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (single_quote_string))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (variable_expansion
+        (variable_name)))
+    name: (word)))
+
+================================================================================
+Override Variable - single override with empty value
+================================================================================
+
+FOO= command
+BAR= cmd
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name))
+    name: (word)))
+
+================================================================================
+Override Variable - multiple overrides
+================================================================================
+
+A=1 B=2 command
+FOO=bar BAR=baz cmd
+X="a" Y="b" Z="c" run
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (integer))
+    override: (override_variable
+      name: (variable_name)
+      value: (integer))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (double_quote_string))
+    override: (override_variable
+      name: (variable_name)
+      value: (double_quote_string))
+    override: (override_variable
+      name: (variable_name)
+      value: (double_quote_string))
+    name: (word)))
+
+================================================================================
+Override Variable - mixed empty and valued overrides
+================================================================================
+
+A= B=val command
+FOO=bar BAR= cmd
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name))
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    override: (override_variable
+      name: (variable_name))
+    name: (word)))
+
+================================================================================
+Override Variable - override with arguments
+================================================================================
+
+FOO=bar command arg1 arg2
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word)
+    argument: (word)
+    argument: (word)))
+
+================================================================================
+Override Variable - not confused with arguments containing equals
+================================================================================
+
+command --foo=bar  --baz-bar=foo
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (word)
+    argument: (concatenation
+      (word)
+      (word))
+    argument: (concatenation
+      (word)
+      (word))))
+
+
+================================================================================
+Override Variable - special characters in names
+================================================================================
+
+PATH_=/usr/bin command
+PATH_PATH=/usr/local/bin command
+path-PATH=/usr/bin:$PATH command
+_path=/opt/bin _path-path=$_path __path_path=$_path-path command
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (concatenation
+        (word)
+        (variable_expansion
+          (variable_name))))
+    name: (word))
+  (command
+    override: (override_variable
+	name: (variable_name)
+	value: (word))
+    override: (override_variable
+      name: (variable_name)
+      value: (variable_expansion
+        (variable_name)))
+    override: (override_variable
+      name: (variable_name)
+      value: (variable_expansion
+        (variable_name)))
+    name: (word)))
+
+================================================================================
+Override Variable - empty override values
+================================================================================
+
+PATH_1= PATH_2= PATH_3= PATH_4= command
+a= b= c= d= command
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name))
+    override: (override_variable
+      name: (variable_name))
+    override: (override_variable
+      name: (variable_name))
+    override: (override_variable
+      name: (variable_name))
+    name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name))
+    override: (override_variable
+      name: (variable_name))
+    override: (override_variable
+      name: (variable_name))
+    override: (override_variable
+      name: (variable_name))
+    name: (word)))
+
+================================================================================
+Override Variable - complex values
+================================================================================
+
+FOO="$(builtin --names)" command
+BAR=(string join \n -- 1 2 3) command
+BAZ=(string collect -- a b c d e) command &> /dev/null
+QUX=$PATH\ $HOME/.local/bin command
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+     override: (override_variable
+       name: (variable_name)
+       value: (double_quote_string
+         (command_substitution
+           (command
+             name: (word)
+             argument: (word)))))
+     name: (word))
+  (command
+     override: (override_variable
+       name: (variable_name)
+       value: (command_substitution
+         (command
+            name: (word)
+            argument: (word)
+            argument: (escape_sequence)
+            argument: (word)
+            argument: (integer)
+            argument: (integer)
+            argument: (integer))))
+     name: (word))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (command_substitution
+        (command
+          name: (word)
+          argument: (word)
+          argument: (word)
+          argument: (word)
+          argument: (word)
+          argument: (word)
+          argument: (word)
+          argument: (word))))
+    name: (word)
+    redirect: (file_redirect
+      operator: (direction)
+      destination: (word)))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (concatenation
+        (variable_expansion
+          (variable_name))
+        (escape_sequence)
+        (variable_expansion
+          (variable_name))
+        (word)))
+    name: (word)))
+

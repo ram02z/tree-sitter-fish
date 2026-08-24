@@ -14,6 +14,7 @@ function regexChars(characters: string[]): string {
 const WHITESPACE = /[\u0009-\u000D\u0085\u2028\u2029\u0020\u3000\u1680\u2000-\u2006\u2008-\u200A\u205F\u00A0\u2007\u202F]+/;
 
 // Set of characters that cannot start a word.
+// Note: '=' is excluded to support env var override syntax (FOO=bar command)
 const WORD_START_NEG_PATTERN = regexChars([
     '$',
     '*',
@@ -29,8 +30,10 @@ const WORD_START_NEG_PATTERN = regexChars([
     ';',
     '\\',
     '\\s',
+    '=',
 ]);
 // Set of characters that cannot continue a word.
+// Note: '=' is excluded to support env var override syntax (FOO=bar command)
 const WORD_CONTINUE_NEG_PATTERN = regexChars([
     '$',
     '*',
@@ -45,6 +48,7 @@ const WORD_CONTINUE_NEG_PATTERN = regexChars([
     ';',
     '\\',
     '\\s',
+    '=',
 ]);
 
 const WORD_PATTERN = new RegExp(`[^${WORD_START_NEG_PATTERN}][^${WORD_CONTINUE_NEG_PATTERN}]*`);
@@ -57,6 +61,8 @@ module.exports = grammar({
         $._brace_concat,
         $._concat_list,
         $._begin_brace,
+        $._override_var_name,           // NAME when followed by =value
+        $._override_var_name_no_value,  // NAME= when followed by whitespace (no value)
     ],
 
     inline: $ => [
@@ -244,7 +250,21 @@ module.exports = grammar({
 
         comment: () => token(prec(-11, /#.*/)),
 
-        variable_name: () => /[a-zA-Z0-9_]+/,
+        variable_name: () => /[a-zA-Z0-9_][a-zA-Z0-9_\-]*/,
+
+        // Environment variable override (e.g., "FOO=bar" in "FOO=bar command")
+        // External scanner distinguishes between NAME=value and NAME= (no value)
+        // and shouldn't include trailing '=' in the name
+        override_variable: $ => choice(
+            // NAME=value (value immediately follows =, no whitespace)
+            seq(
+                field('name', alias($._override_var_name, $.variable_name)),
+                '=',
+                field('value', $._expression),
+            ),
+            // NAME= (no value, followed by whitespace)
+            field('name', alias($._override_var_name_no_value, $.variable_name)),
+        ),
 
         variable_expansion: $ => prec.left(seq(
             '$',
@@ -319,6 +339,7 @@ module.exports = grammar({
         )))),
 
         command: $ => prec.right(seq(
+            repeat(field('override', $.override_variable)),
             field('name', $._expression),
             repeat(choice(
                 field('redirect', choice($.file_redirect, $.stream_redirect)),
@@ -334,7 +355,10 @@ module.exports = grammar({
             field('destination', $._expression),
         ),
 
-        _special_character: () => choice('[', ']'),
+        // Special characters that can appear in concatenations
+        // '=' is included to allow patterns like --foo=bar to work via concatenation
+        // '!=' is included as a single token for test command comparisons
+        _special_character: () => choice('[', ']', '=', '!='),
 
         concatenation: $ => seq(
             choice($._base_expression, $._special_character),

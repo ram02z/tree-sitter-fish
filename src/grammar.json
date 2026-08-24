@@ -821,7 +821,55 @@
     },
     "variable_name": {
       "type": "PATTERN",
-      "value": "[a-zA-Z0-9_]+"
+      "value": "[a-zA-Z0-9_][a-zA-Z0-9_\\-]*"
+    },
+    "override_variable": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_override_var_name"
+                },
+                "named": true,
+                "value": "variable_name"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "="
+            },
+            {
+              "type": "FIELD",
+              "name": "value",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_override_var_name_no_value"
+            },
+            "named": true,
+            "value": "variable_name"
+          }
+        }
+      ]
     },
     "variable_expansion": {
       "type": "PREC_LEFT",
@@ -1140,6 +1188,17 @@
         "type": "SEQ",
         "members": [
           {
+            "type": "REPEAT",
+            "content": {
+              "type": "FIELD",
+              "name": "override",
+              "content": {
+                "type": "SYMBOL",
+                "name": "override_variable"
+              }
+            }
+          },
+          {
             "type": "FIELD",
             "name": "name",
             "content": {
@@ -1222,6 +1281,14 @@
         {
           "type": "STRING",
           "value": "]"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "STRING",
+          "value": "!="
         }
       ]
     },
@@ -1470,7 +1537,7 @@
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s][^\\$\\*~\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s]*"
+      "value": "[^\\$\\*~#\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s=][^\\$\\*~\\(\\)\\{\\}\\[\\]<>\"'&\\|;\\\\\\s=]*"
     },
     "brace_word": {
       "type": "PATTERN",
@@ -1505,6 +1572,14 @@
     {
       "type": "SYMBOL",
       "name": "_begin_brace"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_override_var_name"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_override_var_name_no_value"
     }
   ],
   "inline": [

@@ -348,6 +348,16 @@
           }
         ]
       },
+      "override": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "override_variable",
+            "named": true
+          }
+        ]
+      },
       "redirect": {
         "multiple": true,
         "required": false,
@@ -1447,6 +1457,76 @@
     }
   },
   {
+    "type": "override_variable",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "variable_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "brace_expansion",
+            "named": true
+          },
+          {
+            "type": "command_substitution",
+            "named": true
+          },
+          {
+            "type": "concatenation",
+            "named": true
+          },
+          {
+            "type": "double_quote_string",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "glob",
+            "named": true
+          },
+          {
+            "type": "home_dir_expansion",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "single_quote_string",
+            "named": true
+          },
+          {
+            "type": "variable_expansion",
+            "named": true
+          },
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "pipe",
     "named": true,
     "fields": {},
@@ -2009,6 +2089,10 @@
     "named": false
   },
   {
+    "type": "!=",
+    "named": false
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -2058,6 +2142,10 @@
   },
   {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {

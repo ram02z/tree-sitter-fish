@@ -26,3 +26,10 @@ jobs:
             run: npm run test
           - name: Run parser against examples
             run: npm run test:examples
+          - name: Check for uncommitted changes
+            run: |
+              if ! git diff --exit-code; then
+                echo "Error: There are uncommitted changes after running tests"
+                echo "Please run 'npm run build' and commit the generated files"
+                exit 1
+              fi

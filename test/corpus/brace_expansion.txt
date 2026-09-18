@@ -310,3 +310,108 @@ echo { 1, 2{.1,.2}}
         (brace_expansion
           (word)
           (word))))))
+
+================================================================================
+Brace Expansion - literal and escaped newlines
+================================================================================
+
+echo {
+  a,
+}{1}
+echo {\
+  a,\
+}{\
+  1}
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (concatenation
+      (brace_expansion
+        (word)
+        (word))
+      (brace_expansion
+        (integer))))
+  (command
+    (word)
+    (concatenation
+      (brace_expansion
+        (concatenation
+          (escape_sequence)
+          (word))
+        (escape_sequence))
+      (brace_expansion
+        (concatenation
+          (escape_sequence)
+          (integer))))))
+
+================================================================================
+Brace Expansion - embedded expressions with newlines
+================================================================================
+
+echo {\
+  (a),\
+  $(b),\
+  "c"$x,\
+  {d},\
+  e f}
+echo {
+  (a),
+  $(b),
+  "c"$x,
+  {d},
+  e f}
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (brace_expansion
+      (concatenation
+        (escape_sequence)
+        (command_substitution
+          (command
+            (word))))
+      (concatenation
+        (escape_sequence)
+        (command_substitution
+          (command
+            (word))))
+      (concatenation
+        (escape_sequence)
+        (double_quote_string)
+        (variable_expansion
+          (variable_name)))
+      (concatenation
+        (escape_sequence)
+        (brace_expansion
+          (word)))
+      (concatenation
+        (escape_sequence)
+        (word))))
+  (command
+    (word)
+    (brace_expansion
+      (concatenation
+        (word)
+        (command_substitution
+          (command
+            (word))))
+      (concatenation
+        (word)
+        (command_substitution
+          (command
+            (word))))
+      (concatenation
+        (word)
+        (double_quote_string)
+        (variable_expansion
+          (variable_name)))
+      (concatenation
+        (word)
+        (brace_expansion
+          (word)))
+      (word))))

@@ -48,6 +48,7 @@ const WORD_CONTINUE_NEG_PATTERN = regexChars([
     '=',
 ]);
 const WORD_PATTERN = new RegExp(`[^${WORD_START_NEG_PATTERN}][^${WORD_CONTINUE_NEG_PATTERN}]*`);
+const BRACE_WORD_NEG_PATTERN = regexChars(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')']);
 module.exports = grammar({
     name: 'fish',
     externals: $ => [
@@ -132,6 +133,8 @@ module.exports = grammar({
         home_dir_expansion: () => '~',
         glob: () => token(repeat1('*')),
         word: () => WORD_PATTERN,
-        brace_word: () => new RegExp(`[^${regexChars(['$', '\'', '*', '"', ',', '\\', '{', '}', '(', ')'])}]+`),
+        // Give literal newlines priority over skipping whitespace before numbers.
+        // Ordinary words exclude leading indentation but allow internal whitespace.
+        brace_word: () => choice(token(prec(1, new RegExp(`[\\r\\n][^${BRACE_WORD_NEG_PATTERN}]*`))), new RegExp(`[^ \\t\\r\\n${BRACE_WORD_NEG_PATTERN}][^${BRACE_WORD_NEG_PATTERN}]*`)),
     },
 });

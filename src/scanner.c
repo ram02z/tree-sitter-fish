@@ -4,7 +4,7 @@
 
 enum TokenType {
     CONCAT,
-    BRACKET_CONCAT,
+    BRACE_CONCAT,
     CONCAT_LIST,
     BEGIN_BRACE,
     OVERRIDE_VAR_NAME,           // NAME when followed by =value (value present)
@@ -76,16 +76,20 @@ bool tree_sitter_fish_external_scanner_scan(
         }
     }
 
-    if (valid_symbols[BRACKET_CONCAT]) {
+    if (valid_symbols[BRACE_CONCAT]) {
+        // Ignore indentation between fragments, but preserve literal newlines.
+        // Look past indentation before deciding whether another fragment exists.
+        // '(' starts a command substitution and can continue a brace item.
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+            lexer->advance(lexer, true);
+        }
         if (!(
             lexer->lookahead == 0 ||
             lexer->lookahead == ')' ||
-            lexer->lookahead == '(' ||
             lexer->lookahead == '}' ||
-            lexer->lookahead == ',' ||
-            iswspace(lexer->lookahead)
+            lexer->lookahead == ','
         )) {
-            lexer->result_symbol = BRACKET_CONCAT;
+            lexer->result_symbol = BRACE_CONCAT;
             return true;
         }
     }

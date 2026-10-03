@@ -59,6 +59,8 @@ module.exports = grammar({
     name: 'fish',
 
     externals: $ => [
+        $._continuation_comment,
+        $._continuation_end,
         $._concat,
         $._brace_concat,
         $._concat_list,
@@ -74,6 +76,7 @@ module.exports = grammar({
     ],
 
     extras: $ => [
+        $.line_continuation,
         $.comment,
         WHITESPACE,
     ],
@@ -252,6 +255,16 @@ module.exports = grammar({
 
         comment: () => token(prec(-11, /#.*/)),
 
+        // A continuation separates tokens everywhere extras are allowed. Include
+        // comment EOLs here so they cannot terminate the surrounding statement.
+        line_continuation: $ => seq(
+            $._escaped_newline,
+            repeat(alias($._continuation_comment, $.comment)),
+            $._continuation_end,
+        ),
+
+        _escaped_newline: () => token(seq('\\', choice('\r\n', '\n', '\r'))),
+
         variable_name: () => /[a-zA-Z0-9_][a-zA-Z0-9_\-]*/,
 
         // Environment variable override (e.g., "FOO=bar" in "FOO=bar command")
@@ -316,6 +329,7 @@ module.exports = grammar({
                 /[^\$\\"]+/,
                 $.variable_expansion,
                 $.escape_sequence,
+                alias($._escaped_newline, $.escape_sequence),
                 alias($._command_substitution_dollar, $.command_substitution),
             )),
             '"',
@@ -326,12 +340,13 @@ module.exports = grammar({
             repeat(choice(
                 /[^'\\]+/,
                 $.escape_sequence,
+                alias($._escaped_newline, $.escape_sequence),
             )),
             '\'',
         ),
 
         escape_sequence: () => token(seq('\\', token.immediate(choice(
-            /[^xXuUc]/,
+            /[^xXuUc\r\n]/,
             /[0-7]{1,3}/,
             /x[0-9a-fA-F]{0,2}/,
             /X[0-9a-fA-F]{0,2}/,

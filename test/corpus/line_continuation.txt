@@ -1,0 +1,590 @@
+================================================================================
+Line continuation - adjacent
+================================================================================
+
+echo foo\
+bar
+echo foo\
+  bar
+echo foo\
+ # comment
+ bar
+echo foo\
+ # comment
+ | cat
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (concatenation
+      (word)
+      (line_continuation)
+      (word)))
+  (command
+    (word)
+    (word)
+    (line_continuation)
+    (word))
+  (command
+    (word)
+    (word)
+    (line_continuation
+      (comment))
+    (word))
+  (pipe
+    (command
+      (word)
+      (word))
+    (line_continuation
+      (comment))
+    (command
+      (word))))
+
+================================================================================
+Line continuation - arguments
+================================================================================
+
+cmd \
+  # comment
+  # comment
+  argument \
+  --flag
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (line_continuation
+      (comment)
+      (comment))
+    (word)
+    (line_continuation)
+    (word)))
+
+================================================================================
+Line continuation - blank
+================================================================================
+
+echo a \
+ # comment
+
+echo b
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (word))
+  (line_continuation
+    (comment))
+  (command
+    (word)
+    (word)))
+
+================================================================================
+Line continuation - brace
+================================================================================
+
+echo {\
+ # first
+ a,\
+ # second
+ b}
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (brace_expansion
+      (line_continuation
+        (comment))
+      (word)
+      (line_continuation
+        (comment))
+      (word))))
+
+================================================================================
+Line continuation - conditional operators
+================================================================================
+
+true \
+ # before
+ && \
+ # after
+ false
+or \
+ # command
+ true
+
+--------------------------------------------------------------------------------
+
+(program
+  (conditional_execution
+    (command
+      (word))
+    (line_continuation
+      (comment))
+    (line_continuation
+      (comment))
+    (command
+      (word)))
+  (conditional_execution
+    (line_continuation
+      (comment))
+    (command
+      (word))))
+
+================================================================================
+Line continuation - empty continuation
+================================================================================
+
+\
+# comment
+
+
+--------------------------------------------------------------------------------
+
+(program
+  (line_continuation
+    (comment)))
+
+================================================================================
+Line continuation - for
+================================================================================
+
+for \
+ # var
+ item \
+ # in
+ in \
+ # values
+ a b
+ echo $item
+end
+
+--------------------------------------------------------------------------------
+
+(program
+  (for_statement
+    (line_continuation
+      (comment))
+    (variable_name)
+    (line_continuation
+      (comment))
+    (line_continuation
+      (comment))
+    (word)
+    (word)
+    (command
+      (word)
+      (variable_expansion
+        (variable_name)))))
+
+================================================================================
+Line continuation - function
+================================================================================
+
+function \
+ # name
+ example \
+ # options
+ --argument-names value
+ return \
+ # result
+ 0
+end
+
+--------------------------------------------------------------------------------
+
+(program
+  (function_definition
+    (line_continuation
+      (comment))
+    (word)
+    (line_continuation
+      (comment))
+    (word)
+    (word)
+    (return
+      (line_continuation
+        (comment))
+      (integer))))
+
+================================================================================
+Line continuation - keywords
+================================================================================
+
+if \
+ # condition
+ true
+ echo ok
+else if \
+ # other
+ false
+ echo no
+end
+
+--------------------------------------------------------------------------------
+
+(program
+  (if_statement
+    (line_continuation
+      (comment))
+    (command
+      (word))
+    (command
+      (word)
+      (word))
+    (else_if_clause
+      (line_continuation
+        (comment))
+      (command
+        (word))
+      (command
+        (word)
+        (word)))))
+
+================================================================================
+Line continuation - list and substitution
+================================================================================
+
+echo $x[1 \
+ # index
+ 2] (echo \
+ # argument
+ value)
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (variable_expansion
+      (variable_name)
+      (list_element_access
+        (index
+          (integer))
+        (line_continuation
+          (comment))
+        (index
+          (integer))))
+    (command_substitution
+      (command
+        (word)
+        (line_continuation
+          (comment))
+        (word)))))
+
+================================================================================
+Line continuation - ordinary comments terminate
+================================================================================
+
+echo one # trailing \
+ echo two
+# ordinary
+echo three
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (word))
+  (comment)
+  (command
+    (word)
+    (word))
+  (comment)
+  (command
+    (word)
+    (word)))
+
+================================================================================
+Line continuation - override
+================================================================================
+
+FOO=bar \
+ # comment
+ cmd
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (override_variable
+      (variable_name)
+      (word))
+    (line_continuation
+      (comment))
+    (word)))
+
+================================================================================
+Line continuation - pipe-after
+================================================================================
+
+cmd | \
+  # comment
+  cmd
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipe
+    (command
+      (word))
+    (line_continuation
+      (comment))
+    (command
+      (word))))
+
+================================================================================
+Line continuation - pipe-before
+================================================================================
+
+cmd \
+  # comment
+  | cmd
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipe
+    (command
+      (word))
+    (line_continuation
+      (comment))
+    (command
+      (word))))
+
+================================================================================
+Line continuation - quoted
+================================================================================
+
+echo "foo\
+# literal
+bar" 'foo\
+# literal
+bar'
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (double_quote_string
+      (escape_sequence))
+    (single_quote_string
+      (escape_sequence))))
+
+================================================================================
+Line continuation - redirect
+================================================================================
+
+cmd > \
+ # dest
+ file
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (file_redirect
+      (direction)
+      (line_continuation
+        (comment))
+      (word))))
+
+================================================================================
+Line continuation - repeated
+================================================================================
+
+echo \
+# first
+\
+# second
+ value
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (line_continuation
+      (comment))
+    (line_continuation
+      (comment))
+    (word)))
+
+================================================================================
+Line continuation - switch and case
+================================================================================
+
+switch \
+ # value
+ $x
+case \
+ # pattern
+ a \
+ # second pattern
+ b
+ echo yes
+end
+
+--------------------------------------------------------------------------------
+
+(program
+  (switch_statement
+    (line_continuation
+      (comment))
+    (variable_expansion
+      (variable_name))
+    (case_clause
+      (line_continuation
+        (comment))
+      (word)
+      (line_continuation
+        (comment))
+      (word)
+      (command
+        (word)
+        (word)))))
+
+================================================================================
+Line continuation - while and negation
+================================================================================
+
+while \
+ # condition
+ not \
+ # command
+ false
+ break
+end
+
+--------------------------------------------------------------------------------
+
+(program
+  (while_statement
+    (line_continuation
+      (comment))
+    (negated_statement
+      (line_continuation
+        (comment))
+      (command
+        (word)))
+    (break)))
+
+================================================================================
+Line continuation - list adjacency
+================================================================================
+
+echo $x\
+[1]
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (variable_expansion
+      (variable_name)
+      (line_continuation)
+      (list_element_access
+        (index
+          (integer))))))
+
+================================================================================
+Line continuation - escaped backslash
+================================================================================
+
+echo \\
+next
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (escape_sequence))
+  (command
+    (word)))
+
+================================================================================
+Line continuation - CRLF
+================================================================================
+
+cmd \
+ # one
+ # two
+ arg
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (line_continuation
+      (comment)
+      (comment))
+    (word)))
+
+================================================================================
+Line continuation - CR
+================================================================================
+
+cmd \ # one # two arg;
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (line_continuation
+      (comment)
+      (comment))
+    (word)))
+
+================================================================================
+Line continuation - pipe inside command substitution
+================================================================================
+
+set (
+    echo 1 \
+    | string trim )
+set (
+    echo 1 \
+    # This comment preserves the pipe node
+    | string trim )
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    (word)
+    (command_substitution
+      (pipe
+        (command
+          (word)
+          (integer))
+        (line_continuation)
+        (command
+          (word)
+          (word)))))
+  (command
+    (word)
+    (command_substitution
+      (pipe
+        (command
+          (word)
+          (integer))
+        (line_continuation
+          (comment))
+        (command
+          (word)
+          (word))))))

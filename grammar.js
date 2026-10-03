@@ -52,6 +52,8 @@ const BRACE_WORD_NEG_PATTERN = regexChars(['$', '\'', '*', '"', ',', '\\', '{', 
 module.exports = grammar({
     name: 'fish',
     externals: $ => [
+        $._continuation_comment,
+        $._continuation_end,
         $._concat,
         $._brace_concat,
         $._concat_list,
@@ -65,6 +67,7 @@ module.exports = grammar({
         $._base_expression,
     ],
     extras: $ => [
+        $.line_continuation,
         $.comment,
         WHITESPACE,
     ],
@@ -99,6 +102,10 @@ module.exports = grammar({
         /* Syntax `{ [COMMANDS ...] }` added in 4.1.0 */
         begin_statement: $ => choice(seq('begin', optional(repeat1($._terminated_opt_statement)), 'end'), seq(alias($._begin_brace, '{'), repeat($._terminated_opt_statement), optional($._statement), '}')),
         comment: () => token(prec(-11, /#.*/)),
+        // A continuation separates tokens everywhere extras are allowed. Include
+        // comment EOLs here so they cannot terminate the surrounding statement.
+        line_continuation: $ => seq($._escaped_newline, repeat(alias($._continuation_comment, $.comment)), $._continuation_end),
+        _escaped_newline: () => token(seq('\\', choice('\r\n', '\n', '\r'))),
         variable_name: () => /[a-zA-Z0-9_][a-zA-Z0-9_\-]*/,
         // Environment variable override (e.g., "FOO=bar" in "FOO=bar command")
         // External scanner distinguishes between NAME=value and NAME= (no value)
@@ -113,9 +120,9 @@ module.exports = grammar({
         range: $ => prec.right(2, seq(optional($.index), '..', optional($.index))),
         list_element_access: $ => seq('[', repeat(choice($.index, $.range)), ']'),
         brace_expansion: $ => prec.right(seq('{', seq(optional($._brace_expression), repeat(seq(',', optional($._brace_expression)))), '}')),
-        double_quote_string: $ => seq('"', repeat(choice(/[^\$\\"]+/, $.variable_expansion, $.escape_sequence, alias($._command_substitution_dollar, $.command_substitution))), '"'),
-        single_quote_string: $ => seq('\'', repeat(choice(/[^'\\]+/, $.escape_sequence)), '\''),
-        escape_sequence: () => token(seq('\\', token.immediate(choice(/[^xXuUc]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/)))),
+        double_quote_string: $ => seq('"', repeat(choice(/[^\$\\"]+/, $.variable_expansion, $.escape_sequence, alias($._escaped_newline, $.escape_sequence), alias($._command_substitution_dollar, $.command_substitution))), '"'),
+        single_quote_string: $ => seq('\'', repeat(choice(/[^'\\]+/, $.escape_sequence, alias($._escaped_newline, $.escape_sequence))), '\''),
+        escape_sequence: () => token(seq('\\', token.immediate(choice(/[^xXuUc\r\n]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/)))),
         command: $ => prec.right(seq(repeat(field('override', $.override_variable)), field('name', $._expression), repeat(choice(field('redirect', choice($.file_redirect, $.stream_redirect)), field('argument', $._expression))))),
         stream_redirect: () => /\d*(>>|>|<)&[012-]/,
         direction: () => /(\d*|&)(>>?\??|<)/,

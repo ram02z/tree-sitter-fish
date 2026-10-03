@@ -338,14 +338,12 @@ echo {\
     (word)
     (concatenation
       (brace_expansion
-        (concatenation
-          (escape_sequence)
-          (word))
-        (escape_sequence))
+        (line_continuation)
+        (word)
+        (line_continuation))
       (brace_expansion
-        (concatenation
-          (escape_sequence)
-          (integer))))))
+        (line_continuation)
+        (integer)))))
 
 ================================================================================
 Brace Expansion - embedded expressions with newlines
@@ -370,28 +368,24 @@ echo {
   (command
     (word)
     (brace_expansion
+      (line_continuation)
+      (command_substitution
+        (command
+          (word)))
+      (line_continuation)
+      (command_substitution
+        (command
+          (word)))
+      (line_continuation)
       (concatenation
-        (escape_sequence)
-        (command_substitution
-          (command
-            (word))))
-      (concatenation
-        (escape_sequence)
-        (command_substitution
-          (command
-            (word))))
-      (concatenation
-        (escape_sequence)
         (double_quote_string)
         (variable_expansion
           (variable_name)))
-      (concatenation
-        (escape_sequence)
-        (brace_expansion
-          (word)))
-      (concatenation
-        (escape_sequence)
-        (word))))
+      (line_continuation)
+      (brace_expansion
+        (word))
+      (line_continuation)
+      (word)))
   (command
     (word)
     (brace_expansion

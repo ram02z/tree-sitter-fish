@@ -1371,6 +1371,21 @@
     }
   },
   {
+    "type": "line_continuation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "list_element_access",
     "named": true,
     "fields": {},

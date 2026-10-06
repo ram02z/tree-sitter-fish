@@ -12,5 +12,8 @@ do
     fi
 done
 
+[[ -z "$parse_errors" ]] && echo "Parsing passed" && exit 0
+
 echo "Parsing failed for following files:"
-printf $parse_errors
+printf '%b' "$parse_errors"
+exit 1

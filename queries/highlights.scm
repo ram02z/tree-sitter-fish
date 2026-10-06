@@ -1,5 +1,5 @@
 [(double_quote_string) (single_quote_string)] @string
-(escape_sequence) @string.escape
+[(escape_sequence) (line_continuation)] @string.escape
 
 (comment) @comment
 

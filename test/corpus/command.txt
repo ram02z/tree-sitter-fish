@@ -68,7 +68,7 @@ multiline
     name: (word)
     argument: (concatenation
       (word)
-      (escape_sequence)
+      (line_continuation)
       (word))))
 
 ================================================================================

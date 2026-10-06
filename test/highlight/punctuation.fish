@@ -2,6 +2,10 @@ echo {1,2}two
 #    ^ punctuation.bracket
 #      ^ punctuation.delimiter
 #        ^ punctuation.bracket
+echo {\
+    one,\
+    two}
+#      ^ punctuation.bracket
 echo $PATH[1..2]
 #         ^ punctuation.bracket
 #              ^ punctuation.bracket

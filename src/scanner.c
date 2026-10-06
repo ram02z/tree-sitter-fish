@@ -3,8 +3,10 @@
 #include <stdbool.h>
 
 enum TokenType {
+    CONTINUATION_COMMENT,
+    CONTINUATION_END,
     CONCAT,
-    BRACKET_CONCAT,
+    BRACE_CONCAT,
     CONCAT_LIST,
     BEGIN_BRACE,
     OVERRIDE_VAR_NAME,           // NAME when followed by =value (value present)
@@ -30,6 +32,30 @@ void tree_sitter_fish_external_scanner_deserialize(void *p, const char *b, unsig
 bool tree_sitter_fish_external_scanner_scan(
     void *payload, TSLexer *lexer, const bool *valid_symbols
 ) {
+    // These tokens are only valid inside a line_continuation extra. An
+    // explicit end makes the extra unambiguous without persistent scanner state.
+    // Never consume a blank line: its newline still terminates the statement.
+    // CONCAT is also enabled during error recovery; do not emit a zero-width
+    // continuation end in that all-symbols-valid state.
+    if (valid_symbols[CONTINUATION_END] && !valid_symbols[CONCAT]) {
+        lexer->mark_end(lexer);
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+            lexer->advance(lexer, true);
+        }
+        if (lexer->lookahead == '#' && valid_symbols[CONTINUATION_COMMENT]) {
+            while (lexer->lookahead && lexer->lookahead != '\n' && lexer->lookahead != '\r') {
+                lexer->advance(lexer, false);
+            }
+            if (lexer->lookahead == '\r') lexer->advance(lexer, false);
+            if (lexer->lookahead == '\n') lexer->advance(lexer, false);
+            lexer->mark_end(lexer);
+            lexer->result_symbol = CONTINUATION_COMMENT;
+        } else {
+            lexer->result_symbol = CONTINUATION_END;
+        }
+        return true;
+    }
+
     // BEGIN_BRACE: { followed by whitespace or ; (for begin_statement)
     // Must take priority over internal '{' token used by brace_expansion
     if (valid_symbols[BEGIN_BRACE]) {
@@ -48,6 +74,24 @@ bool tree_sitter_fish_external_scanner_scan(
         }
         // Not matched - return false to let internal lexer try
         // (returning false resets lexer state)
+    }
+
+    if (valid_symbols[CONCAT] || valid_symbols[CONCAT_LIST]) {
+        // Decide adjacency after removing escaped EOLs. Keep the concat
+        // token zero-width so the grammar still emits line_continuation nodes.
+        lexer->mark_end(lexer);
+        while (lexer->lookahead == '\\') {
+            lexer->advance(lexer, false);
+            if (lexer->lookahead != '\r' && lexer->lookahead != '\n') {
+                if (!valid_symbols[CONCAT]) return false;
+                lexer->result_symbol = CONCAT;
+                return true;
+            }
+            if (lexer->lookahead == '\r') lexer->advance(lexer, false);
+            if (lexer->lookahead == '\n') lexer->advance(lexer, false);
+            // A comment after a continuation is trivia, not a word fragment.
+            if (lexer->lookahead == '#') return false;
+        }
     }
 
     if (valid_symbols[CONCAT_LIST]) {
@@ -76,16 +120,20 @@ bool tree_sitter_fish_external_scanner_scan(
         }
     }
 
-    if (valid_symbols[BRACKET_CONCAT]) {
+    if (valid_symbols[BRACE_CONCAT]) {
+        // Ignore indentation between fragments, but preserve literal newlines.
+        // Look past indentation before deciding whether another fragment exists.
+        // '(' starts a command substitution and can continue a brace item.
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+            lexer->advance(lexer, true);
+        }
         if (!(
             lexer->lookahead == 0 ||
             lexer->lookahead == ')' ||
-            lexer->lookahead == '(' ||
             lexer->lookahead == '}' ||
-            lexer->lookahead == ',' ||
-            iswspace(lexer->lookahead)
+            lexer->lookahead == ','
         )) {
-            lexer->result_symbol = BRACKET_CONCAT;
+            lexer->result_symbol = BRACE_CONCAT;
             return true;
         }
     }

@@ -11,14 +11,9 @@ enum TokenType {
     OVERRIDE_VAR_NAME_NO_VALUE   // NAME= when followed by whitespace (no value)
 };
 
-// Check if character is valid for start of variable name in override context
-static bool is_override_var_start(int32_t c) {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') ||  c == '_';
-}
-
-// Check if character is valid for continuation of variable name
-static bool is_override_var_continue(int32_t c) {
-    return is_override_var_start(c) || (c == '-'); ;
+// Mirrors `variable_name` in grammar.ts: letters, digits, and underscores only
+static bool is_variable_name_char(int32_t c) {
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_';
 }
 
 void *tree_sitter_fish_external_scanner_create() { return NULL; }
@@ -97,10 +92,10 @@ bool tree_sitter_fish_external_scanner_scan(
             lexer->advance(lexer, true);  // true = mark as skipped/whitespace
         }
 
-        if (is_override_var_start(lexer->lookahead)) {
+        if (is_variable_name_char(lexer->lookahead)) {
             // Consume variable name
             lexer->advance(lexer, false);
-            while (is_override_var_continue(lexer->lookahead)) {
+            while (is_variable_name_char(lexer->lookahead)) {
                 lexer->advance(lexer, false);
             }
 

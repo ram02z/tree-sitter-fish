@@ -98,7 +98,7 @@ module.exports = grammar({
         /* Syntax `{ [COMMANDS ...] }` added in 4.1.0 */
         begin_statement: $ => choice(seq('begin', optional(repeat1($._terminated_opt_statement)), 'end'), seq(alias($._begin_brace, '{'), repeat($._terminated_opt_statement), optional($._statement), '}')),
         comment: () => token(prec(-11, /#.*/)),
-        variable_name: () => /[a-zA-Z0-9_][a-zA-Z0-9_\-]*/,
+        variable_name: () => /[a-zA-Z0-9_]+/,
         // Environment variable override (e.g., "FOO=bar" in "FOO=bar command")
         // External scanner distinguishes between NAME=value and NAME= (no value)
         // and shouldn't include trailing '=' in the name

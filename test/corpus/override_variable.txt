@@ -157,8 +157,7 @@ Override Variable - special characters in names
 
 PATH_=/usr/bin command
 PATH_PATH=/usr/local/bin command
-path-PATH=/usr/bin:$PATH command
-_path=/opt/bin _path-path=$_path __path_path=$_path-path command
+_path=/opt/bin __path_path=$_path-path command
 
 --------------------------------------------------------------------------------
 
@@ -176,24 +175,48 @@ _path=/opt/bin _path-path=$_path __path_path=$_path-path command
   (command
     override: (override_variable
       name: (variable_name)
+      value: (word))
+    override: (override_variable
+      name: (variable_name)
       value: (concatenation
-        (word)
         (variable_expansion
-          (variable_name))))
-    name: (word))
+          (variable_name))
+        (word)))
+    name: (word)))
+
+================================================================================
+Override Variable - names containing `-` are not overrides
+================================================================================
+
+path-PATH=/usr/bin:$PATH command
+_path=/opt/bin _path-path=$_path command
+a-b=1 echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (concatenation
+      (word)
+      (word)
+      (variable_expansion
+        (variable_name)))
+    argument: (word))
   (command
     override: (override_variable
-	name: (variable_name)
-	value: (word))
-    override: (override_variable
       name: (variable_name)
-      value: (variable_expansion
+      value: (word))
+    name: (concatenation
+      (word)
+      (variable_expansion
         (variable_name)))
-    override: (override_variable
-      name: (variable_name)
-      value: (variable_expansion
-        (variable_name)))
-    name: (word)))
+    argument: (word))
+  (command
+    name: (concatenation
+      (word)
+      (integer))
+    argument: (word)
+    argument: (word)))
 
 ================================================================================
 Override Variable - empty override values

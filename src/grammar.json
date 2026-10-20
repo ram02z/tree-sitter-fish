@@ -1190,12 +1190,21 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "FIELD",
-              "name": "override",
-              "content": {
-                "type": "SYMBOL",
-                "name": "override_variable"
-              }
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "override",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "override_variable"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_override_end"
+                }
+              ]
             }
           },
           {
@@ -1580,6 +1589,14 @@
     {
       "type": "SYMBOL",
       "name": "_override_var_name_no_value"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_override_end"
+    },
+    {
+      "type": "STRING",
+      "value": "\n"
     }
   ],
   "inline": [

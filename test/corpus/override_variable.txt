@@ -312,3 +312,63 @@ QUX=$PATH\ $HOME/.local/bin command
         (word)))
     name: (word)))
 
+
+================================================================================
+Override Variable - line continuation before command name
+================================================================================
+
+k=v \
+echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word)
+    argument: (word)))
+
+================================================================================
+Override Variable - overrides without command on the same line is ERROR
+================================================================================
+
+A=
+B=1
+C=2 echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (ERROR
+    (override_variable
+      name: (variable_name))
+    (override_variable
+      name: (variable_name)
+      value: (integer)))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (integer))
+    name: (word)
+    argument: (word)))
+
+================================================================================
+Override Variable - comment after override is ERROR
+================================================================================
+
+k=v # c
+echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (ERROR
+    (override_variable
+      name: (variable_name)
+      value: (word)))
+  (comment)
+  (command
+    name: (word)
+    argument: (word)))

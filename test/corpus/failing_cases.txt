@@ -36,3 +36,41 @@ set (
       (command
         (word)
         (word)))))
+
+================================================================================
+Error recovery - stray `}` in a function name ends at the newline
+================================================================================
+
+function foo}
+    string match -r x
+end
+
+--------------------------------------------------------------------------------
+
+(program
+  (function_definition
+    name: (word)
+    (ERROR)
+    (command
+      name: (word)
+      argument: (word)
+      argument: (word)
+      argument: (word))))
+
+================================================================================
+Error recovery - stray `)` ends at the newline
+================================================================================
+
+echo a )
+echo b
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (word)
+    argument: (word))
+  (ERROR)
+  (command
+    name: (word)
+    argument: (word)))

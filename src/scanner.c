@@ -8,7 +8,9 @@ enum TokenType {
     CONCAT_LIST,
     BEGIN_BRACE,
     OVERRIDE_VAR_NAME,           // NAME when followed by =value (value present)
-    OVERRIDE_VAR_NAME_NO_VALUE   // NAME= when followed by whitespace (no value)
+    OVERRIDE_VAR_NAME_NO_VALUE,  // NAME= when followed by whitespace (no value)
+    OVERRIDE_END,                // zero-width, after an override when the command continues on the same line
+    NEWLINE,                     // the '\n' terminator; the internal lexer handles it everywhere else
 };
 
 // Mirrors `variable_name` in grammar.ts: letters, digits, and underscores only
@@ -25,6 +27,25 @@ void tree_sitter_fish_external_scanner_deserialize(void *p, const char *b, unsig
 bool tree_sitter_fish_external_scanner_scan(
     void *payload, TSLexer *lexer, const bool *valid_symbols
 ) {
+    // During error recovery tree-sitter marks every external token valid.
+    // OVERRIDE_END and BEGIN_BRACE are never valid together otherwise.
+    if (valid_symbols[OVERRIDE_END] && valid_symbols[BEGIN_BRACE]) {
+        // '\n' is an external token, so the internal lexer no longer emits it
+        // during recovery. Emit it here, so recovery still ends the broken
+        // statement at its line instead of reading the next line into it.
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+            lexer->advance(lexer, true);
+        }
+        if (lexer->lookahead == '\r') lexer->advance(lexer, false);
+        if (lexer->lookahead == '\n') {
+            lexer->advance(lexer, false);
+            lexer->mark_end(lexer);
+            lexer->result_symbol = NEWLINE;
+            return true;
+        }
+        return false;
+    }
+
     // BEGIN_BRACE: { followed by whitespace or ; (for begin_statement)
     // Must take priority over internal '{' token used by brace_expansion
     if (valid_symbols[BEGIN_BRACE]) {
@@ -82,6 +103,46 @@ bool tree_sitter_fish_external_scanner_scan(
         )) {
             lexer->result_symbol = BRACKET_CONCAT;
             return true;
+        }
+    }
+
+    // An override must be followed by another override or the command name on
+    // the same line. Newlines and comments are extras, so without this check
+    // `k=v` + newline + `echo hi` would parse as one command.
+    if (valid_symbols[OVERRIDE_END]) {
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+            lexer->advance(lexer, true);
+        }
+        lexer->mark_end(lexer);
+        if (lexer->lookahead == '\\') {
+            // `\` + newline continues the line
+            lexer->advance(lexer, false);
+            if (lexer->lookahead == '\r') lexer->advance(lexer, false);
+            if (lexer->lookahead != '\n') {
+                lexer->result_symbol = OVERRIDE_END;
+                return true;
+            }
+            lexer->advance(lexer, false);
+            while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+                lexer->advance(lexer, false);
+            }
+            lexer->mark_end(lexer);
+        }
+        switch (lexer->lookahead) {
+            case '\r': case '\n':
+                // Hand the newline to the parser as a terminator (invalid here),
+                // so error recovery ends the statement at this line instead of
+                // skipping the newline as an extra and reading the next line.
+                if (lexer->lookahead == '\r') lexer->advance(lexer, false);
+                if (lexer->lookahead == '\n') lexer->advance(lexer, false);
+                lexer->mark_end(lexer);
+                lexer->result_symbol = NEWLINE;
+                return true;
+            case 0: case '#':
+                return false;
+            default:
+                lexer->result_symbol = OVERRIDE_END;
+                return true;
         }
     }
 

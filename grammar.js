@@ -56,7 +56,9 @@ module.exports = grammar({
         $._concat_list,
         $._begin_brace,
         $._override_var_name,
-        $._override_var_name_no_value, // NAME= when followed by whitespace (no value)
+        $._override_var_name_no_value,
+        $._override_end,
+        '\n',
     ],
     inline: $ => [
         $._terminator,
@@ -115,7 +117,7 @@ module.exports = grammar({
         double_quote_string: $ => seq('"', repeat(choice(/[^\$\\"]+/, $.variable_expansion, $.escape_sequence, alias($._command_substitution_dollar, $.command_substitution))), '"'),
         single_quote_string: $ => seq('\'', repeat(choice(/[^'\\]+/, $.escape_sequence)), '\''),
         escape_sequence: () => token(seq('\\', token.immediate(choice(/[^xXuUc]/, /[0-7]{1,3}/, /x[0-9a-fA-F]{0,2}/, /X[0-9a-fA-F]{0,2}/, /u[0-9a-fA-F]{0,4}/, /U[0-9a-fA-F]{0,8}/, /c[a-zA-Z]?/)))),
-        command: $ => prec.right(seq(repeat(field('override', $.override_variable)), field('name', $._expression), repeat(choice(field('redirect', choice($.file_redirect, $.stream_redirect)), field('argument', $._expression))))),
+        command: $ => prec.right(seq(repeat(seq(field('override', $.override_variable), $._override_end)), field('name', $._expression), repeat(choice(field('redirect', choice($.file_redirect, $.stream_redirect)), field('argument', $._expression))))),
         stream_redirect: () => /\d*(>>|>|<)&[012-]/,
         direction: () => /(\d*|&)(>>?\??|<)/,
         file_redirect: $ => seq(field('operator', $.direction), field('destination', $._expression)),

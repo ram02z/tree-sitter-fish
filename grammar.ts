@@ -63,6 +63,8 @@ module.exports = grammar({
         $._begin_brace,
         $._override_var_name,           // NAME when followed by =value
         $._override_var_name_no_value,  // NAME= when followed by whitespace (no value)
+        $._override_end,                // zero-width: an override must be followed by more of the command on the same line
+        '\n' as any,                    // lexed by the scanner only after an override with no command
     ],
 
     inline: $ => [
@@ -250,7 +252,7 @@ module.exports = grammar({
 
         comment: () => token(prec(-11, /#.*/)),
 
-        variable_name: () => /[a-zA-Z0-9_][a-zA-Z0-9_\-]*/,
+        variable_name: () => /[a-zA-Z0-9_]+/,
 
         // Environment variable override (e.g., "FOO=bar" in "FOO=bar command")
         // External scanner distinguishes between NAME=value and NAME= (no value)
@@ -339,7 +341,7 @@ module.exports = grammar({
         )))),
 
         command: $ => prec.right(seq(
-            repeat(field('override', $.override_variable)),
+            repeat(seq(field('override', $.override_variable), $._override_end)),
             field('name', $._expression),
             repeat(choice(
                 field('redirect', choice($.file_redirect, $.stream_redirect)),

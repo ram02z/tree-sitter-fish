@@ -208,6 +208,33 @@ $PATH\ ological
       (word))))
 
 ================================================================================
+Concatenation - variable expansion followed by `-`
+================================================================================
+
+$PATH-bar
+"$PATH-bar"
+-$PATH-
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (concatenation
+      (variable_expansion
+        (variable_name))
+      (word)))
+  (command
+    name: (double_quote_string
+      (variable_expansion
+        (variable_name))))
+  (command
+    name: (concatenation
+      (word)
+      (variable_expansion
+        (variable_name))
+      (word))))
+
+================================================================================
 Concatenation - variable_expansion and command_substitution
 ================================================================================
 

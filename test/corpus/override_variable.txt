@@ -157,8 +157,7 @@ Override Variable - special characters in names
 
 PATH_=/usr/bin command
 PATH_PATH=/usr/local/bin command
-path-PATH=/usr/bin:$PATH command
-_path=/opt/bin _path-path=$_path __path_path=$_path-path command
+_path=/opt/bin __path_path=$_path-path command
 
 --------------------------------------------------------------------------------
 
@@ -176,24 +175,48 @@ _path=/opt/bin _path-path=$_path __path_path=$_path-path command
   (command
     override: (override_variable
       name: (variable_name)
+      value: (word))
+    override: (override_variable
+      name: (variable_name)
       value: (concatenation
-        (word)
         (variable_expansion
-          (variable_name))))
-    name: (word))
+          (variable_name))
+        (word)))
+    name: (word)))
+
+================================================================================
+Override Variable - names containing `-` are not overrides
+================================================================================
+
+path-PATH=/usr/bin:$PATH command
+_path=/opt/bin _path-path=$_path command
+a-b=1 echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    name: (concatenation
+      (word)
+      (word)
+      (variable_expansion
+        (variable_name)))
+    argument: (word))
   (command
     override: (override_variable
-	name: (variable_name)
-	value: (word))
-    override: (override_variable
       name: (variable_name)
-      value: (variable_expansion
+      value: (word))
+    name: (concatenation
+      (word)
+      (variable_expansion
         (variable_name)))
-    override: (override_variable
-      name: (variable_name)
-      value: (variable_expansion
-        (variable_name)))
-    name: (word)))
+    argument: (word))
+  (command
+    name: (concatenation
+      (word)
+      (integer))
+    argument: (word)
+    argument: (word)))
 
 ================================================================================
 Override Variable - empty override values
@@ -289,3 +312,63 @@ QUX=$PATH\ $HOME/.local/bin command
         (word)))
     name: (word)))
 
+
+================================================================================
+Override Variable - line continuation before command name
+================================================================================
+
+k=v \
+echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (word))
+    name: (word)
+    argument: (word)))
+
+================================================================================
+Override Variable - overrides without command on the same line is ERROR
+================================================================================
+
+A=
+B=1
+C=2 echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (ERROR
+    (override_variable
+      name: (variable_name))
+    (override_variable
+      name: (variable_name)
+      value: (integer)))
+  (command
+    override: (override_variable
+      name: (variable_name)
+      value: (integer))
+    name: (word)
+    argument: (word)))
+
+================================================================================
+Override Variable - comment after override is ERROR
+================================================================================
+
+k=v # c
+echo hi
+
+--------------------------------------------------------------------------------
+
+(program
+  (ERROR
+    (override_variable
+      name: (variable_name)
+      value: (word)))
+  (comment)
+  (command
+    name: (word)
+    argument: (word)))
